@@ -1,5 +1,5 @@
 <x-app-layout>
-    <div class="pt-24">
+    <div>
         <x-main-banner/>
 
         <div class="overflow-hidden sm:rounded-lg">

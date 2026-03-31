@@ -1,5 +1,5 @@
 <x-app-layout>
-    <div class="pt-20">
+    <div>
         <x-main-banner/>
 
         {{-- Título y posición del usuario --}}

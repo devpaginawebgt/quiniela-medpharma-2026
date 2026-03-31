@@ -1,5 +1,5 @@
 <x-app-layout>
-    <div class="pt-16">
+    <div>
         <x-main-banner/>
 
         <section>
@@ -10,7 +10,7 @@
             >
         </section>
 
-        <div class="h-8 w-full"></div>
+        <div class="h-4 md:h-8 w-full"></div>
 
         <section>
             <img

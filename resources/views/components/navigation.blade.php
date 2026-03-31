@@ -71,7 +71,7 @@
 </nav>
 
 {{-- Drawer de navegación móvil (Flowbite) --}}
-<div id="mobile-nav-drawer" class="fixed top-0 left-0 z-50 h-screen w-72 bg-white shadow-xl transition-transform -translate-x-full" tabindex="-1">
+<div id="mobile-nav-drawer" class="fixed -top-16 z-50 bg-white shadow-xl transition-transform -translate-y-full" tabindex="-1">
     <div class="flex items-center justify-between p-4 border-b border-gray-200">
         <img src="{{ asset('images/logos/medpharma-logo.png') }}" alt="Medpharma" class="h-8">
         <button data-drawer-hide="mobile-nav-drawer" class="text-dark">

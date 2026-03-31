@@ -1,7 +1,5 @@
 <x-app-layout>
-    {{-- <x-carousel-section-banners :banners="$banners" /> --}}
-
-    <div class="pt-16">
+    <div>
         <x-main-banner/>
 
         <div class="overflow-hidden">

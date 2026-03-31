@@ -34,8 +34,10 @@
         @include('components.navigation')
 
         <!-- Page Content -->
-        <main class="max-w-screen-2xl mx-auto relative">
+        <main class="max-w-screen-2xl mx-auto">
             {{ $slot }}
         </main>
+
+        <x-footer />
     </body>
 </html>
