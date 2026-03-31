@@ -6,6 +6,9 @@
     'required' => false,
     'autofocus' => false,
     'autocomplete' => 'off',
+    'pattern' => null,
+    'message' => null,
+    'minlength' => null,
 ])
 
 <div class="relative">
@@ -21,6 +24,9 @@
         placeholder="{{ $placeholder }}"
         @if($required) required @endif
         @if($autofocus) autofocus @endif
+        @if($pattern) pattern="{{ $pattern }}" @endif
+        @if($message) title="{{ $message }}" @endif
+        @if($minlength) minlength="{{ $minlength }}" @endif
         autocomplete="{{ $autocomplete }}"
         {{ $attributes->merge(['class' => 'w-full py-3 pe-11 bg-transparent border-2 rounded-lg border-secondary text-dark placeholder-complementary-dark focus:ring-0 focus:border-complementary-secondary focus:border-3 text-base ' . ($icon ? 'ps-11' : 'ps-4')]) }}
     >

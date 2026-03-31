@@ -6,6 +6,9 @@
     'value' => '',
     'required' => false,
     'maxlength' => null,
+    'minlength' => null,
+    'pattern' => null,
+    'message' => null,
     'autofocus' => false,
     'autocomplete' => null,
 ])
@@ -23,6 +26,9 @@
         placeholder="{{ $placeholder }}"
         @if($required) required @endif
         @if($maxlength) maxlength="{{ $maxlength }}" @endif
+        @if($minlength) minlength="{{ $minlength }}" @endif
+        @if($pattern) pattern="{{ $pattern }}" @endif
+        @if($message) title="{{ $message }}" @endif
         @if($autofocus) autofocus @endif
         @if($autocomplete) autocomplete="{{ $autocomplete }}" @endif
         {{ $attributes->merge(['class' => 'w-full py-3 bg-transparent border-2 rounded-lg border-secondary text-dark placeholder-complementary-dark focus:ring-0 focus:border-complementary-secondary focus:border-3 text-base ' . ($icon ? 'ps-11' : 'ps-4')]) }}

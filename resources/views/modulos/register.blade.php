@@ -15,12 +15,12 @@
         {{-- Full screen background --}}
         <div class="relative min-h-screen w-full">
             {{-- Background --}}
-            <div class="absolute inset-0 bg-cover bg-center lg:hidden"
+            {{-- <div class="absolute inset-0 bg-cover bg-center lg:hidden"
                  style="background-image: url({{ asset('images/portadas/portada-auth.jpg') }});"></div>
             <div class="absolute inset-0 bg-cover bg-center hidden lg:block"
-                 style="background-image: url({{ asset('images/portadas/portada-auth.jpg') }});"></div>
+                 style="background-image: url({{ asset('images/portadas/portada-auth.jpg') }});"></div> --}}
             {{-- Overlay --}}
-            <div class="absolute inset-0 bg-black/0"></div>
+            {{-- <div class="absolute inset-0 bg-black/0"></div> --}}
 
             {{-- Mobile: bottom drawer / lg+: left drawer --}}
             <div
@@ -63,22 +63,72 @@
                             <input type="hidden" name="accepted_terms" value="{{ old('accepted_terms', '') }}">
     
                             {{-- Nombres --}}
-                            <x-auth-input name="nombres" icon="icon-[fluent--person-24-filled]" placeholder="Nombres" required autofocus />
+                            <x-auth-input
+                                name="nombres"
+                                icon="icon-[fluent--person-24-filled]"
+                                placeholder="Nombres"
+                                minlength="2"
+                                maxlength="60"
+                                required
+                                autofocus
+                            />
     
                             {{-- Apellidos --}}
-                            <x-auth-input name="apellidos" icon="icon-[fluent--person-24-filled]" placeholder="Apellidos" required />
+                            <x-auth-input
+                                name="apellidos"
+                                icon="icon-[fluent--person-24-filled]"
+                                placeholder="Apellidos"
+                                minlength="2"
+                                maxlength="60"
+                                required
+                            />
     
                             {{-- Numero de Documento de Identidad --}}
-                            <x-auth-input name="numero_documento" icon="icon-[fluent--contact-card-16-filled]" placeholder="Numero de Documento de Identidad" required maxlength="13" />
+                            @php
+                                $regex    = $country->document_regex;
+                                $message  = $country->document_regex_message;
+                                $document = $country->document_name;
+                            @endphp
+
+                            <x-auth-input
+                                name="numero_documento"
+                                icon="icon-[fluent--contact-card-16-filled]"
+                                placeholder="Numero de {{ $document }}"
+                                pattern="{{ $regex }}"
+                                message="{{ $message }}"
+                                required
+                            />
     
                             {{-- Numero de Telefono --}}
-                            <x-auth-input name="telefono" icon="icon-[fluent--call-24-filled]" placeholder="Numero de Telefono" required maxlength="15" />
+                            <x-auth-input
+                                name="telefono"
+                                icon="icon-[fluent--call-24-filled]"
+                                placeholder="Numero de Telefono"
+                                required
+                                minlength="8"
+                                maxlength="8"
+                            />
     
                             {{-- Email --}}
-                            <x-auth-input name="email" type="email" icon="icon-[fluent--mail-24-filled]" placeholder="Email" required />
+                            <x-auth-input
+                                name="email"
+                                type="email"
+                                icon="icon-[fluent--mail-24-filled]"
+                                placeholder="Email"
+                                minlength="5"
+                                maxlength="255"
+                                required
+                            />
     
                             {{-- Codigo de registro --}}
-                            <x-auth-input name="codigo" icon="icon-[fluent--text-number-format-20-filled]" placeholder="Codigo de registro" required />
+                            <x-auth-input
+                                name="codigo"
+                                icon="icon-[fluent--text-number-format-20-filled]"
+                                placeholder="Codigo de registro"
+                                minlength="7"
+                                maxlength="7"
+                                required
+                            />
     
                             {{-- Pais (detectado por IP) --}}
                             <input type="hidden" name="pais_id" value="{{ $country->id }}">
@@ -88,10 +138,22 @@
                             </div>
     
                             {{-- Contraseña --}}
-                            <x-auth-password-input id="password" name="password" icon="icon-[fluent--password-24-filled]" placeholder="Contraseña" required />
+                            <x-auth-password-input
+                                id="password"
+                                name="password"
+                                icon="icon-[fluent--password-24-filled]"
+                                placeholder="Contraseña"
+                                required
+                            />
     
                             {{-- Confirmar Contraseña --}}
-                            <x-auth-password-input id="password_confirmation" name="password_confirmation" icon="icon-[fluent--password-24-filled]" placeholder="Confirmar Contraseña" required />
+                            <x-auth-password-input
+                                id="password_confirmation"
+                                name="password_confirmation"
+                                icon="icon-[fluent--password-24-filled]"
+                                placeholder="Confirmar Contraseña"  
+                                required
+                            />
     
                             {{-- Actions --}}
                             <div class="w-full flex items-center justify-between gap-4 pt-2">

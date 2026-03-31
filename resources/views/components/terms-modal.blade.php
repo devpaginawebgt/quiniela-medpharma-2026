@@ -1,7 +1,7 @@
 <div id="modal-terms" class="pointer-events-none fixed inset-0 z-50 flex items-end sm:items-center justify-center p-0 sm:p-4">
 
     {{-- Backdrop --}}
-    <div id="modal-terms-backdrop" class="absolute inset-0 bg-black/70 opacity-0 transition-opacity duration-300"></div>
+    <div id="modal-terms-backdrop" class="absolute inset-0 bg-black/70 backdrop-blur-xs opacity-0 transition-opacity duration-300"></div>
 
     {{-- Panel --}}
     <div id="modal-terms-panel" class="relative bg-light text-dark rounded-t-3xl sm:rounded-3xl overflow-hidden w-full sm:max-w-xl max-h-[90dvh] flex flex-col translate-y-full opacity-0 transition-[transform,opacity] duration-300 ease-out p-8">
