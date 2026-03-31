@@ -1,0 +1,138 @@
+<?php
+
+namespace App\Http\Services;
+
+use App\Http\Requests\Auth\ApiLoginRequest;
+use App\Models\Brand;
+use App\Models\BrandPosition;
+use App\Models\Country;
+use App\Models\EquipoPartido;
+use App\Models\User;
+use Illuminate\Support\Facades\DB;
+
+class UserService {
+
+    public function getUsers()
+    {
+
+        $participantes = User::where('status_user', 1)->get();
+
+        return $participantes;
+
+    }
+
+    public function getUser(int $userId)
+    {
+        return User::find($userId);
+    }
+
+    public function getUserLogin(ApiLoginRequest $request)
+    {
+        return User::where('numero_documento', $request->numero_documento)
+            ->select('id', 'email', 'password', 'nombres', 'apellidos', 'pais_id', 'numero_documento', 'email', 'telefono', 'puntos', 'status_user', 'created_at')
+            ->first();
+    }
+
+    public function getRanking($id_pais)
+    {
+        $participantes = User::select('id', 'nombres', 'apellidos', 'pais_id', 'numero_documento', 'email', 'telefono', 'puntos', 'created_at')
+            ->selectRaw('RANK() OVER (ORDER BY puntos DESC, nombres ASC) as posicion')
+            ->has('predictions')
+            ->where('status_user', 1)
+            ->where('pais_id', $id_pais)
+            ->where('puntos', '>', 0)
+            ->get();
+
+        return $participantes;
+
+    }
+
+    /**
+     * Obtiene el ranking de participantes activos con predicciones, paginado.
+     *
+     * @param  int    $id_pais   ID del país para filtrar participantes.
+     * @param  int    $perPage   Cantidad de registros por página.
+     * @param  array  $columns   Columnas adicionales a seleccionar.
+     * @return \Illuminate\Contracts\Pagination\Paginator
+     */
+    public function getRankingWeb($id_pais, $perPage = 100)
+    {
+        return User::select('id', 'nombres', 'apellidos', 'puntos', 'pais_id', 'numero_documento', 'email', 'telefono', 'created_at')
+            ->selectRaw('RANK() OVER (ORDER BY puntos DESC, nombres ASC) as posicion')
+            ->has('predictions')
+            ->where('status_user', 1)
+            ->where('pais_id', $id_pais)
+            ->where('puntos', '>', 0)
+            ->simplePaginate($perPage);
+    }
+
+    public function getUserRank($user)
+    {
+        $rankingQuery = User::select('id', 'nombres', 'apellidos', 'pais_id', 'puntos', 'created_at')
+            ->selectRaw('RANK() OVER (ORDER BY puntos DESC, nombres ASC) as posicion')
+            ->has('predictions')
+            ->where('status_user', 1)
+            ->where('pais_id', $user->pais_id)
+            ->where('puntos', '>', 0);
+        
+        $rank = DB::query()
+            ->fromSub($rankingQuery, 'ranking')
+            ->where('id', $user->id)
+            ->value('posicion');
+
+        $user->posicion = $rank;
+
+        return $user;
+    }
+
+    public function getUserPredictionsCount($user)
+    {
+        $partidos_existentes = EquipoPartido::whereHas('partido')->count();
+
+        $predicciones_realizadas = $user->predictions->count();
+
+        $predicciones_pendientes = $partidos_existentes - $predicciones_realizadas;
+
+        $partidos = [
+            'total_partidos' => $partidos_existentes,
+            'predicciones' => $predicciones_realizadas,
+            'predicciones_pendientes' => $predicciones_pendientes
+        ];
+
+        $user->partidos = (object) $partidos;
+
+        return $user;
+    }
+
+    public function setUserBrands($users, $country_id) 
+    {
+        $first_position = BrandPosition::where('country_id', $country_id)
+            ->where('position', 1)
+            ->first();
+
+        if (isset($first_position) && ! empty($first_position)) {
+
+            $first_position_brand = $first_position->brand;
+    
+            $users->each(function ($user) use ($first_position_brand) {
+                $user->brand = $user->posicion === 1 ? $first_position_brand : null;
+            });
+
+        }
+
+        return $users;
+    }
+
+    public function updateGlobalPoints()
+    {
+        User::where('puntos_trivias', '>', 0)
+            ->orWhere('puntos_predicciones', '>', 0)
+            ->chunkById(500, function ($users) {
+                foreach ($users as $user) {
+                    $user->puntos = $user->puntos_predicciones + $user->puntos_trivias;
+                    $user->save();
+                }
+            });
+    }
+
+}

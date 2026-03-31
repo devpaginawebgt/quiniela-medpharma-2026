@@ -1,0 +1,42 @@
+<?php
+
+namespace Database\Seeders;
+
+use Illuminate\Database\Seeder;
+
+class DatabaseSeeder extends Seeder
+{
+    /**
+     * Seed the application's database.
+     *
+     * @return void
+     */
+    public function run()
+    {
+        $this->call([
+            CountrySeeder::class,
+            CodigoSeeder::class,
+            UserSeeder::class,
+            BannerSeeder::class,
+            GrupoSeeder::class,
+            EquipoSeeder::class,
+            EstadioSeeder::class,
+            JornadaSeeder::class,
+            PartidoSeeder::class,
+            EquipoPartidoSeeder::class,
+            PremioSeeder::class,
+            // CompanySeeder::class,
+            // BrandSeeder::class,
+            // BrandPositionSeeder::class,
+            // TermSeeder::class,
+            // ModuleSeeder::class,
+            // VisitorSeeder::class,
+            // UserTypeSeeder::class,
+            // QuizSeeder::class,
+            // QuizQuestionSeeder::class,
+            // QuizOptionSeeder::class,
+            // QuizUserSeeder::class,
+            // QuizResponseSeeder::class,
+        ]);
+    }
+}
