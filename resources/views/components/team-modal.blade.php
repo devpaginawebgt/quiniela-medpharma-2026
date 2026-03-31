@@ -4,7 +4,7 @@
     <div id="modal-equipo-backdrop" class="absolute inset-0 bg-black/70 opacity-0 transition-opacity duration-300"></div>
 
     {{-- Panel --}}
-    <div id="modal-equipo-panel" class="relative bg-complementary-primary rounded-t-3xl sm:rounded-3xl overflow-hidden w-full sm:max-w-xl max-h-[90dvh] flex flex-col translate-y-full opacity-0 transition-[transform,opacity] duration-300 ease-out">
+    <div id="modal-equipo-panel" class="relative bg-light rounded-t-3xl sm:rounded-tr-4xl sm:rounded-bl-4xl sm:rounded-tl-none sm:rounded-br-none overflow-hidden w-full sm:max-w-xl max-h-[90dvh] flex flex-col translate-y-full opacity-0 transition-[transform,opacity] duration-300 ease-out">
 
         {{-- Header --}}
         <div class="flex items-center justify-end px-4 pt-3 pb-2 shrink-0">
@@ -12,7 +12,7 @@
             <button
                 id="modal-equipo-close"
                 type="button"
-                class="shrink-0 bg-complementary-light/10 hover:bg-complementary-light/20 text-light rounded-full p-1.5 transition-colors"
+                class="shrink-0 bg-complementary-dark/10 hover:bg-complementary-dark/20 text-dark rounded-full p-1.5 transition-colors"
                 aria-label="Cerrar"
             >
                 <svg class="w-5 h-5" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor">
@@ -28,12 +28,12 @@
                     id="modal-equipo-img"
                     src=""
                     alt=""
-                    class="w-full aspect-video object-cover rounded-2xl"
+                    class="w-full aspect-video object-cover rounded-tr-4xl rounded-bl-4xl"
                 >
             </div>
             <div class="p-6 flex flex-col gap-3">
                 <h3 id="modal-equipo-nombre" class="font-bold text-2xl text-center"></h3>
-                <p id="modal-equipo-descripcion" class="text-complementary-light text-sm leading-relaxed text-justify"></p>
+                <p id="modal-equipo-descripcion" class="text-complementary-dark text-sm lg:text-base leading-relaxed text-justify"></p>
             </div>
         </div>
 

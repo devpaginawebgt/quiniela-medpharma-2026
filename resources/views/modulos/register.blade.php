@@ -15,12 +15,12 @@
         {{-- Full screen background --}}
         <div class="relative min-h-screen w-full">
             {{-- Background --}}
-            {{-- <div class="absolute inset-0 bg-cover bg-center lg:hidden"
+            <div class="absolute inset-0 bg-cover bg-center lg:hidden"
                  style="background-image: url({{ asset('images/portadas/portada-auth.jpg') }});"></div>
             <div class="absolute inset-0 bg-cover bg-center hidden lg:block"
-                 style="background-image: url({{ asset('images/portadas/portada-auth.jpg') }});"></div> --}}
+                 style="background-image: url({{ asset('images/portadas/portada-auth.jpg') }});"></div>
             {{-- Overlay --}}
-            {{-- <div class="absolute inset-0 bg-black/0"></div> --}}
+            <div class="absolute inset-0 bg-black/0"></div>
 
             {{-- Mobile: bottom drawer / lg+: left drawer --}}
             <div

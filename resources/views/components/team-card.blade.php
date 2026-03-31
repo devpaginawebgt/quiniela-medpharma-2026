@@ -1,27 +1,37 @@
 @props(['equipo'])
 
 <div
-    class="team-card bg-complementary-primary border border-secondary rounded-2xl overflow-hidden cursor-pointer hover:scale-[1.02] transition-transform duration-200"
+    class="team-card bg-light border-4 lg:border-6 border-light cursor-pointer
+        rounded-tr-xl rounded-bl-xl lg:rounded-tr-3xl lg:rounded-bl-3xl
+        hover:-translate-y-1 transition-translate duration-200"
     data-nombre="{{ $equipo->nombre }}"
     data-imagen="{{ asset($equipo->imagen) }}"
+    data-popover-target="popover-{{ $equipo->id }}"
+    data-popover-trigger="hover"
+    data-popover-placement="top"
 >
     {{-- Description hidden — used by JS for the modal --}}
     <span class="team-card-descripcion hidden">{{ $equipo->descripcion }}</span>
 
-    <div class="flex items-center gap-4 p-4">
+    <div>
         <img
             src="{{ asset($equipo->imagen) }}"
             alt="{{ $equipo->nombre }}"
-            class="h-16 w-24 object-cover rounded-xl shrink-0 shadow-md"
+            class="w-full object-cover aspect-8/5
+                max-w-16 min-[420px]:max-w-20 sm:max-w-24 md:max-w-34 lg:max-w-24 xl:max-w-32 
+                rounded-tr-lg rounded-bl-lg lg:rounded-tr-3xl lg:rounded-bl-3xl"
         >
-        <div class="flex-1 min-w-0">
-            <p class="font-bold text-light leading-tight">{{ $equipo->nombre }}</p>
-            <p class="text-complementary-light text-sm line-clamp-2 mt-0.5">{{ $equipo->descripcion }}</p>
-        </div>
-        <span class="flex items-center gap-1 shrink-0 font-semibold text-sm text-light ml-2">
-            <svg class="w-5 h-5" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor">
-                <path stroke-linecap="round" stroke-linejoin="round" d="m8.25 4.5 7.5 7.5-7.5 7.5" />
-            </svg>
-        </span>
     </div>
+</div>
+
+<div
+    data-popover
+    id="popover-{{ $equipo->id }}"
+    role="tooltip"
+    class="absolute z-20 hidden lg:inline-block px-4 pt-4 pb-6 rounded-tr-3xl rounded-bl-3xl shadow-md
+        text-lg uppercase font-bold text-dark bg-light
+        invisible opacity-0 transition-opacity duration-200"
+>
+    {{ $equipo->nombre }}
+    <div data-popper-arrow class="border-light"></div>
 </div>

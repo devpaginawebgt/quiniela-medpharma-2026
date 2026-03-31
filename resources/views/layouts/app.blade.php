@@ -23,7 +23,7 @@
             'resources/js/functions.js'
         ])
     </head>
-    <body class="font-sans antialiased text-dark overflow-x-hidden bg-primary min-h-screen pt-16">
+    <body class="font-sans antialiased text-dark overflow-x-hidden bg-primary min-h-screen pt-16 flex flex-col justify-between">
         {{-- Fondo responsive --}}
         {{-- <div class="fixed inset-0 -z-10 bg-cover bg-center bg-complementary-primary lg:hidden"
              style="background-image: url({{ asset('images/decoracion/main-bg.png') }});"></div>
