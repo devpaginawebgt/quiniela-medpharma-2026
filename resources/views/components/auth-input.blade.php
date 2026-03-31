@@ -7,6 +7,7 @@
     'required' => false,
     'maxlength' => null,
     'autofocus' => false,
+    'autocomplete' => null,
 ])
 
 <div class="relative">
@@ -23,6 +24,7 @@
         @if($required) required @endif
         @if($maxlength) maxlength="{{ $maxlength }}" @endif
         @if($autofocus) autofocus @endif
+        @if($autocomplete) autocomplete="{{ $autocomplete }}" @endif
         {{ $attributes->merge(['class' => 'w-full py-3 bg-transparent border-2 rounded-lg border-secondary text-dark placeholder-complementary-dark focus:ring-0 focus:border-complementary-secondary focus:border-3 text-base ' . ($icon ? 'ps-11' : 'ps-4')]) }}
     >
 </div>

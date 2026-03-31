@@ -1,57 +1,57 @@
-@props(['terms'])
-
 <div id="modal-terms" class="pointer-events-none fixed inset-0 z-50 flex items-end sm:items-center justify-center p-0 sm:p-4">
 
     {{-- Backdrop --}}
     <div id="modal-terms-backdrop" class="absolute inset-0 bg-black/70 opacity-0 transition-opacity duration-300"></div>
 
     {{-- Panel --}}
-    <div id="modal-terms-panel" class="relative bg-complementary-primary rounded-t-3xl sm:rounded-3xl overflow-hidden w-full sm:max-w-3xl max-h-[90dvh] flex flex-col translate-y-full opacity-0 transition-[transform,opacity] duration-300 ease-out p-4">
+    <div id="modal-terms-panel" class="relative bg-light text-dark rounded-t-3xl sm:rounded-3xl overflow-hidden w-full sm:max-w-xl max-h-[90dvh] flex flex-col translate-y-full opacity-0 transition-[transform,opacity] duration-300 ease-out p-8">
 
         {{-- Header --}}
-        <div class="shrink-0 pt-4 pb-4 px-6">
-            {{-- Pill decorativa --}}
-            {{-- <div class="w-12 h-1.5 bg-complementary-dark rounded-full mx-auto mb-4"></div> --}}
-            <h2 class="text-xl font-bold text-light text-center">Términos y Condiciones</h2>
-            <div class="w-full h-0.5 bg-secondary mt-3"></div>
-        </div>
+        <h2 class="text-2xl font-bold text-dark text-center mb-6">Términos y Condiciones</h2>
 
-        {{-- Scrollable content --}}
-        <div class="overflow-y-auto flex-1 px-6 pb-4">
-            <div class="prose prose-invert prose-sm max-w-none
-                prose-headings:text-light prose-headings:font-bold
-                prose-p:text-complementary-light prose-p:leading-relaxed
-                prose-a:text-secondary prose-a:no-underline hover:prose-a:underline
-                prose-strong:text-light
-                prose-li:text-complementary-light
-            ">
-                {!! Str::markdown($terms->content) !!}
-            </div>
+        <p class="text-lg mb-6">
+            Para poder participar en la Quiniela Medpharma 2026, lee cuidadosamente el siguiente documento de Términos y Condiciones.
+        </p>
+
+        <div class="flex justify-between rounded-md overflow-hidden mb-4 text-light">
+            <a
+                class="w-full flex items-center gap-3 text-sm py-3 px-3 bg-complementary-secondary hover:brightness-[1.20]"
+                href="/docs/terminos-y-condiciones-quiniela-2026.pdf"
+                target="_blank"
+            >
+                <span><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32"><path fill="#909090" d="m24.1 2.072l5.564 5.8v22.056H8.879V30h20.856V7.945z"/><path fill="#f4f4f4" d="M24.031 2H8.808v27.928h20.856V7.873z"/><path fill="#7a7b7c" d="M8.655 3.5h-6.39v6.827h20.1V3.5z"/><path fill="#dd2025" d="M22.472 10.211H2.395V3.379h20.077z"/><path fill="#464648" d="M9.052 4.534H7.745v4.8h1.028V7.715L9 7.728a2 2 0 0 0 .647-.117a1.4 1.4 0 0 0 .493-.291a1.2 1.2 0 0 0 .335-.454a2.1 2.1 0 0 0 .105-.908a2.2 2.2 0 0 0-.114-.644a1.17 1.17 0 0 0-.687-.65a2 2 0 0 0-.409-.104a2 2 0 0 0-.319-.026m-.189 2.294h-.089v-1.48h.193a.57.57 0 0 1 .459.181a.92.92 0 0 1 .183.558c0 .246 0 .469-.222.626a.94.94 0 0 1-.524.114m3.671-2.306c-.111 0-.219.008-.295.011L12 4.538h-.78v4.8h.918a2.7 2.7 0 0 0 1.028-.175a1.7 1.7 0 0 0 .68-.491a1.9 1.9 0 0 0 .373-.749a3.7 3.7 0 0 0 .114-.949a4.4 4.4 0 0 0-.087-1.127a1.8 1.8 0 0 0-.4-.733a1.6 1.6 0 0 0-.535-.4a2.4 2.4 0 0 0-.549-.178a1.3 1.3 0 0 0-.228-.017m-.182 3.937h-.1V5.392h.013a1.06 1.06 0 0 1 .6.107a1.2 1.2 0 0 1 .324.4a1.3 1.3 0 0 1 .142.526c.009.22 0 .4 0 .549a3 3 0 0 1-.033.513a1.8 1.8 0 0 1-.169.5a1.1 1.1 0 0 1-.363.36a.67.67 0 0 1-.416.106m5.08-3.915H15v4.8h1.028V7.434h1.3v-.892h-1.3V5.43h1.4v-.892"/><path fill="#dd2025" d="M21.781 20.255s3.188-.578 3.188.511s-1.975.646-3.188-.511m-2.357.083a7.5 7.5 0 0 0-1.473.489l.4-.9c.4-.9.815-2.127.815-2.127a14 14 0 0 0 1.658 2.252a13 13 0 0 0-1.4.288Zm-1.262-6.5c0-.949.307-1.208.546-1.208s.508.115.517.939a10.8 10.8 0 0 1-.517 2.434a4.4 4.4 0 0 1-.547-2.162Zm-4.649 10.516c-.978-.585 2.051-2.386 2.6-2.444c-.003.001-1.576 3.056-2.6 2.444M25.9 20.895c-.01-.1-.1-1.207-2.07-1.16a14 14 0 0 0-2.453.173a12.5 12.5 0 0 1-2.012-2.655a11.8 11.8 0 0 0 .623-3.1c-.029-1.2-.316-1.888-1.236-1.878s-1.054.815-.933 2.013a9.3 9.3 0 0 0 .665 2.338s-.425 1.323-.987 2.639s-.946 2.006-.946 2.006a9.6 9.6 0 0 0-2.725 1.4c-.824.767-1.159 1.356-.725 1.945c.374.508 1.683.623 2.853-.91a23 23 0 0 0 1.7-2.492s1.784-.489 2.339-.623s1.226-.24 1.226-.24s1.629 1.639 3.2 1.581s1.495-.939 1.485-1.035"/><path fill="#909090" d="M23.954 2.077V7.95h5.633z"/><path fill="#f4f4f4" d="M24.031 2v5.873h5.633z"/><path fill="#fff" d="M8.975 4.457H7.668v4.8H8.7V7.639l.228.013a2 2 0 0 0 .647-.117a1.4 1.4 0 0 0 .493-.291a1.2 1.2 0 0 0 .332-.454a2.1 2.1 0 0 0 .105-.908a2.2 2.2 0 0 0-.114-.644a1.17 1.17 0 0 0-.687-.65a2 2 0 0 0-.411-.105a2 2 0 0 0-.319-.026m-.189 2.294h-.089v-1.48h.194a.57.57 0 0 1 .459.181a.92.92 0 0 1 .183.558c0 .246 0 .469-.222.626a.94.94 0 0 1-.524.114m3.67-2.306c-.111 0-.219.008-.295.011l-.235.006h-.78v4.8h.918a2.7 2.7 0 0 0 1.028-.175a1.7 1.7 0 0 0 .68-.491a1.9 1.9 0 0 0 .373-.749a3.7 3.7 0 0 0 .114-.949a4.4 4.4 0 0 0-.087-1.127a1.8 1.8 0 0 0-.4-.733a1.6 1.6 0 0 0-.535-.4a2.4 2.4 0 0 0-.549-.178a1.3 1.3 0 0 0-.228-.017m-.182 3.937h-.1V5.315h.013a1.06 1.06 0 0 1 .6.107a1.2 1.2 0 0 1 .324.4a1.3 1.3 0 0 1 .142.526c.009.22 0 .4 0 .549a3 3 0 0 1-.033.513a1.8 1.8 0 0 1-.169.5a1.1 1.1 0 0 1-.363.36a.67.67 0 0 1-.416.106m5.077-3.915h-2.43v4.8h1.028V7.357h1.3v-.892h-1.3V5.353h1.4v-.892"/></svg></span>
+                Términos y Condiciones Quiniela 2026
+            </a>
+
+            <a
+                class="flex items-center gap-2 py-3 px-4 bg-complementary-secondary hover:brightness-[1.20]"
+                href="/docs/terminos-y-condiciones-quiniela-2026.pdf"
+                download
+            >
+                <span class="icon-[fluent--arrow-download-24-filled] w-5 h-5"></span>
+            </a>
         </div>
 
         {{-- Footer --}}
-        <div class="shrink-0 px-6 py-4 border-t border-complementary-dark/30">
-            <label class="flex items-start gap-3 mb-4 cursor-pointer w-max">
+        <div class="shrink-0">
+            <label class="flex items-start gap-3 mb-6 cursor-pointer w-max">
                 <input
                     type="checkbox"
                     id="terms-checkbox"
-                    class="mt-0.5 w-5 h-5 rounded border-complementary-light text-teal-700 focus:ring-light focus:ring-2 shrink-0"
+                    class="mt-0.5 w-5 h-5 rounded border-complementary-dark text-secondary focus:ring-dark focus:ring-2 shrink-0"
                 >
-                <span class="text-sm text-complementary-light mt-0.5">He leído y acepto los términos y condiciones</span>
+                <span class="text-sm text-dark mt-0.5">He leído y acepto los Términos y Condiciones</span>
             </label>
 
             <button
                 type="button"
                 id="btn-confirmar-terms"
                 disabled
-                class="w-full bg-secondary text-complementary-primary font-bold rounded-full text-lg px-6 py-3.5 flex items-center justify-center gap-2 disabled:bg-zinc-400 disabled:opacity-40 disabled:cursor-not-allowed hover:brightness-[1.1] focus:ring-3 focus:ring-white transition-opacity"
+                class="w-full bg-secondary text-light font-bold rounded-lg text-lg px-6 py-3.5 flex items-center justify-center gap-2 disabled:bg-zinc-400 disabled:opacity-40 disabled:cursor-not-allowed disabled:pointer-events-none hover:brightness-[1.25] focus:ring-3 focus:ring-secondary transition-colors cursor-pointer"
             >
-                Confirmar y Crear Cuenta
+                Aceptar y Continuar
             </button>
         </div>
 
-    </div>
-
-    {{-- Versión de los términos (valor usado por JS) --}}
-    <input type="hidden" id="terms-version-value" value="{{ $terms->version }}">
+    </div>    
 </div>

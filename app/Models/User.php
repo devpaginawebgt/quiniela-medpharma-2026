@@ -28,11 +28,10 @@ class User extends Authenticatable
         'numero_documento',
         'telefono',
         'email',
-        'direccion',
         'pais_id',
         'status_user',
         'puntos',
-        'accepted_terms_version',
+        'accepted_terms',
         'password',
         'email_verified_at',
     ];

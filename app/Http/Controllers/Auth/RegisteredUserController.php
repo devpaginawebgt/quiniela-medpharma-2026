@@ -6,12 +6,14 @@ use App\Models\User;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Auth\RegisterRequest;
 use App\Http\Services\CountryService;
+use App\Models\Codigo;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Auth\Events\Registered;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Http\Request;
+use Illuminate\Validation\ValidationException;
 
 class RegisteredUserController extends Controller
 {
@@ -50,6 +52,20 @@ class RegisteredUserController extends Controller
         $data['puntos'] = 0;
 
         $data['password'] = Hash::make($data['password']);
+
+        $codigo = Codigo::where('codigo', $data['codigo'])->first();
+
+        if (empty($codigo)) {
+            throw ValidationException::withMessages([
+                'codigo' => 'El código ingresado no existe'
+            ]);
+        }
+
+        if ((int)$codigo->estado === 1) {
+            throw ValidationException::withMessages([
+                'codigo' => 'El código ingresado ya fue utilizado para registrarse, intenta con otro.'
+            ]);
+        }
 
         $user = User::create($data);
 

@@ -6,7 +6,7 @@
     @csrf
 
     <input type="hidden" name="user_type_id" value="1">
-    <input type="hidden" name="accepted_terms_version" value="">
+    <input type="hidden" name="accepted_terms" value="">
 
     <x-auth-input
         label="Nombres del Dependiente"

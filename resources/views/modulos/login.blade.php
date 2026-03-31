@@ -71,9 +71,9 @@
                         </div>
 
                         <div class="mb-4">
-                            <x-auth-input
+                            <x-auth-password-input
+                                id="login-password"
                                 name="password"
-                                type="password"
                                 icon="icon-[fluent--password-32-filled]"
                                 placeholder="Contraseña"
                                 required

@@ -26,10 +26,9 @@ class CreateUsersTable extends Migration
             $table->string('email')->unique();
             $table->integer('puntos')->index()->default(0);
             $table->unsignedBigInteger('pais_id');
-            $table->string('direccion');
             $table->integer('status_user')->index()->default(1);
             $table->string('password');
-            $table->string('accepted_terms_version');
+            $table->boolean('accepted_terms')->default(false);
             $table->timestamp('email_verified_at')->nullable();
             $table->rememberToken();
             $table->timestamps();
@@ -46,6 +45,7 @@ class CreateUsersTable extends Migration
                 ->onUpdate('cascade')
                 ->onDelete('restrict');
 
+            // $table->string('direccion');
             // $table->integer('puntos_trivias')->default(0);
             // $table->integer('puntos_predicciones')->default(0);
 

@@ -27,7 +27,7 @@ class UserFactory extends Factory
             'puntos'                 => 0,
             'status_user'            => 1,
             'password'               => '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', // password
-            'accepted_terms_version' => '0.1.0',
+            'accepted_terms' => true,
         ];
     }
 

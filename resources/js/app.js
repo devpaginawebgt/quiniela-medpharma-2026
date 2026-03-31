@@ -1,9 +1,11 @@
 import './bootstrap';
 import 'flowbite';
 import { initToastErrors } from './components/toast-errors';
+import { initPasswordToggles } from './components/password-toggle';
 
 document.addEventListener('DOMContentLoaded', () => {
     initToastErrors();
+    initPasswordToggles();
 });
 
 import Swiper from 'swiper';

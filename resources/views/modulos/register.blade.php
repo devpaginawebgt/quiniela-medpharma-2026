@@ -9,7 +9,7 @@
 
         <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&display=swap">
 
-        @vite(['resources/css/app.css', 'resources/css/styles.css', 'resources/js/app.js'])
+        @vite(['resources/css/app.css', 'resources/css/styles.css', 'resources/js/app.js', 'resources/js/views/register.js'])
     </head>
     <body class="font-sans text-light antialiased bg-dark">
         {{-- Full screen background --}}
@@ -32,85 +32,92 @@
                 {{-- Drawer panel --}}
                 <div
                     class="
-                        w-full rounded-t-3xl bg-light p-8
-                        lg:rounded-none lg:max-w-lg 2xl:max-w-xl lg:w-full lg:min-h-screen lg:flex lg:flex-col lg:justify-center lg:shadow-2xl shadow-black lg:overflow-y-auto
+                        w-full max-h-screen sm:rounded-t-3xl bg-light p-8 flex flex-col
+                        lg:rounded-none lg:max-w-lg 2xl:max-w-xl lg:w-full lg:shadow-2xl shadow-black
                     "
                 >
-                    {{-- Logo --}}
-                    <div class="mb-4">
-                        <img
-                            src="/images/logos/medpharma-logo.jpg"
-                            class="w-full max-w-82 mx-auto"
-                            alt="{{ config('app.name', 'Quiniela') }}"
-                        >
-                    </div>
-
-                    {{-- Title --}}
-                    <h1 class="text-2xl text-center font-bold text-complementary-dark mb-4">Crear cuenta</h1>
-
-                    {{-- Toast Errors --}}
-                    <x-toast-errors :errors="$errors" />
-
-                    {{-- Register Form --}}
-                    <form
-                        method="POST"
-                        action="{{ route('register') }}"
-                        class="w-full max-w-108 mx-auto space-y-3"
-                    >
-                        @csrf
-
-                        {{-- Nombres --}}
-                        <x-auth-input name="nombres" icon="icon-[fluent--person-24-filled]" placeholder="Nombres" required autofocus />
-
-                        {{-- Apellidos --}}
-                        <x-auth-input name="apellidos" icon="icon-[fluent--person-24-filled]" placeholder="Apellidos" required />
-
-                        {{-- Numero de Documento de Identidad --}}
-                        <x-auth-input name="numero_documento" icon="icon-[fluent--contact-card-16-filled]" placeholder="Numero de Documento de Identidad" required maxlength="13" />
-
-                        {{-- Numero de Telefono --}}
-                        <x-auth-input name="telefono" icon="icon-[fluent--call-24-filled]" placeholder="Numero de Telefono" required maxlength="15" />
-
-                        {{-- Email --}}
-                        <x-auth-input name="email" type="email" icon="icon-[fluent--mail-24-filled]" placeholder="Email" required />
-
-                        {{-- Codigo de registro --}}
-                        <x-auth-input name="codigo" icon="icon-[fluent--text-number-format-20-filled]" placeholder="Codigo de registro" required />
-
-                        {{-- Pais (detectado por IP) --}}
-                        <input type="hidden" name="pais_id" value="{{ $country->id }}">
-                        <div class="flex items-center gap-3 py-3 px-4 bg-transparent border-2 rounded-lg border-secondary text-dark text-base cursor-default">
-                            <img src="{{ asset($country->image) }}" alt="{{ $country->name }}" class="w-6 aspect-6/4 rounded-sm object-cover shadow-sm">
-                            <span>{{ $country->name }}</span>
-                        </div>
-
-                        {{-- Contraseña --}}
-                        <x-auth-input name="password" type="password" icon="icon-[fluent--password-24-filled]" placeholder="Contraseña" required />
-
-                        {{-- Confirmar Contraseña --}}
-                        <x-auth-input name="password_confirmation" type="password" icon="icon-[fluent--password-24-filled]" placeholder="Confirmar Contraseña" required />
-
-                        {{-- Actions --}}
-                        <div class="w-full flex items-center justify-between gap-4 pt-2">
-                            <button
-                                type="submit"
-                                class="bg-secondary text-light font-bold rounded-lg px-6 py-3 hover:brightness-110 focus:ring-4 focus:ring-secondary/50 flex items-center justify-center gap-2 w-full"
+                    <div class="overflow-y-auto my-auto">
+                        {{-- Logo --}}
+                        <div class="mb-4">
+                            <img
+                                src="/images/logos/medpharma-logo.jpg"
+                                class="w-full max-w-82 mx-auto"
+                                alt="{{ config('app.name', 'Quiniela') }}"
                             >
-                                <span class="icon-[fluent--person-16-filled] w-5 h-5"></span>
-                                Registrarme
-                            </button>
                         </div>
-
-                        {{-- Login link --}}
-                        <p class="text-center mt-8 text-sm">
-                            <span class="text-complementary-dark mb-2">¿Ya estás registrado?</span>
-                            <a href="{{ route('ingresa') }}" class="text-secondary font-bold hover:text-dark">
-                                Inicia sesión
-                            </a>
-                        </p>
-                    </form>
+    
+                        {{-- Title --}}
+                        <h1 class="text-2xl text-center font-bold text-complementary-dark mb-4">Crear cuenta</h1>
+    
+                        {{-- Toast Errors --}}
+                        <x-toast-errors :errors="$errors" />
+    
+                        {{-- Register Form --}}
+                        <form
+                            method="POST"
+                            action="{{ route('register') }}"
+                            class="w-full max-w-108 mx-auto space-y-3"
+                        >
+                            @csrf
+    
+                            <input type="hidden" name="accepted_terms" value="{{ old('accepted_terms', '') }}">
+    
+                            {{-- Nombres --}}
+                            <x-auth-input name="nombres" icon="icon-[fluent--person-24-filled]" placeholder="Nombres" required autofocus />
+    
+                            {{-- Apellidos --}}
+                            <x-auth-input name="apellidos" icon="icon-[fluent--person-24-filled]" placeholder="Apellidos" required />
+    
+                            {{-- Numero de Documento de Identidad --}}
+                            <x-auth-input name="numero_documento" icon="icon-[fluent--contact-card-16-filled]" placeholder="Numero de Documento de Identidad" required maxlength="13" />
+    
+                            {{-- Numero de Telefono --}}
+                            <x-auth-input name="telefono" icon="icon-[fluent--call-24-filled]" placeholder="Numero de Telefono" required maxlength="15" />
+    
+                            {{-- Email --}}
+                            <x-auth-input name="email" type="email" icon="icon-[fluent--mail-24-filled]" placeholder="Email" required />
+    
+                            {{-- Codigo de registro --}}
+                            <x-auth-input name="codigo" icon="icon-[fluent--text-number-format-20-filled]" placeholder="Codigo de registro" required />
+    
+                            {{-- Pais (detectado por IP) --}}
+                            <input type="hidden" name="pais_id" value="{{ $country->id }}">
+                            <div class="flex items-center gap-3 py-3 px-4 bg-transparent border-2 rounded-lg border-secondary text-dark text-base cursor-default">
+                                <img src="{{ asset($country->image) }}" alt="{{ $country->name }}" class="w-6 aspect-6/4 rounded-sm object-cover shadow-sm">
+                                <span>{{ $country->name }}</span>
+                            </div>
+    
+                            {{-- Contraseña --}}
+                            <x-auth-password-input id="password" name="password" icon="icon-[fluent--password-24-filled]" placeholder="Contraseña" required />
+    
+                            {{-- Confirmar Contraseña --}}
+                            <x-auth-password-input id="password_confirmation" name="password_confirmation" icon="icon-[fluent--password-24-filled]" placeholder="Confirmar Contraseña" required />
+    
+                            {{-- Actions --}}
+                            <div class="w-full flex items-center justify-between gap-4 pt-2">
+                                <button
+                                    type="submit"
+                                    class="bg-secondary text-light font-bold rounded-lg px-6 py-3 hover:brightness-110 focus:ring-4 focus:ring-secondary/50 flex items-center justify-center gap-2 w-full"
+                                >
+                                    <span class="icon-[fluent--person-16-filled] w-5 h-5"></span>
+                                    Registrarme
+                                </button>
+                            </div>
+    
+                            {{-- Login link --}}
+                            <p class="text-center mt-8 text-sm">
+                                <span class="text-complementary-dark mb-2">¿Ya estás registrado?</span>
+                                <a href="{{ route('ingresa') }}" class="text-secondary font-bold hover:text-dark">
+                                    Inicia sesión
+                                </a>
+                            </p>
+                        </form>
+                    </div>
                 </div>
             </div>
         </div>
+
+        {{-- Terms & Conditions Modal --}}
+        <x-terms-modal />
     </body>
 </html>
