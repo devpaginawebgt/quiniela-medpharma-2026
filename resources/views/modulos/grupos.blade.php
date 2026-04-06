@@ -9,7 +9,7 @@
                     class="flex flex-col md:flex-row justify-center items-center md:items-end my-8 lg:my-12 gap-4 lg:gap-8 2xl:gap-12 mx-auto"
                     style="max-width: min(84rem, calc(100vw - 2rem));"
                 >
-                    <h1 class="text-center md:text-start text-4xl sm:text-6xl lg:text-8xl uppercase font-brandan">
+                    <h1 class="text-center md:text-start text-5xl sm:text-6xl lg:text-8xl uppercase font-brandan">
                         Grupos conformados
                     </h1>
     

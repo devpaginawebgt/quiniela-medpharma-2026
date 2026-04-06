@@ -3,15 +3,26 @@
         <x-main-banner/>
 
         <div class="overflow-hidden">
-            <div class="px-6 pb-6">
+            <div class="px-4 lg:px-12 pb-6">
 
-                <h5 class="text-3xl 2xl:text-4xl text-center font-bold mt-8 mb-4">Estadios de la Copa Mundial</h5>
+                <div
+                    class="flex flex-col md:flex-row justify-center items-center md:justify-between md:items-end my-8 lg:my-12 gap-4 lg:gap-8 2xl:gap-12 mx-auto"
+                    style="max-width: min(84rem, calc(100vw - 2rem));"
+                >
+                    <h1 class="text-center md:text-start text-5xl sm:text-6xl lg:text-8xl uppercase font-brandan">
+                        Estadios del mundial
+                    </h1>
 
-                <div class="w-full max-w-lg mx-auto mb-6">
-                    <x-search-input id="buscar-estadios" name="buscar_estadios" placeholder="Buscar Estadios" />
+                    <div class="w-full max-w-sm md:max-w-56 mb-2">
+                        <x-search-input id="buscar-estadios" name="buscar_estadios" placeholder="Buscar Estadios" />
+                    </div>
                 </div>
 
-                <div id="estadios-grid" class="grid grid-cols-1 md:grid-cols-2 2xl:gap-12 max-w-6xl mx-auto gap-4 lg:gap-8 items-start">
+                <div
+                    id="estadios-grid"
+                    class="grid grid-cols-1 md:grid-cols-2 mx-auto gap-8 lg:gap-8 2xl:gap-12 items-start"
+                    style="max-width: min(84rem, calc(100vw - 2rem));"
+                >
                     @foreach($estadios as $estadio)
                         <x-estadio-card :estadio="$estadio" />
                     @endforeach

@@ -4,7 +4,7 @@
     <div id="modal-estadio-backdrop" class="absolute inset-0 bg-black/70 opacity-0 transition-opacity duration-300"></div>
 
     {{-- Panel --}}
-    <div id="modal-estadio-panel" class="relative bg-light rounded-t-3xl sm:rounded-3xl overflow-hidden w-full sm:max-w-xl max-h-[90dvh] flex flex-col translate-y-full opacity-0 transition-[transform,opacity] duration-300 ease-out">
+    <div id="modal-estadio-panel" class="relative bg-light rounded-t-3xl sm:rounded-t-none sm:rounded-tr-4xl sm:rounded-bl-4xl overflow-hidden w-full sm:max-w-xl max-h-[90dvh] flex flex-col translate-y-full opacity-0 transition-[transform,opacity] duration-300 ease-out">
 
         {{-- Scrollable content --}}
         <div class="overflow-y-auto">
