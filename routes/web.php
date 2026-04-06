@@ -34,10 +34,10 @@ Route::middleware(['auth'])->as('web.')->group(function() {
         Route::get('selecciones', 'equiposWeb')->name('selecciones');
     });
 
-    Route::controller(GrupoController::class)->group(function() {            
-        Route::get('grupos', 'gruposWeb')->name('grupos');
-        Route::get('/{grupo_id}/equipos', 'getEquiposWeb')->name('equipos');
-        Route::get('/{grupo_id}/jornadas', 'getJornadasWeb')->name('jornadas');
+    Route::controller(GrupoController::class)->prefix('grupos')->group(function() {            
+        Route::get('', 'gruposWeb')->name('grupos');
+        Route::get('{grupo_id}/equipos', 'getEquiposWeb')->name('equipos');
+        Route::get('{grupo_id}/jornadas', 'getJornadasWeb')->name('jornadas');
     });
 
     Route::controller(EstadioController::class)->group(function() {

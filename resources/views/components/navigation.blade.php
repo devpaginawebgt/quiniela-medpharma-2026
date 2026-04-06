@@ -14,7 +14,7 @@
             <div class="hidden lg:block w-px h-7 bg-dark mx-4"></div>
 
             {{-- Links de navegación (desktop) --}}
-            <div class="hidden lg:flex items-center gap-6 xl:gap-8 flex-1">
+            <div class="hidden lg:flex items-center gap-6 xl:gap-8 flex-1 font-sans">
                 @php
                     $links = [
                         ['route' => 'web.inicio', 'label' => 'Inicio'],
@@ -73,13 +73,13 @@
 {{-- Drawer de navegación móvil (Flowbite) --}}
 <div id="mobile-nav-drawer" class="fixed -top-16 z-50 bg-white shadow-xl transition-transform -translate-y-full" tabindex="-1">
     <div class="flex items-center justify-between p-4 border-b border-gray-200">
-        <img src="{{ asset('images/logos/medpharma-logo.png') }}" alt="Medpharma" class="h-8">
+        <img src="{{ asset('images/logos/medpharma-logo.jpg') }}" alt="Medpharma" class="h-8">
         <button data-drawer-hide="mobile-nav-drawer" class="text-dark">
             <span class="icon-[fluent--dismiss-20-filled] w-6 h-6"></span>
         </button>
     </div>
 
-    <div class="flex flex-col gap-1 p-4">
+    <div class="flex flex-col gap-1 p-4 font-sans">
         @php
             $mobileLinks = [
                 ['route' => 'web.inicio', 'label' => 'Inicio', 'icon' => 'icon-[fluent--home-20-filled]'],

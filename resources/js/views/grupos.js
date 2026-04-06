@@ -3,10 +3,14 @@ import { renderMatchCard } from '../components/match-card.js';
 // --- Helpers ---
 
 const buildTeamRow = (equipo) => `
-    <tr class="border-b border-complementary-light/20">
-        <td class="px-4 py-3 flex items-center gap-3">
-            <img src="${equipo.image}" alt="${equipo.name}" class="h-8 w-12 object-cover rounded shrink-0">
-            <span class="font-semibold whitespace-nowrap">${equipo.name}</span>
+    <tr class="border-b border-zinc-300 text-xs sm:text-base lg:text-xl">
+        <td class="px-4 py-3 lg:py-4 flex items-center gap-4">
+            <img
+                src="${equipo.image}"
+                alt="${equipo.name}"
+                class="w-12 sm:w-18 lg:w-20 aspect-8/5 object-cover rounded-tr-xl rounded-bl-xl sm:rounded-tr-2xl sm:rounded-bl-2xl shrink-0"
+            >
+            <span class="uppercase whitespace-nowrap">${equipo.name}</span>
         </td>
         <td class="px-2 py-3 text-center">${equipo.pj}</td>
         <td class="px-2 py-3 text-center">${equipo.pg}</td>
@@ -15,7 +19,7 @@ const buildTeamRow = (equipo) => `
         <td class="px-2 py-3 text-center">${equipo.gf}</td>
         <td class="px-2 py-3 text-center">${equipo.gc}</td>
         <td class="px-2 py-3 text-center">${equipo.dg}</td>
-        <td class="px-2 py-3 text-center font-bold">${equipo.pts}</td>
+        <td class="px-2 py-3 text-center border-s border-zinc-400">${equipo.pts}</td>
     </tr>`;
 
 // --- Jornadas ---
@@ -33,25 +37,26 @@ const renderJornadasGrupo = (jornadas) => {
     const contenedor = document.getElementById('jornadas-partidos-list');
 
     contenedor.innerHTML = jornadas.map(jornada => `
-        <div class="mb-8">
-            <h6 class="text-xl font-semibold text-center mb-4">Jornada ${jornada.value}</h6>
-            <ul class="flex flex-wrap justify-center gap-4">
+        <div class="mb-24">
+            <h2 class="text-3xl sm:text-4xl lg:text-5xl uppercase font-brandan mb-4 lg:mb-6 text-center md:text-start">
+                Jornada ${jornada.value}
+            </h2>
+            <div class="divide-y divide-zinc-300">
                 ${jornada.partidos.map(renderMatchCard).join('')}
-            </ul>
+            </div>
         </div>
     `).join('');
 
     const buscar = document.getElementById('buscar-partidos-grupo');
+    
     if (buscar?.value.trim()) {
         filtrarPartidosGrupo(buscar.value.trim());
     }
 };
 
-const cargarJornadasGrupo = async (grupoId, grupoNombre) => {
-    const spinner    = document.getElementById('jornadas-spinner');
-    const tituloJorn = document.getElementById('titulo-jornadas-grupo');
+const cargarJornadasGrupo = async (grupoId) => {
+    const spinner = document.getElementById('jornadas-spinner');
 
-    tituloJorn.textContent = `Jornadas de Partidos del Grupo ${grupoNombre}`;
     spinner?.classList.remove('hidden');
 
     try {
@@ -75,8 +80,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     if (selectorGrupo) {
         selectorGrupo.addEventListener('change', async function () {
-            const grupoId     = this.value;
-            const grupoNombre = this.options[this.selectedIndex].text;
+            const grupoId = this.value;
 
             spinner?.classList.remove('hidden');
             listaEquipos.innerHTML = '';
@@ -92,13 +96,14 @@ document.addEventListener('DOMContentLoaded', () => {
                 spinner?.classList.add('hidden');
             }
 
-            cargarJornadasGrupo(grupoId, grupoNombre);
+            cargarJornadasGrupo(grupoId);
         });
     }
 
     // --- Search filters ---
 
     const buscarPartidos = document.getElementById('buscar-partidos-grupo');
+
     if (buscarPartidos) {
         buscarPartidos.addEventListener('input', function () {
             filtrarPartidosGrupo(this.value);
@@ -115,9 +120,8 @@ document.addEventListener('DOMContentLoaded', () => {
             const isHidden = jornadasSection.classList.toggle('hidden');
 
             if (!isHidden) {
-                const grupoId     = selectorGrupo?.value;
-                const grupoNombre = selectorGrupo?.options[selectorGrupo.selectedIndex]?.text;
-                cargarJornadasGrupo(grupoId, grupoNombre);
+                const grupoId = selectorGrupo?.value;
+                cargarJornadasGrupo(grupoId);
                 jornadasSection.scrollIntoView({ behavior: 'smooth' });
             }
         });

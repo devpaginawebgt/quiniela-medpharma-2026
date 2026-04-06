@@ -1,5 +1,24 @@
 @import "tailwindcss";
 @import "./styles.css" layer(base);
+
+@font-face {
+    font-family: 'Brandan';
+    src: url('../../public/fonts/brandan/BrandanPersonalUseRegular.woff2') format('woff2'),
+         url('../../public/fonts/brandan/BrandanPersonalUseRegular.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'OptiImprov';
+    src: url('../../public/fonts/optimprov/OPTIImprovNewWideNine.woff2') format('woff2'),
+         url('../../public/fonts/optimprov/OPTIImprovNewWideNine.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+}
+
 @plugin "flowbite/plugin";
 @plugin "@tailwindcss/typography";
 @plugin "@iconify/tailwind4";
@@ -21,6 +40,8 @@
 
 @theme {
     --font-sans: 'Arial', ui-sans-serif, system-ui, sans-serif;
+    --font-brandan: 'Brandan', 'Arial', ui-sans-serif, system-ui, sans-serif;
+    --font-optimprov: 'OptiImprov', ui-sans-serif, system-ui, sans-serif;
     --color-primary: #feffff;
     --color-secondary: #01665e;
     --color-dark: #101820;
