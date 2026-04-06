@@ -4,7 +4,7 @@ const formatFecha = (fechaStr) => {
     const num = fecha.getDate();
     const mes = fecha.toLocaleDateString('es', { month: 'long' });
     const capitalize = (s) => s.charAt(0).toUpperCase() + s.slice(1);
-    return `${capitalize(dia)} ${num} de ${capitalize(mes)}`;
+    return `${capitalize(dia)} ${num} de ${mes}`;
 };
 
 const formatHora = (fechaStr) => {

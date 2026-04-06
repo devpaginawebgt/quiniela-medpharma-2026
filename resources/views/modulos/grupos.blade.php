@@ -102,10 +102,10 @@
         </div>
 
         {{-- Contenedor de jornadas con partidos --}}
-        <div id="jornadas-partidos-list" class="mx-auto mt-20" style="max-width: min(82rem, calc(100vw - 2rem));">
+        <div id="jornadas-partidos-list" class="mx-auto mt-12 sm:mt-20" style="max-width: min(82rem, calc(100vw - 2rem));">
             @foreach([$jornada_uno, $jornada_dos, $jornada_tres] as $jornada)
                 @if($jornada && isset($jornada->partidos))
-                <div class="mb-24">
+                <div class="mb-16 sm:mb-24">
                     <h2 class="text-3xl sm:text-4xl lg:text-5xl uppercase font-brandan mb-4 lg:mb-6 text-center md:text-start">
                         Jornada {{ $jornada->id }}
                     </h2>

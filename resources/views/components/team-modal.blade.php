@@ -12,7 +12,7 @@
             <button
                 id="modal-equipo-close"
                 type="button"
-                class="shrink-0 bg-complementary-dark/10 hover:bg-complementary-dark/20 text-dark rounded-full p-1.5 transition-colors"
+                class="shrink-0 bg-complementary-dark/10 hover:bg-complementary-dark/20 text-dark rounded-full p-1.5 transition-colors cursor-pointer"
                 aria-label="Cerrar"
             >
                 <svg class="w-5 h-5" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor">
@@ -32,7 +32,7 @@
                 >
             </div>
             <div class="p-6 flex flex-col gap-3">
-                <h3 id="modal-equipo-nombre" class="font-bold text-2xl text-center"></h3>
+                <h3 id="modal-equipo-nombre" class="font-optimprov text-xl uppercase text-center"></h3>
                 <p id="modal-equipo-descripcion" class="text-complementary-dark text-sm lg:text-base leading-relaxed text-justify"></p>
             </div>
         </div>

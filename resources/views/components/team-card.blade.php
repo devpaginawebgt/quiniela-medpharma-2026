@@ -28,9 +28,9 @@
     data-popover
     id="popover-{{ $equipo->id }}"
     role="tooltip"
-    class="absolute z-20 hidden lg:inline-block px-4 pt-4 pb-6 rounded-tr-3xl rounded-bl-3xl shadow-md
-        text-lg uppercase font-bold text-dark bg-light
-        invisible opacity-0 transition-opacity duration-200"
+    class="absolute hidden lg:inline-block px-4 pt-4 pb-6 rounded-tr-3xl rounded-bl-3xl shadow-md
+        text-lg uppercase text-dark bg-light
+        invisible opacity-0 transition-opacity duration-200 font-optimprov"
 >
     {{ $equipo->nombre }}
     <div data-popper-arrow class="border-light"></div>
