@@ -1,7 +1,7 @@
 <input type="hidden" id="user_id" value="{{ Auth::user()->id }}">
 
 {{-- Top Navigation Bar --}}
-<nav class="fixed top-0 left-0 right-0 z-40 bg-white shadow-sm">
+<nav class="fixed top-0 left-0 right-0 z-50 bg-white shadow-sm">
     <div class="max-w-screen-2xl mx-auto px-4 lg:px-8 flex items-center justify-between h-16">
 
         <div class="flex gap-4 justify-start items-center">
@@ -23,7 +23,7 @@
                         ['route' => 'web.estadios', 'label' => 'Estadios'],
                         ['route' => 'web.quiniela', 'label' => 'Calendario y Quiniela'],
                         ['route' => 'web.users.tabla-de-resultados', 'label' => 'Tabla de resultados'],
-                        ['route' => 'web.tabla-de-premios', 'label' => 'Tabla de premios'],
+                        ['route' => 'web.tabla-de-premios', 'label' => 'Premios Ganadores'],
                     ];
                 @endphp
     
@@ -64,56 +64,46 @@
         </div>
 
         {{-- Botón hamburguesa (móvil) --}}
-        <button data-drawer-target="mobile-nav-drawer" data-drawer-show="mobile-nav-drawer" class="lg:hidden text-dark">
+        <button data-drawer-target="mobile-nav-drawer" data-drawer-toggle="mobile-nav-drawer" data-drawer-placement="top" class="lg:hidden text-dark">
             <span class="icon-[fluent--navigation-20-filled] w-6 h-6"></span>
         </button>
     </div>
 </nav>
 
 {{-- Drawer de navegación móvil (Flowbite) --}}
-<div id="mobile-nav-drawer" class="fixed -top-16 z-50 bg-white shadow-xl transition-transform -translate-y-full" tabindex="-1">
-    <div class="flex items-center justify-between p-4 border-b border-gray-200">
-        <img src="{{ asset('images/logos/medpharma-logo.jpg') }}" alt="Medpharma" class="h-8">
-        <button data-drawer-hide="mobile-nav-drawer" class="text-dark">
-            <span class="icon-[fluent--dismiss-20-filled] w-6 h-6"></span>
-        </button>
-    </div>
+<div id="mobile-nav-drawer" class="lg:hidden fixed top-16 left-0 right-0 z-40 bg-white shadow-xl transition-transform -translate-y-full pt-6 p-4" tabindex="-1">
+    <p class="flex items-center gap-2 text-sm text-dark mb-4">
+        <span class="icon-[fluent--person-12-filled] w-10 h-10"></span>
+        <span class="uppercase text-2xl font-brandan">{{ $username }}</span>
+    </p>
 
-    <div class="flex flex-col gap-1 p-4 font-sans">
+    <div class="flex flex-col gap-1 font-sans">
         @php
             $mobileLinks = [
-                ['route' => 'web.inicio', 'label' => 'Inicio', 'icon' => 'icon-[fluent--home-20-filled]'],
+                ['route' => 'web.inicio', 'label' => 'Inicio', 'icon' => 'icon-[fluent--home-16-filled]'],
                 ['route' => 'web.selecciones', 'label' => 'Selecciones', 'icon' => 'icon-[fluent--people-team-20-filled]'],
-                ['route' => 'web.grupos', 'label' => 'Grupos', 'icon' => 'icon-[fluent--group-list-20-filled]'],
-                ['route' => 'web.estadios', 'label' => 'Estadios', 'icon' => 'icon-[fluent--building-20-filled]'],
-                ['route' => 'web.quiniela', 'label' => 'Quiniela', 'icon' => 'icon-[fluent--clipboard-text-edit-20-filled]'],
-                ['route' => 'web.users.tabla-de-resultados', 'label' => 'Tabla de resultados', 'icon' => 'icon-[fluent--trophy-20-filled]'],
-                ['route' => 'web.tabla-de-premios', 'label' => 'Tabla de premios', 'icon' => 'icon-[fluent--gift-20-filled]'],
+                ['route' => 'web.grupos', 'label' => 'Grupos', 'icon' => 'icon-[fluent--contact-card-group-16-filled]'],
+                ['route' => 'web.estadios', 'label' => 'Estadios', 'icon' => 'icon-[fluent--seat-multiple-stadium-16-filled]'],
+                ['route' => 'web.quiniela', 'label' => 'Calendario y Quiniela', 'icon' => 'icon-[fluent--calendar-12-filled]'],
+                ['route' => 'web.users.tabla-de-resultados', 'label' => 'Tabla de resultados', 'icon' => 'icon-[fluent--medal-16-filled]'],
+                ['route' => 'web.tabla-de-premios', 'label' => 'Premios Ganadores', 'icon' => 'icon-[fluent--gift-card-multiple-20-filled]'],
             ];
         @endphp
 
         @foreach ($mobileLinks as $link)
             <a href="{{ route($link['route']) }}"
                class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium transition-colors duration-150
-                      {{ request()->routeIs($link['route']) ? 'bg-primary text-white' : 'text-dark hover:bg-gray-100' }}">
-                <span class="{{ $link['icon'] }} w-5 h-5"></span>
+                      {{ request()->routeIs($link['route']) ? 'bg-secondary text-white' : 'text-dark hover:bg-gray-100' }}">
+                <span class="{{ $link['icon'] }} w-6 h-6"></span>
                 {{ $link['label'] }}
             </a>
         @endforeach
-    </div>
-
-    <div class="absolute bottom-0 left-0 right-0 p-4 border-t border-gray-200">
-        <div class="flex items-center justify-between">
-            <div class="flex items-center gap-3">
-                <span class="icon-[fluent--person-20-filled] w-6 h-6 text-dark"></span>
-                <span class="text-sm font-bold text-dark">{{ $username }}</span>
-            </div>
-            <form method="POST" action="{{ route('web.logout') }}">
+            <form method="POST" action="{{ route('web.logout') }}" class="w-full">
                 @csrf
-                <button type="submit" class="text-dark hover:text-red-600 transition-colors" title="Cerrar sesión">
-                    <span class="icon-[fluent--sign-out-20-filled] w-5 h-5"></span>
+                <button type="submit" class="w-full flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium transition-colors duration-150 hover:bg-gray-100">
+                    <span class="icon-[fluent--arrow-exit-16-filled] w-6 h-6"></span>
+                    Cerrar sesión
                 </button>
             </form>
-        </div>
     </div>
 </div>

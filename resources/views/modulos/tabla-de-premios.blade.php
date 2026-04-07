@@ -2,11 +2,17 @@
     <div>
         <x-main-banner/>
 
-        <div class="overflow-hidden sm:rounded-lg">
-            <div
-                class="px-4 lg:px-12 my-8 lg:my-12 mx-auto"
-                style="max-width: min(84rem, calc(100vw - 2rem));"
+        <div class="relative">
+            {{-- Background image --}}
+            <img
+                src="{{ asset('images/portadas/portada_shared_sm.jpg') }}"
+                alt=""
+                class="absolute inset-0 w-full h-full object-cover"
             >
+            {{-- White overlay --}}
+            <div class="absolute inset-0 bg-white mx-4 lg:mx-8 mb-4 lg:mb-8"></div>
+
+            <div class="relative px-6 md:px-8 lg:px-12 pb-16 pt-8 mx-auto" style="max-width: min(84rem, calc(100vw - 2rem));">
 
                 <h1 class="text-center md:text-start text-5xl sm:text-7xl lg:text-8xl uppercase font-brandan max-w-[12ch]">
                     Premios Ganadores
