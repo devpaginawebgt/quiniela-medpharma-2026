@@ -28,17 +28,10 @@ class PremioController extends Controller
         
         $id_pais = $user->pais_id;
 
-        // $user = $this->userService->getUserRank($user);
-        // $user = $this->userService->getUserPredictionsCount($user);
-
         $premios = $this->premioService->getPremios($id_pais);
-
-        // $brands = Brand::all();
 
         return view('modulos.tabla-de-premios', [
             'premios' => $premios,
-            // 'brands' => $brands,
-            // 'user' => $user,
         ]);
     }
 
