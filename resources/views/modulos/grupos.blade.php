@@ -2,88 +2,84 @@
     <div class="w-full overflow-hidden">
         <x-main-banner/>
 
-        <div>
-            <div class="px-4 lg:px-12 pb-6">
+        <div class="px-4 lg:px-12 pb-6">
+            <div
+                class="flex flex-col md:flex-row justify-center items-center md:items-end my-8 lg:my-12 gap-4 lg:gap-8 2xl:gap-12 mx-auto"
+                style="max-width: min(84rem, calc(100vw - 2rem));"
+            >
+                <h1 class="text-center md:text-start text-5xl sm:text-6xl lg:text-8xl uppercase font-brandan">
+                    Grupos conformados
+                </h1>
 
-                <div
-                    class="flex flex-col md:flex-row justify-center items-center md:items-end my-8 lg:my-12 gap-4 lg:gap-8 2xl:gap-12 mx-auto"
-                    style="max-width: min(84rem, calc(100vw - 2rem));"
-                >
-                    <h1 class="text-center md:text-start text-5xl sm:text-6xl lg:text-8xl uppercase font-brandan">
-                        Grupos conformados
-                    </h1>
-    
-                    {{-- Group selector --}}
-                    <div class="w-full max-w-sm md:max-w-48 mb-2">
-                        <x-form-select id="selector-grupo" name="selector_grupo">
-                            @foreach($grupos as $grupo)
-                            <option
-                                value="{{ $grupo->id }}"
-                                class="text-complementary-dark"
-                                {{ $grupo->is_current === true ? 'selected' : '' }}
-                            >
-                                Grupo {{ $grupo->name }}
-                            </option>
-                            @endforeach
-                        </x-form-select>
-                    </div>
+                {{-- Group selector --}}
+                <div class="w-full max-w-sm md:max-w-48 mb-2">
+                    <x-form-select id="selector-grupo" name="selector_grupo">
+                        @foreach($grupos as $grupo)
+                        <option
+                            value="{{ $grupo->id }}"
+                            class="text-complementary-dark"
+                            {{ $grupo->is_current === true ? 'selected' : '' }}
+                        >
+                            Grupo {{ $grupo->name }}
+                        </option>
+                        @endforeach
+                    </x-form-select>
                 </div>
-                
+            </div>
+            
 
-                {{-- Loading spinner --}}
-                <div id="grupos-spinner" class="hidden">
-                    <div class="flex justify-center py-8">
-                        <svg class="animate-spin w-8 h-8 text-secondary" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
-                            <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
-                            <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4z"></path>
-                        </svg>
-                    </div>
+            {{-- Loading spinner --}}
+            <div id="grupos-spinner" class="hidden">
+                <div class="flex justify-center py-8">
+                    <svg class="animate-spin w-8 h-8 text-secondary" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                        <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+                        <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4z"></path>
+                    </svg>
                 </div>
+            </div>
 
-                {{-- Tabla de equipos del grupo --}}
-                <div
-                    class="mx-auto rounded-t-3xl overflow-x-auto"
-                    style="max-width: min(84rem, calc(100vw - 2rem));"
-                >
-                    <table class="min-w-150 w-full text-left text-dark font-optimprov">
-                        <thead class="uppercase bg-dark text-light text-xs sm:text-sm lg:text-xl">
-                            <tr>
-                                <th scope="col" class="px-4 py-3">Equipo</th>
-                                <th scope="col" class="px-2 py-3 text-center font-bold">PJ</th>
-                                <th scope="col" class="px-2 py-3 text-center font-bold">PG</th>
-                                <th scope="col" class="px-2 py-3 text-center font-bold">PE</th>
-                                <th scope="col" class="px-2 py-3 text-center font-bold">PP</th>
-                                <th scope="col" class="px-2 py-3 text-center font-bold">GF</th>
-                                <th scope="col" class="px-2 py-3 text-center font-bold">GC</th>
-                                <th scope="col" class="px-2 py-3 text-center font-bold">DG</th>
-                                <th scope="col" class="px-2 py-3 text-center font-bold">PTS</th>
-                            </tr>
-                        </thead>
-                        <tbody id="equipos-grupo-list">
-                            @foreach($equipos_grupo as $equipo)
-                            <tr class="border-b border-zinc-300 text-xs sm:text-base lg:text-xl">
-                                <td class="px-4 py-3 lg:py-4 flex items-center gap-4">
-                                    <img
-                                        src="{{ $equipo->imagen }}"
-                                        alt="{{ $equipo->nombre }}"
-                                        class="w-12 sm:w-18 lg:w-20 aspect-8/5 object-cover rounded-tr-xl rounded-bl-xl sm:rounded-tr-2xl sm:rounded-bl-2xl shrink-0"
-                                    >
-                                    <span class="uppercase whitespace-nowrap">{{ $equipo->nombre }}</span>
-                                </td>
-                                <td class="px-2 py-3 text-center">{{ $equipo->partidos_jugados }}</td>
-                                <td class="px-2 py-3 text-center">{{ $equipo->partidos_ganados }}</td>
-                                <td class="px-2 py-3 text-center">{{ $equipo->partidos_empatados }}</td>
-                                <td class="px-2 py-3 text-center">{{ $equipo->partidos_perdidos }}</td>
-                                <td class="px-2 py-3 text-center">{{ $equipo->goles_favor }}</td>
-                                <td class="px-2 py-3 text-center">{{ $equipo->goles_contra }}</td>
-                                <td class="px-2 py-3 text-center">{{ $equipo->goles_favor - $equipo->goles_contra }}</td>
-                                <td class="px-2 py-3 text-center border-s border-zinc-400">{{ $equipo->puntos }}</td>
-                            </tr>
-                            @endforeach
-                        </tbody>
-                    </table>
-                </div>
-
+            {{-- Tabla de equipos del grupo --}}
+            <div
+                class="mx-auto rounded-t-3xl overflow-x-auto"
+                style="max-width: min(84rem, calc(100vw - 2rem));"
+            >
+                <table class="min-w-150 w-full text-left text-dark font-optimprov">
+                    <thead class="uppercase bg-dark text-light text-xs sm:text-sm lg:text-xl">
+                        <tr>
+                            <th scope="col" class="px-4 py-3">Equipo</th>
+                            <th scope="col" class="px-2 py-3 text-center font-bold">PJ</th>
+                            <th scope="col" class="px-2 py-3 text-center font-bold">PG</th>
+                            <th scope="col" class="px-2 py-3 text-center font-bold">PE</th>
+                            <th scope="col" class="px-2 py-3 text-center font-bold">PP</th>
+                            <th scope="col" class="px-2 py-3 text-center font-bold">GF</th>
+                            <th scope="col" class="px-2 py-3 text-center font-bold">GC</th>
+                            <th scope="col" class="px-2 py-3 text-center font-bold">DG</th>
+                            <th scope="col" class="px-2 py-3 text-center font-bold">PTS</th>
+                        </tr>
+                    </thead>
+                    <tbody id="equipos-grupo-list">
+                        @foreach($equipos_grupo as $equipo)
+                        <tr class="border-b border-zinc-300 text-xs sm:text-base lg:text-xl">
+                            <td class="px-4 py-3 lg:py-4 flex items-center gap-4">
+                                <img
+                                    src="{{ $equipo->imagen }}"
+                                    alt="{{ $equipo->nombre }}"
+                                    class="w-12 sm:w-18 lg:w-20 aspect-8/5 object-cover rounded-tr-xl rounded-bl-xl sm:rounded-tr-2xl sm:rounded-bl-2xl shrink-0"
+                                >
+                                <span class="uppercase whitespace-nowrap">{{ $equipo->nombre }}</span>
+                            </td>
+                            <td class="px-2 py-3 text-center">{{ $equipo->partidos_jugados }}</td>
+                            <td class="px-2 py-3 text-center">{{ $equipo->partidos_ganados }}</td>
+                            <td class="px-2 py-3 text-center">{{ $equipo->partidos_empatados }}</td>
+                            <td class="px-2 py-3 text-center">{{ $equipo->partidos_perdidos }}</td>
+                            <td class="px-2 py-3 text-center">{{ $equipo->goles_favor }}</td>
+                            <td class="px-2 py-3 text-center">{{ $equipo->goles_contra }}</td>
+                            <td class="px-2 py-3 text-center">{{ $equipo->goles_favor - $equipo->goles_contra }}</td>
+                            <td class="px-2 py-3 text-center border-s border-zinc-400">{{ $equipo->puntos }}</td>
+                        </tr>
+                        @endforeach
+                    </tbody>
+                </table>
             </div>
         </div>
     </div>

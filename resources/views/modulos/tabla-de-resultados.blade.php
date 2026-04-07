@@ -2,13 +2,10 @@
     <div>
         <x-main-banner/>
 
-        <div class="px-4 lg:px-12 pb-6">
+        <div class="px-4 lg:px-12 pb-6 mx-auto" style="max-width: min(84rem, calc(100vw - 2rem));">
 
             {{-- Titulo y posicion del usuario --}}
-            <div
-                class="flex flex-col md:flex-row justify-center items-center md:items-start my-8 lg:my-12 gap-4 lg:gap-8 2xl:gap-12 mx-auto"
-                style="max-width: min(84rem, calc(100vw - 2rem));"
-            >
+            <div class="flex flex-col md:flex-row justify-center items-center md:items-start my-8 lg:my-12 gap-4 lg:gap-8 2xl:gap-12 mx-auto">
                 <h1 class="text-center md:text-start text-5xl sm:text-7xl lg:text-8xl uppercase font-brandan">
                     Resultados de quiniela
                 </h1>
@@ -27,18 +24,12 @@
             </div>
 
             {{-- Subtitulo --}}
-            <h2
-                class="text-2xl sm:text-3xl lg:text-4xl uppercase font-brandan mb-2 mx-auto"
-                style="max-width: min(84rem, calc(100vw - 2rem));"
-            >
+            <h2 class="text-2xl sm:text-3xl lg:text-4xl uppercase font-brandan mb-2 mx-auto">
                 Top 10 Quiniela
             </h2>
 
             {{-- Tabla de ranking --}}
-            <div
-                class="mx-auto rounded-t-3xl overflow-x-auto"
-                style="max-width: min(84rem, calc(100vw - 2rem));"
-            >
+            <div class="mx-auto rounded-t-3xl overflow-x-auto">
                 <table class="w-full text-left text-dark">
                     <thead class="uppercase bg-dark text-light">
                         <tr class="font-optimprov text-sm sm:text-lg lg:text-2xl">
