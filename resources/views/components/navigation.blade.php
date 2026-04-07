@@ -21,7 +21,7 @@
                         ['route' => 'web.selecciones', 'label' => 'Selecciones'],
                         ['route' => 'web.grupos', 'label' => 'Grupos'],
                         ['route' => 'web.estadios', 'label' => 'Estadios'],
-                        ['route' => 'web.quiniela', 'label' => 'Quiniela'],
+                        ['route' => 'web.quiniela', 'label' => 'Calendario y Quiniela'],
                         ['route' => 'web.users.tabla-de-resultados', 'label' => 'Tabla de resultados'],
                         ['route' => 'web.tabla-de-premios', 'label' => 'Tabla de premios'],
                     ];
