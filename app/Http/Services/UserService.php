@@ -66,6 +66,20 @@ class UserService {
             ->simplePaginate($perPage);
     }
 
+    public function getTop10(int $id_pais)
+    {
+        return User::select('id', 'nombres', 'apellidos', 'puntos')
+            ->selectRaw('RANK() OVER (ORDER BY puntos DESC, nombres ASC) as posicion')
+            ->has('predictions')
+            ->where('status_user', 1)
+            ->where('pais_id', $id_pais)
+            ->where('puntos', '>', 0)
+            ->orderByDesc('puntos')
+            ->orderBy('nombres')
+            ->limit(10)
+            ->get();
+    }
+
     public function getUserRank($user)
     {
         $rankingQuery = User::select('id', 'nombres', 'apellidos', 'pais_id', 'puntos', 'created_at')

@@ -25,8 +25,11 @@ class UserController extends Controller
         $user = Auth::user();
         $user = $this->userService->getUserRank($user);
 
+        $top10 = $this->userService->getTop10((int) $user->pais_id);
+
         return view('modulos.tabla-de-resultados', [
             'user_rank' => $user->posicion,
+            'top10'     => $top10,
         ]);
     }
 

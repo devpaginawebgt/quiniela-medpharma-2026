@@ -25,6 +25,8 @@ class DatabaseSeeder extends Seeder
             PartidoSeeder::class,
             EquipoPartidoSeeder::class,
             PremioSeeder::class,
+            PrediccionSeeder::class,
+            ResultadoPartidoSeeder::class,
             // CompanySeeder::class,
             // BrandSeeder::class,
             // BrandPositionSeeder::class,

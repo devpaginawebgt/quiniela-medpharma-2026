@@ -276,7 +276,7 @@ class PrediccionService {
         $acerto_goles_dos = boolval($pred_e_dos === $res_e_dos);
 
         $acerto_marcadores = boolval($acerto_goles_uno && $acerto_goles_dos);
-        // $acerto_un_marcador = boolval($acerto_goles_uno || $acerto_goles_dos);
+        $acerto_un_marcador = boolval($acerto_goles_uno || $acerto_goles_dos);
 
         // Acertó en equipo ganador
 
@@ -294,17 +294,15 @@ class PrediccionService {
 
         // Validaciones de predicción
 
-        if ($acerto_marcadores) return 3;
+        if ($acerto_marcadores) return 5;
 
-        if ($acerto_equipo_ganador) return 1;
+        if ($acerto_equipo_ganador && $acerto_un_marcador) return 4; 
 
-        if ($predijo_empate) return 1;
+        if ($acerto_equipo_ganador || $predijo_empate) return 2;
+
+        if ($acerto_un_marcador) return 1;
 
         return 0;
-
-        // if ($acerto_equipo_ganador && $acerto_un_marcador) return 4; 
-
-        // if ($acerto_un_marcador) return 1;
     
     }
 
