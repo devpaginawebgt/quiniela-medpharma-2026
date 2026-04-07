@@ -1,4 +1,46 @@
-<input type="hidden" id="user_id" value="{{ Auth::user()->id }}">
+@php
+    $user = Auth::user();
+    $username = "{$user->nombres} {$user->apellidos}";
+    $navLinks = [
+        [
+            'route' => 'web.inicio',
+            'label' => 'Inicio',
+            'icon'  => 'icon-[fluent--home-16-filled]',
+        ],
+        [
+            'route' => 'web.selecciones',
+            'label' => 'Selecciones',
+            'icon'  => 'icon-[fluent--people-team-20-filled]',
+        ],
+        [
+            'route' => 'web.grupos',
+            'label' => 'Grupos',
+            'icon'  => 'icon-[fluent--contact-card-group-16-filled]',
+        ],
+        [
+            'route' => 'web.estadios',
+            'label' => 'Estadios',
+            'icon'  => 'icon-[fluent--seat-multiple-stadium-16-filled]',
+        ],
+        [
+            'route' => 'web.quiniela',
+            'label' => 'Calendario y Quiniela',
+            'icon'  => 'icon-[fluent--calendar-12-filled]',
+        ],
+        [
+            'route' => 'web.users.tabla-de-resultados',
+            'label' => 'Tabla de resultados',
+            'icon'  => 'icon-[fluent--medal-16-filled]',
+        ],
+        [
+            'route' => 'web.tabla-de-premios',
+            'label' => 'Premios',
+            'icon'  => 'icon-[fluent--gift-card-multiple-20-filled]',
+        ],
+    ];
+@endphp
+
+<input type="hidden" id="user_id" value="{{ $user->id }}">
 
 {{-- Top Navigation Bar --}}
 <nav class="fixed top-0 left-0 right-0 z-50 bg-white shadow-sm">
@@ -9,28 +51,16 @@
             <a href="{{ route('web.inicio') }}" class="shrink-0 w-32">
                 <img src="{{ asset('images/logos/medpharma-logo.jpg') }}" alt="Medpharma" class="w-full max-w-32">
             </a>
-    
+
             {{-- Separador --}}
             <div class="hidden lg:block w-px h-7 bg-dark mx-4"></div>
 
             {{-- Links de navegación (desktop) --}}
             <div class="hidden lg:flex items-center gap-6 xl:gap-8 flex-1 font-sans">
-                @php
-                    $links = [
-                        ['route' => 'web.inicio', 'label' => 'Inicio'],
-                        ['route' => 'web.selecciones', 'label' => 'Selecciones'],
-                        ['route' => 'web.grupos', 'label' => 'Grupos'],
-                        ['route' => 'web.estadios', 'label' => 'Estadios'],
-                        ['route' => 'web.quiniela', 'label' => 'Calendario y Quiniela'],
-                        ['route' => 'web.users.tabla-de-resultados', 'label' => 'Tabla de resultados'],
-                        ['route' => 'web.tabla-de-premios', 'label' => 'Premios Ganadores'],
-                    ];
-                @endphp
-    
-                @foreach ($links as $link)
+                @foreach ($navLinks as $link)
                     <a href="{{ route($link['route']) }}"
-                       class="relative text-sm font-bold whitespace-nowrap pb-1 transition-colors duration-150
-                              {{ request()->routeIs($link['route']) ? 'text-dark border-b-3 px-2 border-complementary-secondary' : 'text-dark hover:text-complementary-secondary' }}">
+                       class="relative text-xs min-[1140px]:text-sm font-bold whitespace-nowrap transition-colors duration-150
+                              {{ request()->routeIs($link['route']) ? 'text-dark border-b-3 px-2 border-complementary-secondary pb-1' : 'text-dark hover:text-complementary-secondary' }}">
                         {{ $link['label'] }}
                     </a>
                 @endforeach
@@ -39,12 +69,8 @@
 
 
         {{-- Usuario dropdown --}}
-        @php
-            $user = Auth::user();
-            $username = "{$user->nombres} {$user->apellidos}";
-        @endphp
         <div class="hidden lg:block relative shrink-0 ml-4">
-            <button id="user-dropdown-btn" data-dropdown-toggle="user-dropdown" data-dropdown-placement="bottom-end" class="flex items-center gap-2 text-sm font-bold text-dark">
+            <button id="user-dropdown-btn" data-dropdown-toggle="user-dropdown" data-dropdown-placement="bottom-end" class="flex items-center gap-2 text-xs min-[1140px]:text-sm font-bold text-dark">
                 {{ $username }}
                 <span class="icon-[fluent--chevron-down-20-filled] w-4 h-4"></span>
             </button>
@@ -54,7 +80,7 @@
                         <form method="POST" action="{{ route('web.logout') }}">
                             @csrf
                             <button type="submit" class="w-full flex items-center gap-2 px-4 py-2 text-sm text-dark hover:bg-gray-100">
-                                <span class="icon-[fluent--sign-out-20-filled] w-4 h-4"></span>
+                                <span class="icon-[fluent--arrow-exit-16-filled] w-5 h-5    "></span>
                                 Cerrar sesión
                             </button>
                         </form>
@@ -78,19 +104,7 @@
     </p>
 
     <div class="flex flex-col gap-1 font-sans">
-        @php
-            $mobileLinks = [
-                ['route' => 'web.inicio', 'label' => 'Inicio', 'icon' => 'icon-[fluent--home-16-filled]'],
-                ['route' => 'web.selecciones', 'label' => 'Selecciones', 'icon' => 'icon-[fluent--people-team-20-filled]'],
-                ['route' => 'web.grupos', 'label' => 'Grupos', 'icon' => 'icon-[fluent--contact-card-group-16-filled]'],
-                ['route' => 'web.estadios', 'label' => 'Estadios', 'icon' => 'icon-[fluent--seat-multiple-stadium-16-filled]'],
-                ['route' => 'web.quiniela', 'label' => 'Calendario y Quiniela', 'icon' => 'icon-[fluent--calendar-12-filled]'],
-                ['route' => 'web.users.tabla-de-resultados', 'label' => 'Tabla de resultados', 'icon' => 'icon-[fluent--medal-16-filled]'],
-                ['route' => 'web.tabla-de-premios', 'label' => 'Premios Ganadores', 'icon' => 'icon-[fluent--gift-card-multiple-20-filled]'],
-            ];
-        @endphp
-
-        @foreach ($mobileLinks as $link)
+        @foreach ($navLinks as $link)
             <a href="{{ route($link['route']) }}"
                class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium transition-colors duration-150
                       {{ request()->routeIs($link['route']) ? 'bg-secondary text-white' : 'text-dark hover:bg-gray-100' }}">
