@@ -51,6 +51,7 @@ Route::middleware(['auth'])->as('web.')->group(function() {
 
     Route::controller(UserController::class)->as('users')->group(function() {
         Route::get('tabla-de-resultados', 'indexWeb')->name('.tabla-de-resultados');
+        Route::get('ranking-general', 'getRankingGeneral')->name('.ranking-general');
         Route::get('resultados/data', 'getResultadosData')->name('.resultados.data');
         Route::get('/perfil', 'perfil')->name('.perfil');
     });

@@ -33,6 +33,16 @@ class UserController extends Controller
         ]);
     }
 
+    public function getRankingGeneral()
+    {
+        $user = Auth::user();
+        $user = $this->userService->getUserRank($user);
+
+        return view('modulos.ranking-general', [
+            'user_rank' => $user->posicion,
+        ]);
+    }
+
     /**
      * Devuelve los datos paginados del ranking vía JSON.
      */
@@ -40,7 +50,7 @@ class UserController extends Controller
     {
         $user = Auth::user();
         $id_pais = (int) $user->pais_id;
-        $perPage = (int) $request->query('perPage', 10);
+        $perPage = (int) $request->query('perPage', 100);
 
         $result = $this->userService->getRankingWeb($id_pais, $perPage);
 

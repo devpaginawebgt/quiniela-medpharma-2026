@@ -20,7 +20,7 @@
                     <span class="text-8xl lg:text-9xl font-black leading-none my-2 md:my-0">
                         {{ $user_rank ?? '-' }}
                     </span>
-                    <a href="#" class="text-3xl font-brandan text-fuchsia-800">
+                    <a href="{{ route('web.users.ranking-general') }}" class="text-3xl font-brandan text-fuchsia-800">
                         Ver mi posici&oacute;n
                     </a>
                 </div>
