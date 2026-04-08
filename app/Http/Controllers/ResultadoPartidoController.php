@@ -15,6 +15,7 @@ use App\Http\Services\PartidoService;
 use App\Http\Services\PrediccionService;
 use App\Http\Services\UserService;
 use App\Traits\ApiResponse;
+use Carbon\Carbon;
 
 class ResultadoPartidoController extends Controller
 {
@@ -46,79 +47,36 @@ class ResultadoPartidoController extends Controller
 
     }
 
-    // Continua lógica de la web
-
-    // public function proximosPartidosWeb(Request $request)
-    // {
-    //     $user = Auth::user();
-
-    //     $this->actualizacionDataGeneral($user->id);
-
-    //     // Banners
-
-    //     $banners = $this->moduleService->getBanners(7);
-
-    //     // User Info
-        
-    //     $user = $this->userService->getUserRank($user);
-
-    //     $user = $this->userService->getUserPredictionsCount($user);
-
-    //     // Jornadas
-
-    //     $jornadas = $this->partidoService->getJornadas();
-
-    //     $jornada_activa = $jornadas->firstWhere('is_current', true);
-
-    //     $jornada_filtrada = (int)$request->get('jornada') ?: $jornada_activa->id;
-
-    //     // Partidos con predicciones del usuario
-
-    //     $partidosJornada = $this->prediccionService->getPrediccionesJornada($jornada_filtrada, $user->id);
-
-    //     return view('modulos.proximos-partidos', [
-    //         'jornadas'        => $jornadas,
-    //         'banners'         => $banners,
-    //         'user'            => $user,
-    //         'jornada_activa'  => $jornada_filtrada,
-    //         'partidosJornada' => $partidosJornada,
-    //     ]);
-    // }
-
     public function quinielaWeb(Request $request)
     {
         $user = Auth::user();
 
         $this->actualizacionDataGeneral($user->id);
 
-        // Banners
+        $timezone = $user->country->timezone ?? 'America/Guatemala';
 
-        // $banners = $this->moduleService->getBanners(8);
+        $fechas_filtro = $this->prediccionService->getFechasFiltro($timezone);
 
-        // User Info
-        
-        // $user = $this->userService->getUserRank($user);
+        $fecha_actual = Carbon::now($timezone);
 
-        // $user = $this->userService->getUserPredictionsCount($user);
+        $fecha_proxima = $fechas_filtro->first(function($option) use($fecha_actual) {
+            return $fecha_actual <= Carbon::parse($option->fecha);
+        }) ?? $fechas_filtro->last();
 
-        // Jornadas
-
-        $jornadas = $this->partidoService->getJornadas();
-
-        $jornada_activa = $jornadas->firstWhere('is_current', true);
-
-        $jornada_filtrada = (int)$request->get('jornada') ?: $jornada_activa->id;
+        try {
+            $fecha_filtrada = Carbon::createFromFormat('Y-m-d', $request->get('fecha'))->format('Y-m-d');
+        } catch (\Exception $e) {
+            $fecha_filtrada = $fecha_proxima->fecha;
+        }
 
         // Partidos con predicciones del usuario
 
-        $resultados = $this->prediccionService->getResultados($jornada_filtrada, $user->id);
+        $records = $this->prediccionService->getPartidos($fecha_filtrada, $user);
 
         return view('modulos.quiniela', [
-            'jornadas'        => $jornadas,
-            // 'banners'         => $banners,
-            // 'user'            => $user,
-            'jornada_activa'  => $jornada_filtrada,
-            'resultados'      => $resultados,
+            'fechas_filtro' => $fechas_filtro,
+            'fecha_filtrada' => $fecha_filtrada,
+            'records' => $records,
         ]);
     }
 
@@ -175,5 +133,44 @@ class ResultadoPartidoController extends Controller
         ]);
 
     }
+
+    // Continua lógica de la web
+
+    // public function proximosPartidosWeb(Request $request)
+    // {
+    //     $user = Auth::user();
+
+    //     $this->actualizacionDataGeneral($user->id);
+
+    //     // Banners
+
+    //     $banners = $this->moduleService->getBanners(7);
+
+    //     // User Info
+        
+    //     $user = $this->userService->getUserRank($user);
+
+    //     $user = $this->userService->getUserPredictionsCount($user);
+
+    //     // Jornadas
+
+    //     $jornadas = $this->partidoService->getJornadas();
+
+    //     $jornada_activa = $jornadas->firstWhere('is_current', true);
+
+    //     $jornada_filtrada = (int)$request->get('jornada') ?: $jornada_activa->id;
+
+    //     // Partidos con predicciones del usuario
+
+    //     $partidosJornada = $this->prediccionService->getPrediccionesJornada($jornada_filtrada, $user->id);
+
+    //     return view('modulos.proximos-partidos', [
+    //         'jornadas'        => $jornadas,
+    //         'banners'         => $banners,
+    //         'user'            => $user,
+    //         'jornada_activa'  => $jornada_filtrada,
+    //         'partidosJornada' => $partidosJornada,
+    //     ]);
+    // }
         
 }

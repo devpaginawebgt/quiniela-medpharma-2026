@@ -3,36 +3,30 @@
 namespace App\Http\Services;
 
 use App\Models\EquipoPartido;
+use App\Models\Partido;
 use App\Models\Preccion;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Builder;
 
 class PrediccionService {
 
-    public function getPrediccionesJornada(int $id_jornada, int $user_id)
+    public function getFechasFiltro(string $timezone)
     {
-        $predicciones_usuario = EquipoPartido::select([
-            'equipo_partidos.id', 
-            'equipo_partidos.equipo_1', 
-            'equipo_partidos.equipo_2', 
-            'equipo_partidos.partido_id',
-        ])
-            ->whereHas('partido', function(Builder $query) use($id_jornada) {
-                $query ->where('jornada_id', $id_jornada)
-                    ->whereNot('estado', 1);
-            })
-            ->with([
-                'partido:id,fase,jornada_id,fecha_partido,jugado,estado',
-                'equipoUno:id,nombre,imagen,grupo',
-                'equipoDos:id,nombre,imagen,grupo',
-                'prediccion' => function ($query) use ($user_id) {
-                    $query->where('user_id', $user_id)
-                        ->select('id','partido_id','goles_equipo_1','goles_equipo_2');
-                }
-            ])
-            ->get();
+        $offset = Carbon::now($timezone)->format('P'); // e.g. '-06:00'
 
-        return $predicciones_usuario;
+        $fechas_filtro = Partido::selectRaw("DATE(CONVERT_TZ(fecha_partido, '+00:00', ?)) as fecha", [$offset])
+            ->distinct()
+            ->orderBy('fecha')
+            ->pluck('fecha');
+
+        $fechas_filtro = $fechas_filtro->map(function($fecha) {
+            return (object)[
+                'fecha' => $fecha,
+                'fecha_larga' => Carbon::parse($fecha)->translatedFormat('j \d\e F')
+            ];
+        });
+
+        return $fechas_filtro;
     }
 
     public function getPrediccionesById(array $id_partidos, int $user_id)
@@ -58,6 +52,67 @@ class PrediccionService {
             ->get();
 
         return $predicciones_usuario;
+
+    }
+
+    public function getPartidos(string $fecha_filtro, $user)
+    {
+
+
+        $offset = Carbon::now($user->country->timezone)->format('P');
+
+        $registros = EquipoPartido::select([
+            'equipo_partidos.id',
+            'equipo_partidos.equipo_1',
+            'equipo_partidos.equipo_2',
+            'equipo_partidos.partido_id',
+        ])
+            ->whereHas('partido', function(Builder $query) use($fecha_filtro, $offset) {
+                $query->whereRaw("DATE(CONVERT_TZ(fecha_partido, '+00:00', ?)) = ?", [$offset, $fecha_filtro]);
+            })
+            ->with([
+                'partido:id,fase,jornada_id,fecha_partido,jugado,estado',
+                'equipoUno:id,nombre,imagen,grupo',
+                'equipoDos:id,nombre,imagen,grupo',
+                'resultado:id,partido_id,goles_equipo_1,goles_equipo_2',
+                'prediccion' => function ($query) use ($user) {
+                    $query->where('user_id', $user->id)
+                        ->select('id','partido_id','goles_equipo_1','goles_equipo_2');
+                },
+            ])
+            ->get();
+
+        $registros->each(function($registro) {
+
+            if ( empty($registro->prediccion) ) {                
+
+                $registro->puntos = 0;
+
+                $registro->mensaje = 'No has realizado una predicción.';
+
+                return;
+
+            }
+
+            if ( empty($registro->resultado) ) {
+                
+                $registro->puntos = 0;
+
+                $registro->mensaje = 'El partido aún no tiene un resultado.';
+
+                return;
+
+            }
+
+            $puntos = $this->getResultadoPrediccion($registro->prediccion, $registro->resultado);
+
+            $registro->puntos = $puntos;
+
+            $registro->mensaje = "Ganaste: {$puntos} puntos";
+
+        });
+
+        return $registros;
 
     }
 
@@ -208,55 +263,6 @@ class PrediccionService {
 
     }
 
-    public function getResultados(int $id_jornada, int $user_id)
-    {
-        $registros = EquipoPartido::select([
-            'equipo_partidos.id', 
-            'equipo_partidos.equipo_1', 
-            'equipo_partidos.equipo_2', 
-            'equipo_partidos.partido_id',
-        ])
-            ->has('resultado')
-            ->whereHas('partido', function(Builder $query) use($id_jornada) {
-                $query->where('jornada_id', $id_jornada)
-                    ->where('estado', 1);
-            })
-            ->with([
-                'partido:id,fase,jornada_id,fecha_partido,jugado,estado',
-                'equipoUno:id,nombre,imagen,grupo',
-                'equipoDos:id,nombre,imagen,grupo',
-                'resultado:id,partido_id,goles_equipo_1,goles_equipo_2',
-                'prediccion' => function ($query) use ($user_id) {
-                    $query->where('user_id', $user_id)
-                        ->select('id','partido_id','goles_equipo_1','goles_equipo_2');
-                }
-            ])
-            ->get();
-
-        $registros->each(function($registro) {
-
-            if ( empty($registro->prediccion) ) {                
-
-                $registro->puntos = 0;
-
-                $registro->mensaje = 'No has realizado una predicción.';
-
-                return;
-
-            }
-
-            $puntos = $this->getResultadoPrediccion($registro->prediccion, $registro->resultado);
-
-            $registro->puntos = $puntos;
-
-            $registro->mensaje = "Ganaste: {$puntos} puntos";
-
-        });
-
-        return $registros;
-
-    }
-
     public function getResultadoPrediccion($prediccion, $resultado)
     {
 
@@ -304,55 +310,6 @@ class PrediccionService {
 
         return 0;
     
-    }
-
-    // Funciones para la web
-
-    public function getResultadosWeb(int $id_jornada, int $user_id)
-    {
-        $registros = EquipoPartido::select([
-            'equipo_partidos.id', 
-            'equipo_partidos.equipo_1', 
-            'equipo_partidos.equipo_2', 
-            'equipo_partidos.partido_id',            
-        ])
-            ->whereHas('partido', function(Builder $query) use($id_jornada) {
-                $query->where('jornada_id', $id_jornada);
-            })
-            ->with([
-                'partido:id,fase,jornada_id,fecha_partido,jugado,estado',
-                'equipoUno:id,nombre,imagen,grupo',
-                'equipoDos:id,nombre,imagen,grupo',
-                'resultado:id,partido_id,goles_equipo_1,goles_equipo_2',
-                'prediccion' => function ($query) use ($user_id) {
-                    $query->where('user_id', $user_id)
-                        ->select('id','partido_id','goles_equipo_1','goles_equipo_2');
-                }
-            ])
-            ->get();
-
-        $registros->each(function($registro) {
-
-            if ( empty($registro->prediccion) ) {
-
-                $registro->partido->puntos = 0;
-
-                $registro->partido->mensaje = 'No has realizado una predicción.';
-
-                return;
-
-            }
-
-            $puntos = $this->getResultadoPrediccion($registro->prediccion, $registro->resultado);
-
-            $registro->partido->puntos = $puntos;
-
-            $registro->partido->mensaje = "Ganaste: {$puntos} puntos";
-
-        });
-
-        return $registros;
-
     }
 
     public function actualizarPuntosParticipante($user_id)
@@ -431,4 +388,139 @@ class PrediccionService {
                 Preccion::whereIn('id', $prediccionIds)->update(['status' => 1]);
             });
     }
+
+    // public function getResultadosByJornada(int $id_jornada, int $user_id)
+    // {
+    //     $registros = EquipoPartido::select([
+    //         'equipo_partidos.id', 
+    //         'equipo_partidos.equipo_1', 
+    //         'equipo_partidos.equipo_2', 
+    //         'equipo_partidos.partido_id',
+    //     ])
+    //         ->whereHas('partido', function(Builder $query) use($id_jornada) {
+    //             $query->where('jornada_id', $id_jornada)
+    //                 ->where('estado', 1);
+    //         })
+    //         ->with([
+    //             'partido:id,fase,jornada_id,fecha_partido,jugado,estado',
+    //             'equipoUno:id,nombre,imagen,grupo',
+    //             'equipoDos:id,nombre,imagen,grupo',
+    //             'resultado:id,partido_id,goles_equipo_1,goles_equipo_2',
+    //             'prediccion' => function ($query) use ($user_id) {
+    //                 $query->where('user_id', $user_id)
+    //                     ->select('id','partido_id','goles_equipo_1','goles_equipo_2');
+    //             },
+    //         ])
+    //         ->get();
+
+    //     $registros->each(function($registro) {
+
+    //         if ( empty($registro->prediccion) ) {                
+
+    //             $registro->puntos = 0;
+
+    //             $registro->mensaje = 'No has realizado una predicción.';
+
+    //             return;
+
+    //         }
+
+    //         if ( empty($registro->resultado) ) {
+                
+    //             $registro->puntos = 0;
+
+    //             $registro->mensaje = 'El partido aún no tiene un resultado.';
+
+    //             return;
+
+    //         }
+
+    //         $puntos = $this->getResultadoPrediccion($registro->prediccion, $registro->resultado);
+
+    //         $registro->puntos = $puntos;
+
+    //         $registro->mensaje = "Ganaste: {$puntos} puntos";
+
+    //     });
+
+    //     return $registros;
+
+    // }
+
+    // public function getPrediccionesJornada(int $id_jornada, int $user_id)
+    // {
+    //     $predicciones_usuario = EquipoPartido::select([
+    //         'equipo_partidos.id', 
+    //         'equipo_partidos.equipo_1', 
+    //         'equipo_partidos.equipo_2', 
+    //         'equipo_partidos.partido_id',
+    //     ])
+    //         ->whereHas('partido', function(Builder $query) use($id_jornada) {
+    //             $query ->where('jornada_id', $id_jornada)
+    //                 ->whereNot('estado', 1);
+    //         })
+    //         ->with([
+    //             'partido:id,fase,jornada_id,fecha_partido,jugado,estado',
+    //             'equipoUno:id,nombre,imagen,grupo',
+    //             'equipoDos:id,nombre,imagen,grupo',
+    //             'prediccion' => function ($query) use ($user_id) {
+    //                 $query->where('user_id', $user_id)
+    //                     ->select('id','partido_id','goles_equipo_1','goles_equipo_2');
+    //             }
+    //         ])
+    //         ->get();
+
+    //     return $predicciones_usuario;
+    // }
+
+    // }
+
+    // Funciones para la web
+
+    // public function getResultadosWeb(int $id_jornada, int $user_id)
+    // {
+    //     $registros = EquipoPartido::select([
+    //         'equipo_partidos.id', 
+    //         'equipo_partidos.equipo_1', 
+    //         'equipo_partidos.equipo_2', 
+    //         'equipo_partidos.partido_id',            
+    //     ])
+    //         ->whereHas('partido', function(Builder $query) use($id_jornada) {
+    //             $query->where('jornada_id', $id_jornada);
+    //         })
+    //         ->with([
+    //             'partido:id,fase,jornada_id,fecha_partido,jugado,estado',
+    //             'equipoUno:id,nombre,imagen,grupo',
+    //             'equipoDos:id,nombre,imagen,grupo',
+    //             'resultado:id,partido_id,goles_equipo_1,goles_equipo_2',
+    //             'prediccion' => function ($query) use ($user_id) {
+    //                 $query->where('user_id', $user_id)
+    //                     ->select('id','partido_id','goles_equipo_1','goles_equipo_2');
+    //             }
+    //         ])
+    //         ->get();
+
+    //     $registros->each(function($registro) {
+
+    //         if ( empty($registro->prediccion) ) {
+
+    //             $registro->partido->puntos = 0;
+
+    //             $registro->partido->mensaje = 'No has realizado una predicción.';
+
+    //             return;
+
+    //         }
+
+    //         $puntos = $this->getResultadoPrediccion($registro->prediccion, $registro->resultado);
+
+    //         $registro->partido->puntos = $puntos;
+
+    //         $registro->partido->mensaje = "Ganaste: {$puntos} puntos";
+
+    //     });
+
+    //     return $registros;
+
+    // }
 }
