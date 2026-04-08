@@ -92,13 +92,13 @@
     {{-- Resultado y mensaje (solo si estado === 1 y tiene resultado) --}}
     @if($partido->estado === 1 && !empty($resultado))
         <div class="flex flex-col items-center mt-3">
-            <p class="text-lg lg:text-xl font-brandan font-bold uppercase">
+            <p class="text-2xl lg:text-4xl font-brandan uppercase">
                 Resultado
             </p>
-            <p class="text-xl lg:text-2xl font-bold">
+            <p class="text-2xl lg:text-4xl font-optimprov">
                 {{ $resultado->goles_equipo_1 }}-{{ $resultado->goles_equipo_2 }}
             </p>
-            <p class="text-sm text-complementary-dark mt-1">
+            <p class="font-brandan text-2xl lg:text-3xl text-zinc-400 mt-1">
                 {{ $registro->mensaje }}
             </p>
         </div>

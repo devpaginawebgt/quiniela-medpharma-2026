@@ -58,7 +58,6 @@ class PrediccionService {
     public function getPartidos(string $fecha_filtro, $user)
     {
 
-
         $offset = Carbon::now($user->country->timezone)->format('P');
 
         $registros = EquipoPartido::select([
@@ -108,7 +107,7 @@ class PrediccionService {
 
             $registro->puntos = $puntos;
 
-            $registro->mensaje = "Ganaste: {$puntos} puntos";
+            $registro->mensaje = "Ganaste {$puntos} puntos";
 
         });
 

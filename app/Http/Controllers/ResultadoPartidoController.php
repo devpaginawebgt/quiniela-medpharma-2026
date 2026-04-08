@@ -57,10 +57,10 @@ class ResultadoPartidoController extends Controller
 
         $fechas_filtro = $this->prediccionService->getFechasFiltro($timezone);
 
-        $fecha_actual = Carbon::now($timezone);
+        $hoy = Carbon::now($timezone)->toDateString();
 
-        $fecha_proxima = $fechas_filtro->first(function($option) use($fecha_actual) {
-            return $fecha_actual <= Carbon::parse($option->fecha);
+        $fecha_proxima = $fechas_filtro->first(function($option) use($hoy) {
+            return $option->fecha >= $hoy;
         }) ?? $fechas_filtro->last();
 
         try {
