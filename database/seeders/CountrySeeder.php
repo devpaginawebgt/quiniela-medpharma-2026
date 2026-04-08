@@ -21,7 +21,7 @@ class CountrySeeder extends Seeder
             'document_name'          => 'DPI',
             'document_regex'         => '^[0-9]{13}$',
             'document_regex_message' => 'El número de DPI debe contener 13 dígitos.',
-            'timezone'               => 'GMT-6',
+            'timezone'               => 'America/Guatemala',
             'is_active'              => true
         ]);
 
@@ -33,7 +33,7 @@ class CountrySeeder extends Seeder
             'document_name'          => 'Cédula',
             'document_regex'         => '^[0-9]{13}$',
             'document_regex_message' => 'El número de cédula debe contener 13 dígitos.',
-            'timezone'               => 'GMT-6',
+            'timezone'               => 'America/Tegucigalpa',
             'is_active'              => true
         ]);
 
@@ -45,7 +45,7 @@ class CountrySeeder extends Seeder
             'document_name'          => 'CIP',
             'document_regex'         => '^[A-Z0-9]{6,11}$',
             'document_regex_message' => 'El CIP debe contener entre 6 y 11 caracteres alfanuméricos.',
-            'timezone'               => 'GMT-5',
+            'timezone'               => 'America/Panama',
             'is_active'              => false
         ]);
 
@@ -57,7 +57,7 @@ class CountrySeeder extends Seeder
             'document_name'          => 'Cédula',
             'document_regex'         => '^[0-9]{13}[A-Z]$',
             'document_regex_message' => 'La cédula debe contener 13 dígitos y una letra mayúscula al final.',
-            'timezone'               => 'GMT-6',
+            'timezone'               => 'America/Managua',
             'is_active'              => false
         ]);
 
@@ -69,7 +69,7 @@ class CountrySeeder extends Seeder
             'document_name'          => 'Cédula',
             'document_regex'         => '^[0-9]{9}$',
             'document_regex_message' => 'El número de cédula debe contener 9 dígitos.',
-            'timezone'               => 'GMT-6',
+            'timezone'               => 'America/Costa_Rica',
             'is_active'              => false
         ]);
 
@@ -81,7 +81,7 @@ class CountrySeeder extends Seeder
             'document_name'          => 'Cédula',
             'document_regex'         => '^[0-9]{11}$',
             'document_regex_message' => 'El número de cédula debe contener 11 dígitos.',
-            'timezone'               => 'GMT-4',
+            'timezone'               => 'America/Santo_Domingo',
             'is_active'              => false
         ]);
     }
