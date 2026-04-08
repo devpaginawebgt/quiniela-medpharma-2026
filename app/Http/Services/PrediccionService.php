@@ -152,7 +152,7 @@ class PrediccionService {
 
             if ($estado === 1) {
 
-                $prediccion_usuario->message = 'No se puede guardar la predicción: el partido ha finalizado.';
+                $prediccion_usuario->message = 'No se puede guardar la predicción, el partido ha finalizado.';
 
                 $predicciones_rechazadas->push($prediccion_usuario);
 
@@ -162,7 +162,7 @@ class PrediccionService {
 
             if ($estado === 2) {
 
-                $prediccion_usuario->message = 'No se puede guardar la predicción: ¡el partido está en juego!';
+                $prediccion_usuario->message = 'No se puede guardar la predicción, ¡el partido está en juego!';
 
                 $predicciones_rechazadas->push($prediccion_usuario);
 
@@ -176,7 +176,7 @@ class PrediccionService {
 
             if ($fecha_actual->greaterThan($fecha_partido)) {
 
-                $prediccion_usuario->message = 'No se puede guardar la predicción: la fecha del partido ya ha pasado.';
+                $prediccion_usuario->message = 'No se puede guardar la predicción, la fecha del partido ya ha pasado.';
 
                 $predicciones_rechazadas->push($prediccion_usuario);
 
@@ -188,7 +188,7 @@ class PrediccionService {
 
             if ($fecha_actual->greaterThan($fecha_limite)) {
 
-                $prediccion_usuario->message = 'No se puede guardar la predicción: el partido está por comenzar (menos de 10 minutos).';
+                $prediccion_usuario->message = 'No se puede guardar la predicción, el partido está por comenzar (menos de 10 minutos).';
 
                 $predicciones_rechazadas->push($prediccion_usuario);
 

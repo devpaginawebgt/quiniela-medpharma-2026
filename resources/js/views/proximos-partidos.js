@@ -6,36 +6,24 @@ initMarcadorButtons();
 document.addEventListener('DOMContentLoaded', () => {
 
     // Logica para cambiar de jornada 
+    
+    const select = document.getElementById('selector-fecha');
+    const formPredicciones = document.getElementById('form-quiniela');
 
-    const select = document.getElementById('select-proximos-partidos');
+    if (select && formPredicciones) {
+        const urlQuiniela = formPredicciones.dataset.urlQuiniela;
 
-    if (!select) return;
-
-    select.addEventListener('change', () => {
-        document.getElementById('form-proximos-partidos').submit();
-    });
-
-    // Logica para filtrar los registros de predicciones en la vista
-
-    const buscar = document.getElementById('buscar-partidos');
-    const lista  = document.getElementById('partidos-jornada-general');
-
-    if (buscar && lista) {
-        buscar.addEventListener('input', function () {
-            const term = this.value.toLowerCase().trim();
-            lista.querySelectorAll('li[data-equipos]').forEach(card => {
-                card.style.display = (card.dataset.equipos ?? '').includes(term) ? '' : 'none';
-            });
+        select.addEventListener('change', function () {
+            window.location.href = urlQuiniela + "?fecha=" + this.value;
         });
     }
 
     // Logica para guardar predicciones via AJAX
 
-    const formPredicciones = document.getElementById('formPredicionesWeb');
-
     if (formPredicciones) {
         
         const btnSubmit = formPredicciones.querySelector('button[type="submit"]');
+
         const inputsMarcador = formPredicciones.querySelectorAll('.marcador-equipo');
 
         function setFormDisabled(disabled) {
@@ -57,6 +45,7 @@ document.addEventListener('DOMContentLoaded', () => {
             setFormDisabled(true);
 
             const partidoInputs = document.querySelectorAll('.partido-jornada-quiniela');
+
             const predicciones = [];
 
             partidoInputs.forEach(function (input) {
@@ -100,6 +89,20 @@ document.addEventListener('DOMContentLoaded', () => {
                 })
                 .finally(() => setFormDisabled(false));
         });
+
+        // Logica para filtrar los registros de predicciones en la vista
+
+        // const buscar = document.getElementById('buscar-partidos');
+        // const lista  = document.getElementById('partidos-jornada-general');
+
+        // if (buscar && lista) {
+        //     buscar.addEventListener('input', function () {
+        //         const term = this.value.toLowerCase().trim();
+        //         lista.querySelectorAll('li[data-equipos]').forEach(card => {
+        //             card.style.display = (card.dataset.equipos ?? '').includes(term) ? '' : 'none';
+        //         });
+        //     });
+        // }
     }
 
     // Modal resultado de predicciones
@@ -112,55 +115,46 @@ document.addEventListener('DOMContentLoaded', () => {
 
     function createResultCard(prediccion, tipo) {
         const isAceptada = tipo === 'aceptada';
-        const borderColor = 'border-secondary';
         const badgeBg = isAceptada ? 'bg-green-600' : 'bg-red-600';
         const badgeIcon = isAceptada
-            ? '<svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24"><path fill="currentColor" d="m9.55 18l-5.7-5.7l1.425-1.425L9.55 15.15l9.175-9.175L20.15 7.4z"/></svg>'
-            : '<svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24"><path fill="currentColor" d="M19 6.41L17.59 5L12 10.59L6.41 5L5 6.41L10.59 12L5 17.59L6.41 19L12 13.41L17.59 19L19 17.59L13.41 12z"/></svg>';
+            ? '<span class="icon-[fluent--checkmark-16-filled] w-5 h-5"></span>'
+            : '<span class="icon-[fluent--dismiss-16-filled] w-5 h-5"></span>';
         const badgeText = isAceptada ? 'Aceptada' : 'Rechazada';
-        const msgBg = 'bg-secondary text-dark';
 
-        let brandHTML = '';
-        if (prediccion.marca) {
-            brandHTML = `
-                <div class="flex rounded-t-3xl overflow-hidden">
-                    <div class="bg-red-700/80 flex items-center py-2 px-3">
-                        <span class="text-light text-sm font-medium whitespace-nowrap">Partido patrocinado por</span>
-                    </div>
-                    <div class="flex-1 flex items-center justify-center p-2 bg-green-700">
-                        <img src="${prediccion.marca.image}" alt="${prediccion.marca.name}" class="w-full max-w-28 object-contain">
-                    </div>
-                </div>`;
-        }
+        const pred1 = prediccion.prediccionEquipoUno ?? '-';
+        const pred2 = prediccion.prediccionEquipoDos ?? '-';
 
         return `
-            <div class="bg-complementary-primary border ${borderColor} rounded-3xl flex flex-col overflow-hidden">
-                ${brandHTML}
-                <div class="flex flex-col p-5 gap-4">
-                    <div class="flex justify-end">
-                        <span class="flex items-center gap-1 ${badgeBg} text-white text-sm font-semibold px-3 py-1.5 rounded-full">
-                            ${badgeIcon}
-                            ${badgeText}
-                        </span>
-                    </div>
-
-                    <div class="flex items-center justify-between gap-2">
-                        <div class="flex flex-col items-center gap-2 flex-1">
-                            <img src="${prediccion.equipoUno.imagen}" alt="${prediccion.equipoUno.nombre}" class="w-full max-w-20 aspect-6/4 object-cover rounded-xl shadow-md">
-                            <p class="font-semibold text-sm text-center text-light leading-tight">${prediccion.equipoUno.nombre}</p>
+            <div class="border-b border-zinc-200 py-5 px-2 sm:px-4 ">
+                <div class="flex flex-col md:flex-row items-center md:justify-between w-full gap-3 md:gap-4 lg:gap-8 font-optimprov">
+                    <!-- Equipo 1 + marcador -->
+                    <div class="flex items-center justify-between w-full md:w-auto md:flex-1 md:min-w-0 gap-3">
+                        <div class="flex items-center gap-3">
+                            <img src="${prediccion.equipoUno.imagen}" alt="${prediccion.equipoUno.nombre}" class="w-12 md:w-14 lg:w-20 aspect-8/5 object-cover rounded-tr-lg rounded-bl-lg shrink-0">
+                            <span class="text-sm lg:text-lg uppercase">${prediccion.equipoUno.nombre}</span>
                         </div>
-                        <span class="font-bold text-2xl text-light shrink-0">VS</span>
-                        <div class="flex flex-col items-center gap-2 flex-1">
-                            <img src="${prediccion.equipoDos.imagen}" alt="${prediccion.equipoDos.nombre}" class="w-full max-w-20 aspect-6/4 object-cover rounded-xl shadow-md">
-                            <p class="font-semibold text-sm text-center text-light leading-tight">${prediccion.equipoDos.nombre}</p>
+                        <span class="text-xl lg:text-3xl font-bold shrink-0">${pred1}</span>
+                    </div>
+
+                    <!-- VS -->
+                    <span class="text-lg text-zinc-400 font-brandan shrink-0">VS</span>
+
+                    <!-- Marcador + Equipo 2 -->
+                    <div class="flex items-center justify-between flex-row-reverse md:flex-row w-full md:w-auto md:flex-1 md:min-w-0 gap-3">
+                        <span class="text-xl lg:text-3xl font-bold shrink-0">${pred2}</span>
+                        <div class="flex items-center flex-row-reverse md:flex-row gap-3">
+                            <span class="text-sm lg:text-lg uppercase text-end">${prediccion.equipoDos.nombre}</span>
+                            <img src="${prediccion.equipoDos.imagen}" alt="${prediccion.equipoDos.nombre}" class="w-12 md:w-14 lg:w-20 aspect-8/5 object-cover rounded-tr-lg rounded-bl-lg shrink-0">
                         </div>
                     </div>
+                </div>
 
-                    <hr class="border-complementary-light/30">
-
-                    <div class="${msgBg} rounded-xl p-4 text-center font-semibold text-sm">
-                        ${prediccion.message}
-                    </div>
+                <div class="flex items-center justify-between mt-4">
+                    <p class="text-zinc-500 lg:text-lg">${prediccion.message}</p>
+                    <span class="flex items-center gap-1 ${badgeBg} text-white font-semibold px-2 py-1 rounded-full shrink-0">
+                        ${badgeIcon}
+                        ${badgeText}
+                    </span>
                 </div>
             </div>`;
     }

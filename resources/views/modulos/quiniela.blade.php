@@ -1,5 +1,11 @@
 <x-app-layout>
     <div class="flex flex-col flex-1">
+        <div id="toast-container"
+            class="fixed top-4 left-1/2 -translate-x-1/2 z-50 flex-col items-center gap-3 w-full max-w-sm px-4"
+            style="display: none;"
+            aria-live="polite">
+        </div>
+
         <x-main-banner/>
 
         <div class="relative flex-1">
@@ -23,7 +29,10 @@
                         Ingresa tus pronósticos
                     </h2>
 
-                    <div class="w-full max-w-sm md:max-w-48">
+                    <form
+                        class="w-full max-w-sm md:max-w-48"
+                        data-url-quiniela="{{ route('web.save-predicciones') }}"
+                    >
                         <x-form-select id="selector-fecha" name="selector_fecha">
                             @foreach($fechas_filtro as $fecha)
                                 <option
@@ -34,39 +43,78 @@
                                 </option>
                             @endforeach
                         </x-form-select>
-                    </div>
+                    </form>
                 </div>
 
-                {{-- Fecha seleccionada como header --}}
-                @php
-                    $fecha_activa = $fechas_filtro->firstWhere('fecha', $fecha_filtrada);
-                @endphp
+                <form
+                    id="form-quiniela"
+                    action="{{ route('web.save-predicciones') }}"
+                    method="POST"
+                    data-url-predicciones="{{ route('web.save-predicciones') }}"
+                    data-url-quiniela="{{ route('web.quiniela') }}"
+                    class="relative mb-6"
+                >
+                    @csrf
+                    {{-- Fecha seleccionada como header --}}
+                    @php
+                        $fecha_activa = $fechas_filtro->firstWhere('fecha', $fecha_filtrada);
+                    @endphp
 
-                {{-- Lista de partidos --}}
-                @if($records->isEmpty())
-                    <p class="text-center text-zinc-400 py-20 text-lg sm:text-xl lg:text-2xl font-brandan uppercase">
-                        No hay partidos programados para esta fecha.
-                    </p>
-                @else
-                    <div class="bg-dark text-light rounded-t-2xl px-6 py-3 mt-8 mb-4">
-                        <h3 class="text-xl sm:text-3xl lg:text-4xl uppercase font-optimprov">
-                            {{ $fecha_activa->fecha_larga ?? '' }}
-                        </h3>
+                    {{-- Lista de partidos --}}
+                    @if($records->isEmpty())
+                        <p class="text-center text-zinc-400 py-20 text-lg sm:text-xl lg:text-2xl font-brandan uppercase">
+                            No hay partidos programados para esta fecha.
+                        </p>
+                    @else
+                        <div class="bg-dark text-light rounded-t-2xl px-6 py-3 mt-8 mb-4">
+                            <h3 class="text-xl sm:text-3xl lg:text-4xl uppercase font-optimprov">
+                                {{ $fecha_activa->fecha_larga ?? '' }}
+                            </h3>
+                        </div>
+                        <div class="divide-y divide-zinc-300">
+                            @foreach($records as $registro)
+                                <x-prediction-card :registro="$registro" />
+                            @endforeach
+                        </div>
+                    @endif
+
+                    {{-- Botón sticky inferior derecha --}}
+                    <div class="sticky bottom-4 z-50 flex justify-center pointer-events-none">
+                        <button
+                            type="submit"
+                            class="pointer-events-auto cursor-pointer focus:outline-none hover:brightness-[1.2] focus:ring-4 focus:ring-primary rounded-full shadow-lg shadow-dark bg-green-700 text-light text-md lg:text-xl py-3 px-6 font-semibold gap-2 flex justify-center items-center mr-4"
+                        >
+                            <span class="icon-[fluent--edit-16-filled] w-6 h-6"></span>
+                            Pronosticar
+                        </button>
                     </div>
-                    <div class="divide-y divide-zinc-300">
-                        @foreach($records as $registro)
-                            <x-prediction-card :registro="$registro" />
-                        @endforeach
-                    </div>
-                @endif
+                </form>
+            </div>
+        </div>
+
+        {{-- Modal Resultado de Predicciones --}}
+        <div id="modal-resultado-predicciones" class="pointer-events-none fixed inset-0 z-50 flex items-center justify-center p-4" style="display: none;">
+
+            {{-- Backdrop --}}
+            <div id="modal-resultado-backdrop" class="absolute inset-0 bg-black/70 opacity-0 transition-opacity duration-300"></div>
+
+            {{-- Panel --}}
+            <div id="modal-resultado-panel" class="relative bg-light rounded-3xl overflow-hidden w-full max-w-4xl max-h-[90dvh] flex flex-col opacity-0 transition-opacity duration-300 ease-out">
+
+                {{-- Header --}}
+                <div class="shrink-0 pt-6 pb-4 px-6 flex items-start justify-between gap-4">
+                    <h2 class="text-2xl lg:text-3xl uppercase font-bold text-dark leading-tight font-brandan">Resultado del registro de predicciones</h2>
+                    <button type="button" id="modal-resultado-close" class="shrink-0 text-complementary-dark hover:text-dark transition-colors mt-1 cursor-pointer">
+                        <span class="icon-[fluent--dismiss-16-filled] w-6 h-6"></span>
+                    </button>
+                </div>
+
+                {{-- Scrollable cards container --}}
+                <div class="overflow-y-auto flex-1 px-6 py-4 pb-6">
+                    <div id="modal-resultado-cards" class="flex flex-col"></div>
+                </div>
 
             </div>
         </div>
     </div>
-
-    <script>
-    document.getElementById('selector-fecha').addEventListener('change', function () {
-        window.location.href = "{{ route('web.quiniela') }}?fecha=" + this.value;
-    });
-    </script>
 </x-app-layout>
