@@ -41,10 +41,10 @@ class EquipoSeeder extends Seeder
                 'grupo' => 1
             ],
             [
-                'nombre' => 'DEN/MKD/CZE/IRL',
-                'codigo_iso' => 'DK',
-                'imagen' => '/images/selecciones/dk.jpg',
-                'descripcion' => 'La selección nacional de fútbol de Dinamarca es una de las más competitivas de Europa. Su mayor logro internacional fue la conquista de la Eurocopa en 1992, torneo al que clasificó como reemplazo de última hora y terminó levantando el título. En la Copa Mundial de la FIFA ha alcanzado los cuartos de final en 1998 y ha participado regularmente en fases finales del torneo. Es conocida por su solidez táctica, trabajo en equipo y por figuras históricas como Michael Laudrup, Peter Schmeichel y Christian Eriksen.',
+                'nombre' => 'Chequia',
+                'codigo_iso' => 'CZ',
+                'imagen' => '/images/selecciones/cz.png',
+                'descripcion' => 'La selección nacional de fútbol de Chequia, anteriormente conocida como República Checa, es una de las más competitivas de Europa Central. Como Checoslovaquia conquistó la Eurocopa en 1976 y fue subcampeona del mundo en 1934 y 1962. Ya como República Checa alcanzó la final de la Eurocopa en 1996 y las semifinales en 2004. Es reconocida por su solidez táctica, tradición futbolística y figuras destacadas como Pavel Nedvěd, Petr Čech y Karel Poborský.',
                 'grupo' => 1
             ],
 
@@ -59,10 +59,10 @@ class EquipoSeeder extends Seeder
                 'grupo' => 2
             ],
             [
-                'nombre' => 'ITA/NIR/WAL/BIH',
-                'codigo_iso' => 'IT',
-                'imagen' => '/images/selecciones/it.jpg',
-                'descripcion' => 'La selección nacional de fútbol de Italia es una de las más históricas y exitosas del mundo. Ha conquistado cuatro Copas Mundiales de la FIFA en 1934, 1938, 1982 y 2006, además de dos Eurocopas en 1968 y 2020. Tradicionalmente reconocida por su solidez defensiva y el estilo táctico conocido como "catenaccio", Italia ha contado con futbolistas legendarios como Paolo Maldini, Roberto Baggio, Alessandro Del Piero, Francesco Totti y Gianluigi Buffon. Es una de las grandes potencias del fútbol europeo y mundial.',
+                'nombre' => 'Bosnia y Herzegovina',
+                'codigo_iso' => 'BA',
+                'imagen' => '/images/selecciones/ba.png',
+                'descripcion' => 'La selección nacional de fútbol de Bosnia y Herzegovina compite de forma independiente desde 1996 tras la disolución de Yugoslavia. Logró su primera clasificación a una Copa Mundial de la FIFA en Brasil 2014, marcando un hito histórico para el país. Es reconocida por su fortaleza competitiva, intensidad de juego y por haber contado con futbolistas destacados como Edin Džeko, Miralem Pjanić y Asmir Begović, quienes han brillado en las principales ligas europeas.',
                 'grupo' => 2
             ],
             [
@@ -137,7 +137,7 @@ class EquipoSeeder extends Seeder
                 'grupo' => 4
             ],
             [
-                'nombre' => 'TUR/ROU/SVK/KOS',
+                'nombre' => 'Turquía',
                 'codigo_iso' => 'TR',
                 'imagen' => '/images/selecciones/tr.jpg',
                 'descripcion' => 'La selección nacional de fútbol de Turquía ha tenido actuaciones destacadas en competiciones internacionales, siendo su mayor logro el tercer lugar en la Copa Mundial de la FIFA 2002. También alcanzó las semifinales de la Eurocopa en 2008, consolidándose como una selección competitiva en el ámbito europeo. Es reconocida por su intensidad de juego, carácter combativo y el fuerte apoyo de su afición. A lo largo de su historia ha contado con figuras importantes como Hakan Şükür, Rüştü Reçber y Arda Turan.',
@@ -194,7 +194,7 @@ class EquipoSeeder extends Seeder
                 'grupo' => 6
             ],
             [
-                'nombre' => 'UKR/SWE/POL/ALB',
+                'nombre' => 'Suecia',
                 'codigo_iso' => 'SE',
                 'imagen' => '/images/selecciones/se.jpg',
                 'descripcion' => 'La selección nacional de fútbol de Suecia es una de las históricas del continente europeo. Su mayor logro en la Copa Mundial de la FIFA fue el subcampeonato en 1958, torneo que organizó como anfitriona. También alcanzó el tercer lugar en 1950 y 1994. Es reconocida por su fortaleza física, orden táctico y tradición competitiva. A lo largo de su historia ha contado con figuras destacadas como Gunnar Nordahl, Henrik Larsson y Zlatan Ibrahimović.',
@@ -290,10 +290,10 @@ class EquipoSeeder extends Seeder
                 'grupo' => 9
             ],
             [
-                'nombre' => 'BOL/SUR/IRQ',
-                'codigo_iso' => 'BO',
-                'imagen' => '/images/selecciones/bo.jpg',
-                'descripcion' => 'La selección nacional de fútbol de Bolivia representa al país en competiciones internacionales dentro de la Conmebol. Ha participado en tres Copas del Mundo, siendo su actuación más reciente en 1994. Su mayor logro continental fue el subcampeonato en la Copa América 1997, torneo que organizó como anfitriona. Bolivia es reconocida por su fortaleza como local en la altitud de La Paz, una de las sedes más exigentes del fútbol sudamericano.',
+                'nombre' => 'Irak',
+                'codigo_iso' => 'IQ',
+                'imagen' => '/images/selecciones/iq.png',
+                'descripcion' => 'La selección nacional de fútbol de Irak es una de las más destacadas del fútbol asiático occidental. Su mayor logro fue la conquista de la Copa Asiática en 2007, un triunfo histórico que unió al país en medio de un período difícil. También ha participado en la Copa Mundial de la FIFA en México 1986. Es reconocida por su intensidad competitiva, carácter combativo y el desarrollo progresivo de talento dentro de la región.',
                 'grupo' => 9
             ],
             [
@@ -347,10 +347,10 @@ class EquipoSeeder extends Seeder
                 'grupo' => 11
             ],
             [
-                'nombre' => 'NCL/JAM/COD',
-                'codigo_iso' => 'JM',
-                'imagen' => '/images/selecciones/jm.jpg',
-                'descripcion' => 'La selección nacional de fútbol de Jamaica es una de las representativas del Caribe dentro de la Concacaf. Participó en la Copa Mundial de la FIFA 1998, siendo hasta ahora su única aparición en el torneo. Ha tenido actuaciones destacadas en la Copa Oro, alcanzando finales y consolidándose como una selección competitiva en la región. Es conocida por su velocidad, fortaleza física y el desarrollo de futbolistas que compiten en ligas internacionales.',
+                'nombre' => 'RD Congo',
+                'codigo_iso' => 'CD',
+                'imagen' => '/images/selecciones/cd.png',
+                'descripcion' => 'La selección nacional de fútbol de la República Democrática del Congo, conocida anteriormente como Zaire, es una de las históricas del continente africano. Fue la primera selección del África subsahariana en participar en una Copa Mundial de la FIFA en 1974. Ha conquistado la Copa Africana de Naciones en 1968 y 1974. Es reconocida por su tradición futbolística, potencia física y el desarrollo constante de talento dentro del fútbol africano.',
                 'grupo' => 11
             ],
             [
