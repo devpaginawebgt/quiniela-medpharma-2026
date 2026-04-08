@@ -1,8 +1,8 @@
 <x-app-layout>
-    <div>
+    <div class="flex flex-col flex-1">
         <x-main-banner/>
 
-        <div class="relative">
+        <div class="relative flex-1">
             {{-- Background image --}}
             <img
                 src="{{ asset('images/portadas/portada_shared_sm.jpg') }}"
@@ -57,7 +57,7 @@
                         </tr>
                         @empty
                         <tr>
-                            <td colspan="3" class="px-4 py-8 text-center text-complementary-dark">
+                            <td colspan="3" class="text-center text-zinc-400 py-20 text-lg sm:text-xl lg:text-2xl font-brandan uppercase">
                                 No hay participantes para mostrar
                             </td>
                         </tr>

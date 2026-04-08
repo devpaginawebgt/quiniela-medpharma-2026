@@ -1,8 +1,8 @@
 <x-app-layout>
-    <div>
+    <div class="flex flex-col flex-1">
         <x-main-banner/>
 
-        <div class="relative">
+        <div class="relative flex-1">
             {{-- Background image --}}
             <img
                 src="{{ asset('images/portadas/portada_shared_sm.jpg') }}"
@@ -41,7 +41,7 @@
             {{-- Tabla de ranking con scroll interno --}}
             <div
                 id="ranking-scroll-container"
-                class="mx-auto rounded-3xl overflow-y-auto overflow-x-auto"
+                class="mx-auto rounded-t-3xl overflow-y-auto overflow-x-auto"
                 style="max-width: min(84rem, calc(100vw - 2rem)); max-height: 70vh;"
             >
                 <table class="w-full text-left text-dark">
@@ -70,6 +70,11 @@
                     </div>
                 </div>
 
+                {{-- Mensaje vacío --}}
+                <p id="ranking-empty" class="hidden text-center text-zinc-400 py-20 text-lg sm:text-xl lg:text-2xl font-brandan uppercase">
+                    No hay participantes para mostrar
+                </p>
+
                 {{-- Botón cargar más --}}
                 <div class="hidden" id="load-more-container">
                     <button
@@ -96,6 +101,7 @@
         const loader = document.getElementById('ranking-loader');
         const loadMoreContainer = document.getElementById('load-more-container');
         const loadMoreBtn = document.getElementById('load-more-btn');
+        const emptyMessage = document.getElementById('ranking-empty');
 
         let nextPage = 1;
         let hasMore = true;
@@ -159,6 +165,13 @@
                 const data = response.data.data;
                 hasMore = data.has_more;
                 nextPage = data.next_page;
+
+                if (data.users.length === 0 && page === 1) {
+                    emptyMessage.classList.remove('hidden');
+                    loader.classList.add('hidden');
+                    isLoading = false;
+                    return;
+                }
 
                 data.users.forEach(function (user) {
                     tbody.appendChild(createRow(user));

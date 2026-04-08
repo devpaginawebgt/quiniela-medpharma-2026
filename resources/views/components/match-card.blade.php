@@ -1,10 +1,12 @@
 @props(['partido'])
 
 @php
-    $equipoUno = $partido['equipoUno'];
-    $equipoDos = $partido['equipoDos'];
+    $equipoUno = $partido->equipoUno;
+    $equipoDos = $partido->equipoDos;
+    $match     = $partido->partido;
 
-    $fecha = \Carbon\Carbon::parse($partido->partido['fecha_partido'])->locale('es');
+    $timezone = auth()->user()->country->timezone ?? 'America/Guatemala';
+    $fecha = $match->fecha_partido->timezone($timezone)->locale('es');
     $fechaFormateada = ucfirst($fecha->isoFormat('dddd D [de] MMMM'));
     $horaFormateada  = strtoupper($fecha->format('g:i A'));
 @endphp
