@@ -21,24 +21,6 @@ class PartidoService {
         return Jornada::find($jornada);
     }
 
-    public function getPartidosJornada(int $jornada)
-    {
-
-        $partidos = EquipoPartido::select('id', 'equipo_1', 'equipo_2', 'partido_id')
-            ->whereHas('partido', function(Builder $query) use($jornada) {
-                $query->where('jornada_id', $jornada);
-            })
-            ->with([
-                'partido:id,fase,jornada_id,fecha_partido,jugado,estado',
-                'equipoUno:id,nombre,imagen,grupo',
-                'equipoDos:id,nombre,imagen,grupo'
-            ])
-            ->get();
-
-        return $partidos;
-
-    }
-
     public function getJornadasGrupo(string $grupo)
     {
         $jornadas_obtener = collect([1, 2, 3]);
@@ -74,8 +56,7 @@ class PartidoService {
 
         return $jornadas;
     }
-    
-    
+
     // Actualizar el estado de los partidos, si la hora ya ha pasado
 
     public function actualizarPartidosPasados()
@@ -155,5 +136,23 @@ class PartidoService {
             $partido->partido->save();
         }
     }
+
+    // public function getPartidosJornada(int $jornada)
+    // {
+
+    //     $partidos = EquipoPartido::select('id', 'equipo_1', 'equipo_2', 'partido_id')
+    //         ->whereHas('partido', function(Builder $query) use($jornada) {
+    //             $query->where('jornada_id', $jornada);
+    //         })
+    //         ->with([
+    //             'partido:id,fase,jornada_id,fecha_partido,jugado,estado',
+    //             'equipoUno:id,nombre,imagen,grupo',
+    //             'equipoDos:id,nombre,imagen,grupo'
+    //         ])
+    //         ->get();
+
+    //     return $partidos;
+
+    // }
 
 }

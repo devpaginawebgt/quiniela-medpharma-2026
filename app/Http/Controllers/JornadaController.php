@@ -21,73 +21,58 @@ class JornadaController extends Controller
         private readonly ModuleService $moduleService,
     ) {}
         
-    public function calendarioWeb() {
+    // public function calendarioWeb() {
 
-        // Banners
+    //     // Banners
 
-        $banners = $this->moduleService->getBanners(9);
+    //     $banners = $this->moduleService->getBanners(9);
 
-        // User Info
+    //     // User Info
 
-        $user = Auth::user();
+    //     $user = Auth::user();
         
-        $user = $this->userService->getUserRank($user);
+    //     $user = $this->userService->getUserRank($user);
 
-        $user = $this->userService->getUserPredictionsCount($user);
+    //     $user = $this->userService->getUserPredictionsCount($user);
 
-        // Jornadas
+    //     // Jornadas
 
-        $jornadas = $this->partidoService->getJornadas();
+    //     $jornadas = $this->partidoService->getJornadas();
 
-        return view('modulos.calendario', [
-            'jornadas' => $jornadas,
-            'banners'  => $banners,
-            'user'     => $user,
-        ]);
+    //     return view('modulos.calendario', [
+    //         'jornadas' => $jornadas,
+    //         'banners'  => $banners,
+    //         'user'     => $user,
+    //     ]);
 
-    }
+    // }
 
-    public function partidosJornada(string $get_jornada)
-    {
+    // public function partidosJornada(string $get_jornada)
+    // {
 
-        $get_jornada = (int)$get_jornada;
+    //     $get_jornada = (int)$get_jornada;
 
-        if ( empty($get_jornada) ) {
+    //     if ( empty($get_jornada) ) {
 
-            return $this->errorResponse('No se encontró la jornada', 422);
+    //         return $this->errorResponse('No se encontró la jornada', 422);
 
-        }
+    //     }
 
-        $jornada = $this->partidoService->getJornada($get_jornada);
+    //     $jornada = $this->partidoService->getJornada($get_jornada);
 
-        if ( empty($jornada) ) {
+    //     if ( empty($jornada) ) {
 
-            return $this->errorResponse('No se encontró la jornada', 422);
+    //         return $this->errorResponse('No se encontró la jornada', 422);
 
-        }
+    //     }
 
-        $partidos = $this->partidoService->getPartidosJornada($get_jornada);
+    //     $partidos = $this->partidoService->getPartidosJornada($get_jornada);
 
-        $partidos = PartidoResource::collection($partidos);
+    //     $partidos = PartidoResource::collection($partidos);
 
-        return $this->successResponse($partidos);
+    //     return $this->successResponse($partidos);
 
-        // $partidosJornada = DB::select(
-        //     "SELECT 
-        //         * 
-        //     FROM 
-        //         equipo_partidos epar
-        //     INNER JOIN 
-        //         equipos e ON epar.equipo_1 = e.id OR epar.equipo_2 = e.id
-        //     INNER JOIN 
-        //         partidos par ON epar.partido_id = par.id
-        //     WHERE 
-        //         par.jornada_id = {$jornada}"
-        // );
-
-        // return json_encode($partidosJornada);
-
-    }
+    // }
 
     // Respuestas de API
 
