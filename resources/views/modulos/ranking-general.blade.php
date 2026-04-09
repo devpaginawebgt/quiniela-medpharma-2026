@@ -79,7 +79,7 @@
                 <div class="hidden" id="load-more-container">
                     <button
                         id="load-more-btn"
-                        class="w-full py-4 bg-dark text-light font-brandan text-xl uppercase hover:bg-primary transition-colors"
+                        class="w-full py-4 bg-dark text-light font-brandan text-xl uppercase hover:bg-zinc-600 transition-colors cursor-pointer rounded-b-3xl"
                     >
                         Cargar m&aacute;s
                     </button>
