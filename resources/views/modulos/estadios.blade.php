@@ -1,8 +1,8 @@
 <x-app-layout>
-    <div>
+    <div class="flex flex-col flex-1">
         <x-main-banner/>
 
-        <div class="relative">
+        <div class="relative flex-1 pb-16">
             {{-- Background image --}}
             <img
                 src="{{ asset('images/portadas/portada_shared_sm.jpg') }}"

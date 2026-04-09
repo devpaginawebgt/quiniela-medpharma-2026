@@ -1,8 +1,8 @@
 <x-app-layout>
-    <div class="w-full overflow-hidden">
+    <div class="w-full overflow-hidden flex flex-col flex-1">
         <x-main-banner/>
 
-        <div class="relative">
+        <div class="relative flex-1">
             {{-- Background image --}}
             <img
                 src="{{ asset('images/portadas/portada_shared_sm.jpg') }}"
