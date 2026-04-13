@@ -14,7 +14,7 @@
 
         <section>
             <picture>
-                <source media="(min-width: 640px)" srcset="{{ asset('/images/decoracion/banner_grupos.jpg') }}">
+                <source media="(min-width: 640px)" srcset="{{ asset('/images/decoracion/banner-grupos.jpg') }}">
                 <img src="{{ asset('/images/decoracion/banner_grupos_sm.jpg') }}" alt="" class="w-full">
             </picture>
         </section>

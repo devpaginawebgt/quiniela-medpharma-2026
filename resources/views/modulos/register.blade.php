@@ -16,9 +16,9 @@
         <div class="relative min-h-screen w-full">
             {{-- Background --}}
             <div class="absolute inset-0 bg-cover bg-center lg:hidden"
-                 style="background-image: url({{ asset('images/portadas/portada-auth.jpg') }});"></div>
-            <div class="absolute inset-0 bg-cover bg-center hidden lg:block"
-                 style="background-image: url({{ asset('images/portadas/portada-auth.jpg') }});"></div>
+                 style="background-image: url({{ asset('images/portadas/banner-auth-sm.jpg') }});"></div>
+            <div class="absolute inset-0 bg-cover bg-right hidden lg:block"
+                 style="background-image: url({{ asset('images/portadas/banner-auth.jpg') }});"></div>
             {{-- Overlay --}}
             <div class="absolute inset-0 bg-black/0"></div>
 
@@ -44,6 +44,11 @@
                                 class="w-full max-w-82 mx-auto"
                                 alt="{{ config('app.name', 'Quiniela') }}"
                             >
+                        </div>
+
+                        <div class="flex flex-row">
+                            <span>Quiniela</span>
+                            <span>mundialista</span>
                         </div>
     
                         {{-- Title --}}
