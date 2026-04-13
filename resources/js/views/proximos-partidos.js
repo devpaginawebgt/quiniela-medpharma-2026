@@ -143,7 +143,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     <div class="flex items-center justify-between flex-row-reverse md:flex-row w-full md:w-auto md:flex-1 md:min-w-0 gap-3">
                         <span class="text-xl lg:text-3xl font-bold shrink-0">${pred2}</span>
                         <div class="flex items-center flex-row-reverse md:flex-row gap-3">
-                            <span class="text-sm lg:text-lg uppercase text-end">${prediccion.equipoDos.nombre}</span>
+                            <span class="text-sm lg:text-lg uppercase text-start md:text-end">${prediccion.equipoDos.nombre}</span>
                             <img src="${prediccion.equipoDos.imagen}" alt="${prediccion.equipoDos.nombre}" class="w-12 md:w-14 lg:w-20 aspect-8/5 object-cover rounded-tr-lg rounded-bl-lg shrink-0">
                         </div>
                     </div>

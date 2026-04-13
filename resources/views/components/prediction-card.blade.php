@@ -79,7 +79,7 @@
                 <span class="text-2xl lg:text-3xl font-bold shrink-0 md:order-first">{{ $pred_e2 !== '' ? $pred_e2 : '-' }}</span>
             @endif
             <div class="flex items-center flex-row-reverse md:flex-row gap-3">
-                <span class="text-sm lg:text-lg uppercase text-end">{{ $equipoDos->nombre }}</span>
+                <span class="text-sm lg:text-lg uppercase text-start md:text-end">{{ $equipoDos->nombre }}</span>
                 <img
                     src="{{ asset($equipoDos->imagen) }}"
                     alt="{{ $equipoDos->nombre }}"
