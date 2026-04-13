@@ -81,6 +81,6 @@ class UserSeeder extends Seeder
 
         DB::table('users')->insert($users);
 
-        User::factory()->count(600)->create();
+        // User::factory()->count(600)->create();
     }
 }
