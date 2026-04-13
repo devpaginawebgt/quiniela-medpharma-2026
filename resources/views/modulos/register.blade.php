@@ -143,6 +143,8 @@
                                 name="password"
                                 icon="icon-[fluent--password-24-filled]"
                                 placeholder="Contraseña"
+                                minlength="4"
+                                maxlength="50"
                                 required
                             />
     
@@ -151,7 +153,9 @@
                                 id="password_confirmation"
                                 name="password_confirmation"
                                 icon="icon-[fluent--password-24-filled]"
-                                placeholder="Confirmar Contraseña"  
+                                placeholder="Confirmar Contraseña"
+                                minlength="4"
+                                maxlength="50"
                                 required
                             />
     

@@ -76,6 +76,8 @@
                                 name="password"
                                 icon="icon-[fluent--password-32-filled]"
                                 placeholder="Contraseña"
+                                minlength="4"
+                                maxlength="50"
                                 required
                             />
                         </div>

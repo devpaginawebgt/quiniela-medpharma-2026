@@ -28,10 +28,7 @@ class AppServiceProvider extends ServiceProvider
         Schema::defaultStringLength(191);
 
         Password::defaults(function () {
-            $rule = Password::min(8)
-                ->letters()
-                ->mixedCase()
-                ->symbols();
+            $rule = Password::min(4)->max(50);
     
             return $rule;
         });
