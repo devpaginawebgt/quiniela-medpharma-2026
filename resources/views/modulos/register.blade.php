@@ -137,16 +137,21 @@
                                 <span>{{ $country->name }}</span>
                             </div>
     
-                            {{-- Contraseña --}}
-                            <x-auth-password-input
-                                id="password"
-                                name="password"
-                                icon="icon-[fluent--password-24-filled]"
-                                placeholder="Contraseña"
-                                minlength="4"
-                                maxlength="50"
-                                required
-                            />
+                            <div class="flex flex-col gap-2">
+                                {{-- Contraseña --}}
+                                <x-auth-password-input
+                                    id="password"
+                                    name="password"
+                                    icon="icon-[fluent--password-24-filled]"
+                                    placeholder="Contraseña"
+                                    minlength="4"
+                                    maxlength="50"
+                                    required
+                                />
+                                <p class="text-xs text-zinc-400 px-1">
+                                    La contraseña de contener 4 carácteres como mínimo
+                                </p>
+                            </div>
     
                             {{-- Confirmar Contraseña --}}
                             <x-auth-password-input
