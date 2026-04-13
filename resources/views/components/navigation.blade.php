@@ -70,9 +70,15 @@
 
         {{-- Usuario dropdown --}}
         <div class="hidden lg:block relative shrink-0 ml-4">
-            <button id="user-dropdown-btn" data-dropdown-toggle="user-dropdown" data-dropdown-placement="bottom-end" class="flex items-center gap-2 text-xs min-[1140px]:text-sm font-bold text-dark">
-                {{ $username }}
-                <span class="icon-[fluent--chevron-down-20-filled] w-4 h-4"></span>
+            <button
+                id="user-dropdown-btn"
+                data-dropdown-toggle="user-dropdown"
+                data-dropdown-placement="bottom-end"
+                class="flex items-center gap-1.5 text-xs min-[1140px]:text-sm font-bold text-dark lg:max-w-[22ch] xl:max-w-[25ch] 2xl:max-w-[40ch] hover:text-complementary-secondary"
+            >
+                {{-- <span class="icon-[fluent--person-12-filled] w-4 h-4 xl:w-5 xl:h-5 shrink-0"></span> --}}
+                <span class="truncate">{{ $username }}</span>
+                <span class="icon-[fluent--chevron-down-20-filled] w-4 h-4 shrink-0"></span>
             </button>
             <div id="user-dropdown" class="z-50 hidden bg-white rounded-lg shadow-lg border border-gray-200 w-44 transition-opacity! duration-150!">
                 <ul class="py-1">
@@ -98,7 +104,7 @@
 
 {{-- Drawer de navegación móvil (Flowbite) --}}
 <div id="mobile-nav-drawer" class="lg:hidden fixed top-16 left-0 right-0 z-40 bg-white shadow-xl transition-transform -translate-y-full pt-6 p-4" tabindex="-1">
-    <p class="flex items-center gap-2 text-sm text-dark mb-4">
+    <p class="flex items-start gap-3 text-sm text-dark mb-4">
         <span class="icon-[fluent--person-12-filled] w-10 h-10"></span>
         <span class="uppercase text-2xl font-brandan">{{ $username }}</span>
     </p>
