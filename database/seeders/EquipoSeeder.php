@@ -37,7 +37,7 @@ class EquipoSeeder extends Seeder
                 'created_at' => (Carbon::now())->toDateTimeString()
             ],
             [
-                'nombre' => 'República de Corea',
+                'nombre' => 'Corea',
                 'codigo_iso' => 'KR',
                 'imagen' => '/images/selecciones/kr.jpg',
                 'descripcion' => 'La selección nacional de fútbol de la República de Corea, conocida comúnmente como Corea del Sur, es una de las potencias del fútbol asiático. Ha participado en múltiples Copas del Mundo y alcanzó su mejor resultado en 2002, cuando fue coanfitriona del torneo y logró un histórico cuarto lugar. Es reconocida por su intensidad física, disciplina táctica y velocidad de juego. A lo largo de su historia ha contado con figuras destacadas como Park Ji-sung, Hong Myung-bo, Son Heung-min y Cha Bum-kun.',
@@ -45,7 +45,7 @@ class EquipoSeeder extends Seeder
                 'created_at' => (Carbon::now())->toDateTimeString()
             ],
             [
-                'nombre' => 'Chequia',
+                'nombre' => 'R. Checa',
                 'codigo_iso' => 'CZ',
                 'imagen' => '/images/selecciones/cz.png',
                 'descripcion' => 'La selección nacional de fútbol de Chequia, anteriormente conocida como República Checa, es una de las más competitivas de Europa Central. Como Checoslovaquia conquistó la Eurocopa en 1976 y fue subcampeona del mundo en 1934 y 1962. Ya como República Checa alcanzó la final de la Eurocopa en 1996 y las semifinales en 2004. Es reconocida por su solidez táctica, tradición futbolística y figuras destacadas como Pavel Nedvěd, Petr Čech y Karel Poborský.',
@@ -65,7 +65,7 @@ class EquipoSeeder extends Seeder
                 'created_at' => (Carbon::now())->toDateTimeString()
             ],
             [
-                'nombre' => 'Bosnia y Herzegovina',
+                'nombre' => 'Bosnia',
                 'codigo_iso' => 'BA',
                 'imagen' => '/images/selecciones/ba.png',
                 'descripcion' => 'La selección nacional de fútbol de Bosnia y Herzegovina compite de forma independiente desde 1996 tras la disolución de Yugoslavia. Logró su primera clasificación a una Copa Mundial de la FIFA en Brasil 2014, marcando un hito histórico para el país. Es reconocida por su fortaleza competitiva, intensidad de juego y por haber contado con futbolistas destacados como Edin Džeko, Miralem Pjanić y Asmir Begović, quienes han brillado en las principales ligas europeas.',
@@ -129,7 +129,7 @@ class EquipoSeeder extends Seeder
             // GRUPO D (4)
             // ======================
             [
-                'nombre' => 'EE. UU.',
+                'nombre' => 'USA',
                 'codigo_iso' => 'US',
                 'imagen' => '/images/selecciones/us.jpg',
                 'descripcion' => 'La selección nacional de fútbol de Estados Unidos es una de las principales potencias de la Concacaf. Ha participado en múltiples Copas del Mundo, logrando como mejor resultado las semifinales en 1930 y los cuartos de final en 2002. En los últimos años ha experimentado un crecimiento sostenido gracias a una nueva generación de futbolistas que compiten en las principales ligas europeas. Será uno de los países anfitriones de la Copa Mundial de la FIFA 2026 junto a México y Canadá, consolidando su papel como potencia emergente en el fútbol internacional.',
@@ -281,7 +281,7 @@ class EquipoSeeder extends Seeder
                 'created_at' => (Carbon::now())->toDateTimeString()
             ],
             [
-                'nombre' => 'Islas de Cabo Verde',
+                'nombre' => 'Cabo Verde',
                 'codigo_iso' => 'CV',
                 'imagen' => '/images/selecciones/cv.jpg',
                 'descripcion' => 'La selección nacional de fútbol de Cabo Verde representa al país africano insular en competiciones internacionales y forma parte de la Confederación Africana de Fútbol (CAF). En las últimas décadas ha mostrado un crecimiento sostenido, clasificando en varias ocasiones a la Copa Africana de Naciones. Es considerada una selección emergente dentro del continente, con jugadores que compiten en ligas europeas y un estilo de juego dinámico y competitivo.',
