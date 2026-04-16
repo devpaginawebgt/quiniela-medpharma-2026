@@ -132,7 +132,7 @@
                                     name="codigo"
                                     icon="icon-[fluent--text-number-format-20-filled]"
                                     placeholder="Codigo de registro"
-                                    minlength="8"
+                                    minlength="6"
                                     maxlength="8"
                                     required
                                     aria-describedby="codigoHelper"

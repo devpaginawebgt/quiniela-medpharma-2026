@@ -5,8 +5,8 @@ namespace App\Http\Controllers\Auth;
 use App\Models\User;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Auth\RegisterRequest;
+use App\Http\Services\CodigoService;
 use App\Http\Services\CountryService;
-use App\Models\Codigo;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Http;
@@ -19,6 +19,7 @@ class RegisteredUserController extends Controller
 {
     public function __construct(
         private readonly CountryService $countryService,
+        private readonly CodigoService $codigoService,
     ) {}
 
     public function create(Request $request)
@@ -53,21 +54,15 @@ class RegisteredUserController extends Controller
 
         $data['password'] = Hash::make($data['password']);
 
-        $codigo = Codigo::where('codigo', $data['codigo'])->first();
+        $result = $this->codigoService->validate($data['codigo'], $data['pais_id']);
 
-        if (empty($codigo)) {
-            throw ValidationException::withMessages([
-                'codigo' => 'El código ingresado no existe'
-            ]);
-        }
-
-        if ((int)$codigo->estado === 1) {
-            throw ValidationException::withMessages([
-                'codigo' => 'El código ingresado ya fue utilizado para registrarse, intenta con otro.'
-            ]);
+        if (!$result['success']) {
+            throw ValidationException::withMessages(['codigo' => $result['message']]);
         }
 
         $user = User::create($data);
+
+        $this->codigoService->markAsUsed($result['codigo']);
 
         event(new Registered($user));
 

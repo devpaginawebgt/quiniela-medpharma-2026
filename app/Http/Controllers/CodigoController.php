@@ -3,30 +3,25 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\Codigo\CodigoRequest;
-use App\Models\Codigo;
+use App\Http\Services\CodigoService;
 use App\Traits\ApiResponse;
-use Illuminate\Http\Request;
 
 class CodigoController extends Controller
 {
+    public function __construct(
+        private readonly CodigoService $codigoService,
+    ) {}
+
     use ApiResponse;
 
     public function isValid(CodigoRequest $request) {
-        $code = $request->validated('code');
-        $country_id = $request->validated('country_id');
+        $result = $this->codigoService->validate(
+            $request->validated('code'),
+            $request->validated('country_id')
+        );
 
-        $db_code = Codigo::where('codigo', $code)->first();
-
-        if (empty($db_code)) {
-            return $this->errorResponse('Este código de invitación no existe.', 404);
-        }
-
-        if ((int)$db_code->country_id !== (int)$country_id) {
-            return $this->errorResponse('Este código de invitación no pertenece a este país.', 406);
-        }
-        
-        if ((int)$db_code->estado === 1) {
-            return $this->errorResponse('Este código de invitación ya ha sido utilizado.', 406);
+        if (!$result['success']) {
+            return $this->errorResponse($result['message'], $result['code']);
         }
 
         return $this->successResponse(['message' => 'Código de invitación válido.']);
