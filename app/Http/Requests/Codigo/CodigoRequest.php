@@ -22,7 +22,7 @@ class CodigoRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'code'     => ['required', 'string', 'min:6', 'max:8'],
+            'code'     => ['required', 'string', 'size:8'],
             'country_id' => ['required', 'integer', 'exists:countries,id'],
         ];
     }
@@ -43,8 +43,7 @@ class CodigoRequest extends FormRequest
             // CODE
             'code.required' => 'Por favor, ingrese su código de invitación.',
             'code.string'   => 'El código de invitación debe ser un texto válido.',
-            'code.min'      => 'El código de invitación debe tener al menos 6 caracteres.',
-            'code.max'      => 'El código de invitación no debe superar los 8 caracteres.',
+            'code.size'     => 'El código de invitación debe tener exactamente 8 caracteres.',
         ];
     }
 }

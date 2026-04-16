@@ -41,13 +41,8 @@ document.addEventListener('DOMContentLoaded', () => {
             return;
         }
 
-        if (code.length < 6) {
-            addCodeError('El código de invitación debe tener al menos 6 caracteres.')
-            return;
-        }
-
-        if (code.length > 8) {
-            addCodeError('El código de invitación no debe superar los 8 caracteres.')
+        if (code.length !== 8) {
+            addCodeError('El código de invitación debe contener 8 caracteres.')
             return;
         }
 
