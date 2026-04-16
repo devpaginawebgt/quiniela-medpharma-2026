@@ -60,9 +60,13 @@ class RegisteredUserController extends Controller
             throw ValidationException::withMessages(['codigo' => $result['message']]);
         }
 
+        $codigo = $result['codigo'];
+
+        $data['codigo_id'] = $codigo->id;
+
         $user = User::create($data);
 
-        $this->codigoService->markAsUsed($result['codigo']);
+        $this->codigoService->markAsUsed($codigo);
 
         event(new Registered($user));
 
