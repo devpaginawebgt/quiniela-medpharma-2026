@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class Codigo extends Model
 {
@@ -12,7 +13,11 @@ class Codigo extends Model
     protected $fillable = [
         'codigo',
         'estado',
-        // 'id_dependiente',
-        // 'nombre_dependiente'
+        'country_id',
     ];
+
+    public function country(): BelongsTo
+    {
+        return $this->belongsTo(Country::class);
+    }
 }

@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\CodigoController;
 use App\Http\Controllers\EstadioController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
@@ -86,6 +87,8 @@ Route::middleware(['auth'])->as('web.')->group(function() {
 
 
 // Embed (público, sin auth — para Flutter WebView)
+
+Route::post('/codigo', [CodigoController::class, 'isValid'])->name('web.code');
 
 Route::get('/embed/bracket', fn() => view('embed.bracket'))->name('embed.bracket');
 

@@ -126,17 +126,32 @@
                             />
     
                             {{-- Codigo de registro --}}
-                            <x-auth-input
-                                name="codigo"
-                                icon="icon-[fluent--text-number-format-20-filled]"
-                                placeholder="Codigo de registro"
-                                minlength="7"
-                                maxlength="7"
-                                required
-                            />
+                            <div class="flex flex-col gap-1">
+                                <x-auth-input
+                                    id="codigo"
+                                    name="codigo"
+                                    icon="icon-[fluent--text-number-format-20-filled]"
+                                    placeholder="Codigo de registro"
+                                    minlength="8"
+                                    maxlength="8"
+                                    required
+                                    aria-describedby="codigoHelper"
+                                />
+                                <span id="codigoHelper" class="text-sm">
+
+                                </span>
+                            </div>
     
                             {{-- Pais (detectado por IP) --}}
-                            <input type="hidden" name="pais_id" value="{{ $country->id }}">
+
+                            <input
+                                id="paisId"
+                                type="hidden"
+                                name="pais_id"
+                                value="{{ $country->id }}"
+
+                            >
+
                             <div class="flex items-center gap-3 py-3 px-4 bg-transparent border-2 rounded-lg border-secondary text-dark text-base cursor-default">
                                 <img src="{{ asset($country->image) }}" alt="{{ $country->name }}" class="w-6 aspect-6/4 rounded-sm object-cover shadow-sm">
                                 <span>{{ $country->name }}</span>

@@ -1,5 +1,6 @@
 @props([
     'name',
+    'id' => null,
     'type' => 'text',
     'icon' => null,
     'placeholder' => '',
@@ -24,6 +25,7 @@
         name="{{ $name }}"
         value="{{ old($name, $value) }}"
         placeholder="{{ $placeholder }}"
+        @if($id) id="{{ $id }}" @endif
         @if($required) required @endif
         @if($maxlength) maxlength="{{ $maxlength }}" @endif
         @if($minlength) minlength="{{ $minlength }}" @endif

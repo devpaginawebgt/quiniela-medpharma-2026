@@ -29,7 +29,7 @@ class RegisterRequest extends FormRequest
             'numero_documento' => ['required', 'string', 'min:6', 'max:20', 'unique:users,numero_documento'],
             'telefono'         => ['required', 'integer', 'digits:8'],
             'email'            => ['required', 'email', 'min:5', 'max:255', 'unique:users'],
-            'codigo'           => ['required', 'string', 'size:7'],
+            'codigo'           => ['required', 'string', 'size:8'],
             'pais_id'          => ['required', 'integer', 'exists:countries,id'],
             'password'         => ['required', 'confirmed', Password::defaults()],
             'accepted_terms'   => ['required', 'accepted'],
@@ -91,7 +91,7 @@ class RegisterRequest extends FormRequest
             // CODIGO
             'codigo.required' => 'Por favor, ingrese su código de registro.',
             'codigo.string'   => 'El código de registro debe ser un texto válido.',
-            'codigo.size'     => 'El código de registro debe tener exactamente 7 caracteres.',
+            'codigo.size'     => 'El código de registro debe tener exactamente 8 caracteres.',
 
             // PAIS
             'pais_id.required' => 'Por favor seleccione su país.',

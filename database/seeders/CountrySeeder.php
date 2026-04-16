@@ -73,17 +73,17 @@ class CountrySeeder extends Seeder
             'is_active'              => true
         ]);
 
-        Country::create([
-            'name'                   => 'Panamá',
-            'image'                  => '/images/countries/flag-pa.png',
-            'country_code'           => 'PA',
-            'area_code'              => '507',
-            'document_name'          => 'CIP',
-            'document_regex'         => '^[A-Z0-9]{6,11}$',
-            'document_regex_message' => 'El CIP debe contener entre 6 y 11 caracteres alfanuméricos.',
-            'timezone'               => 'America/Panama',
-            'is_active'              => true
-        ]);
+        // Country::create([
+        //     'name'                   => 'Panamá',
+        //     'image'                  => '/images/countries/flag-pa.png',
+        //     'country_code'           => 'PA',
+        //     'area_code'              => '507',
+        //     'document_name'          => 'CIP',
+        //     'document_regex'         => '^[A-Z0-9]{6,11}$',
+        //     'document_regex_message' => 'El CIP debe contener entre 6 y 11 caracteres alfanuméricos.',
+        //     'timezone'               => 'America/Panama',
+        //     'is_active'              => true
+        // ]);
 
         // Country::create([
         //     'name'                   => 'República Dominicana',
