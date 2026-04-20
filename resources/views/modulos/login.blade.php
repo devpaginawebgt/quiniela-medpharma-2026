@@ -40,7 +40,7 @@
                     <div class="mb-4 lg:mb-0">
                         <img
                             src="/images/logos/medpharma-logo.jpg"
-                            class="w-full max-w-84 lg:max-w-52 mx-auto"
+                            class="w-full max-w-84 lg:max-w-52 mx-auto hidden lg:flex"
                             alt="{{ config('app.name', 'Quiniela') }}"
                         >
                     </div>
@@ -89,7 +89,7 @@
 
                         <button
                             type="submit"
-                            class="w-full bg-secondary text-light font-bold rounded-lg px-6 py-3 hover:brightness-110 focus:ring-4 focus:ring-secondary/50 flex items-center justify-center gap-2"
+                            class="w-full bg-comp bg-secondary text-light font-bold rounded-lg px-6 py-3 hover:brightness-110 focus:ring-4 focus:ring-secondary/50 flex items-center justify-center gap-2"
                         >
                             <span class="icon-[fluent--arrow-enter-16-filled] w-5 h-5"></span>
                             Ingresar

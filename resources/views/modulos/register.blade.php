@@ -32,11 +32,12 @@
                 {{-- Drawer panel --}}
                 <div
                     class="
-                        w-full max-h-screen sm:rounded-t-3xl bg-light p-8 flex flex-col
+                        w-full max-h-screen min-h-screen lg:min-h-none sm:rounded-t-3xl bg-light p-8 flex flex-col
                         lg:rounded-none lg:max-w-lg 2xl:max-w-xl lg:w-full lg:shadow-2xl shadow-black
                     "
                 >
                     <div class="overflow-y-auto my-auto">
+
                         {{-- Logo --}}
                         <div class="mb-4">
                             <img
@@ -46,10 +47,10 @@
                             >
                         </div>
 
-                        <div class="flex flex-row">
-                            <span>Quiniela</span>
-                            <span>mundialista</span>
-                        </div>
+                        <div class="hidden lg:flex flex-col items-center justify-center text-dark font-brandan uppercase -mt-2 mb-12">
+                        <span class="text-8xl text-[#9cc600]">Quiniela</span>
+                        <span class="text-6xl text-[#004c3f]">mundialista</span>
+                    </div>
     
                         {{-- Title --}}
                         <h1 class="text-2xl text-center font-bold text-complementary-dark mb-4">Crear cuenta</h1>
