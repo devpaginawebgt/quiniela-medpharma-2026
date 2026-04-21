@@ -65,16 +65,28 @@
                             No hay partidos programados para esta jornada.
                         </p>
                     @else
-                        <div class="bg-dark text-light rounded-t-2xl px-6 py-3 mt-8 mb-4">
-                            <h3 class="text-xl sm:text-3xl lg:text-4xl uppercase font-optimprov">
-                                {{ $jornada_activa->name ?? '' }}
-                            </h3>
-                        </div>
-                        <div class="divide-y divide-zinc-300">
-                            @foreach($records as $registro)
-                                <x-prediction-card :registro="$registro" />
-                            @endforeach
-                        </div>
+                        @php
+                            $timezone = auth()->user()->country->timezone ?? 'America/Guatemala';
+                            $grupos_por_fecha = $records
+                                ->sortBy(fn($registro) => $registro->partido->fecha_partido->timestamp)
+                                ->groupBy(fn($registro) => $registro->partido->fecha_partido->copy()->timezone($timezone)->format('Y-m-d'));
+                        @endphp
+
+                        @foreach($grupos_por_fecha as $fecha => $registros_dia)
+                            @php
+                                $fecha_label = \Carbon\Carbon::parse($fecha)->locale('es')->isoFormat('D [DE] MMMM');
+                            @endphp
+                            <div class="bg-dark text-light rounded-t-2xl px-6 py-3 mt-8 mb-4">
+                                <h3 class="text-xl sm:text-3xl lg:text-4xl uppercase font-optimprov">
+                                    {{ strtoupper($fecha_label) }}
+                                </h3>
+                            </div>
+                            <div class="divide-y divide-zinc-300 mb-4">
+                                @foreach($registros_dia as $registro)
+                                    <x-prediction-card :registro="$registro" />
+                                @endforeach
+                            </div>
+                        @endforeach
                     @endif
 
                     {{-- Botón sticky inferior derecha --}}
