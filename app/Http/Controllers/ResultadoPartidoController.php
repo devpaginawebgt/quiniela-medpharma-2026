@@ -15,7 +15,6 @@ use App\Http\Services\PartidoService;
 use App\Http\Services\PrediccionService;
 use App\Http\Services\UserService;
 use App\Traits\ApiResponse;
-use Carbon\Carbon;
 
 class ResultadoPartidoController extends Controller
 {
@@ -53,29 +52,21 @@ class ResultadoPartidoController extends Controller
 
         $this->actualizacionDataGeneral($user->id);
 
-        $timezone = $user->country->timezone ?? 'America/Guatemala';
+        $jornadas = $this->partidoService->getJornadas();
 
-        $fechas_filtro = $this->prediccionService->getFechasFiltro($timezone);
+        $jornada_actual = $jornadas->firstWhere('is_current', true) ?? $jornadas->first();
 
-        $hoy = Carbon::now($timezone)->toDateString();
+        $jornada_solicitada = (int) $request->get('jornada');
 
-        $fecha_proxima = $fechas_filtro->first(function($option) use($hoy) {
-            return $option->fecha >= $hoy;
-        }) ?? $fechas_filtro->last();
-
-        try {
-            $fecha_filtrada = Carbon::createFromFormat('Y-m-d', $request->get('fecha'))->format('Y-m-d');
-        } catch (\Exception $e) {
-            $fecha_filtrada = $fecha_proxima->fecha;
-        }
+        $jornada_activa = $jornadas->firstWhere('id', $jornada_solicitada) ?? $jornada_actual;
 
         // Partidos con predicciones del usuario
 
-        $records = $this->prediccionService->getPartidos($fecha_filtrada, $user);
+        $records = $this->prediccionService->getPartidosPorJornada($jornada_activa->id, $user);
 
         return view('modulos.quiniela', [
-            'fechas_filtro' => $fechas_filtro,
-            'fecha_filtrada' => $fecha_filtrada,
+            'jornadas' => $jornadas,
+            'jornada_activa' => $jornada_activa,
             'records' => $records,
         ]);
     }

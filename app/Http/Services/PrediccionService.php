@@ -3,31 +3,11 @@
 namespace App\Http\Services;
 
 use App\Models\EquipoPartido;
-use App\Models\Partido;
 use App\Models\Preccion;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Builder;
 
 class PrediccionService {
-
-    public function getFechasFiltro(string $timezone)
-    {
-        $offset = Carbon::now($timezone)->format('P'); // e.g. '-06:00'
-
-        $fechas_filtro = Partido::selectRaw("DATE(CONVERT_TZ(fecha_partido, '+00:00', ?)) as fecha", [$offset])
-            ->distinct()
-            ->orderBy('fecha')
-            ->pluck('fecha');
-
-        $fechas_filtro = $fechas_filtro->map(function($fecha) {
-            return (object)[
-                'fecha' => $fecha,
-                'fecha_larga' => Carbon::parse($fecha)->translatedFormat('j \d\e F')
-            ];
-        });
-
-        return $fechas_filtro;
-    }
 
     public function getPrediccionesById(array $id_partidos, int $user_id)
     {
@@ -55,19 +35,16 @@ class PrediccionService {
 
     }
 
-    public function getPartidos(string $fecha_filtro, $user)
+    public function getPartidosPorJornada(int $jornada_id, $user)
     {
-
-        $offset = Carbon::now($user->country->timezone)->format('P');
-
         $registros = EquipoPartido::select([
             'equipo_partidos.id',
             'equipo_partidos.equipo_1',
             'equipo_partidos.equipo_2',
             'equipo_partidos.partido_id',
         ])
-            ->whereHas('partido', function(Builder $query) use($fecha_filtro, $offset) {
-                $query->whereRaw("DATE(CONVERT_TZ(fecha_partido, '+00:00', ?)) = ?", [$offset, $fecha_filtro]);
+            ->whereHas('partido', function(Builder $query) use($jornada_id) {
+                $query->where('jornada_id', $jornada_id);
             })
             ->with([
                 'partido:id,fase,jornada_id,fecha_partido,jugado,estado',

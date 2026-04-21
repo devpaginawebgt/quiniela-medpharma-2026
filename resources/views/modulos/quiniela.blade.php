@@ -30,16 +30,19 @@
                     </h2>
 
                     <form
-                        class="w-full max-w-sm md:max-w-48"
+                        class="w-full max-w-sm md:max-w-60"
                         data-url-quiniela="{{ route('web.save-predicciones') }}"
                     >
-                        <x-form-select id="selector-fecha" name="selector_fecha">
-                            @foreach($fechas_filtro as $fecha)
+                        <x-form-select id="selector-jornada" name="selector_jornada">
+                            @foreach($jornadas as $jornada)
+                                @php
+                                    $journey_name = in_array($jornada->name, ['1', '2', '3']) ? "Jornada {$jornada->name}" : $jornada->name;
+                                @endphp
                                 <option
-                                    value="{{ $fecha->fecha }}"
-                                    {{ $fecha->fecha === $fecha_filtrada ? 'selected' : '' }}
+                                    value="{{ $jornada->id }}"
+                                    {{ $jornada->id === $jornada_activa->id ? 'selected' : '' }}
                                 >
-                                    {{ $fecha->fecha_larga }}
+                                    {{ $journey_name }}
                                 </option>
                             @endforeach
                         </x-form-select>
@@ -55,20 +58,16 @@
                     class="relative mb-6"
                 >
                     @csrf
-                    {{-- Fecha seleccionada como header --}}
-                    @php
-                        $fecha_activa = $fechas_filtro->firstWhere('fecha', $fecha_filtrada);
-                    @endphp
 
                     {{-- Lista de partidos --}}
                     @if($records->isEmpty())
                         <p class="text-center text-zinc-400 py-20 text-lg sm:text-xl lg:text-2xl font-brandan uppercase">
-                            No hay partidos programados para esta fecha.
+                            No hay partidos programados para esta jornada.
                         </p>
                     @else
                         <div class="bg-dark text-light rounded-t-2xl px-6 py-3 mt-8 mb-4">
                             <h3 class="text-xl sm:text-3xl lg:text-4xl uppercase font-optimprov">
-                                {{ $fecha_activa->fecha_larga ?? '' }}
+                                {{ $jornada_activa->name ?? '' }}
                             </h3>
                         </div>
                         <div class="divide-y divide-zinc-300">

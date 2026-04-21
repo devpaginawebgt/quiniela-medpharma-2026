@@ -7,14 +7,14 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Logica para cambiar de jornada 
     
-    const select = document.getElementById('selector-fecha');
+    const select = document.getElementById('selector-jornada');
     const formPredicciones = document.getElementById('form-quiniela');
 
     if (select && formPredicciones) {
         const urlQuiniela = formPredicciones.dataset.urlQuiniela;
 
         select.addEventListener('change', function () {
-            window.location.href = urlQuiniela + "?fecha=" + this.value;
+            window.location.href = urlQuiniela + "?jornada=" + this.value;
         });
     }
 

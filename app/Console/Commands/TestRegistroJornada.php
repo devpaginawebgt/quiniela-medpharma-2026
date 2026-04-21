@@ -29,9 +29,9 @@ class TestRegistroJornada extends Command
     public function handle()
     {
 
-        $this->error('Comando deshabilitado.');
+        // $this->error('Comando deshabilitado.');
 
-        return Command::FAILURE;
+        // return Command::FAILURE;
 
         $id_jornada = (int) $this->option('jornada');
         
