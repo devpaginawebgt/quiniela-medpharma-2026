@@ -46,7 +46,9 @@ class PartidoService {
                     'equipoUno:id,nombre,imagen,grupo',
                     'equipoDos:id,nombre,imagen,grupo'
                 ])
-                ->get();
+                ->get()
+                ->sortBy(fn($equipoPartido) => $equipoPartido->partido->fecha_partido->timestamp)
+                ->values();
 
             $jornada_db->partidos = $partidosJornada;
 
