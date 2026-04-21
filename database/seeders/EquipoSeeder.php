@@ -129,7 +129,7 @@ class EquipoSeeder extends Seeder
             // GRUPO D (4)
             // ======================
             [
-                'nombre' => 'USA',
+                'nombre' => 'E.E.U.U.',
                 'codigo_iso' => 'US',
                 'imagen' => '/images/selecciones/us.jpg',
                 'descripcion' => 'La selección nacional de fútbol de Estados Unidos es una de las principales potencias de la Concacaf. Ha participado en múltiples Copas del Mundo, logrando como mejor resultado las semifinales en 1930 y los cuartos de final en 2002. En los últimos años ha experimentado un crecimiento sostenido gracias a una nueva generación de futbolistas que compiten en las principales ligas europeas. Será uno de los países anfitriones de la Copa Mundial de la FIFA 2026 junto a México y Canadá, consolidando su papel como potencia emergente en el fútbol internacional.',
@@ -184,7 +184,7 @@ class EquipoSeeder extends Seeder
                 'nombre' => 'Costa de Marfil',
                 'codigo_iso' => 'CI',
                 'imagen' => '/images/selecciones/ci.jpg',
-                'descripcion' => 'La selección nacional de fútbol de Costa de Marfil es una de las potencias tradicionales del continente africano. Ha participado en varias Copas del Mundo y ha conquistado la Copa Africana de Naciones en 1992 y 2015. Durante la llamada "generación dorada" contó con futbolistas de talla mundial como Didier Drogba, Yaya Touré y Kolo Touré. Es reconocida por su potencia física, calidad técnica y competitividad en torneos internacionales.',
+                'descripcion' => 'La selección nacional de fútbol de Costa de Marfil es una de las potencias tradicionales del continente africano. Ha participado en varias Copas del Mundo y ha conquistado la Copa Africana de Naciones en 1992, 2015 y 2023. Durante la llamada "generación dorada" contó con futbolistas de talla mundial como Didier Drogba, Yaya Touré y Kolo Touré. Es reconocida por su potencia física, calidad técnica y competitividad en torneos internacionales.',
                 'grupo' => 5,
                 'created_at' => (Carbon::now())->toDateTimeString()
             ],
@@ -336,7 +336,7 @@ class EquipoSeeder extends Seeder
                 'nombre' => 'Noruega',
                 'codigo_iso' => 'NO',
                 'imagen' => '/images/selecciones/no.jpg',
-                'descripcion' => 'La selección nacional de fútbol de Noruega ha tenido participaciones destacadas en la escena internacional, clasificando a las Copas del Mundo de 1938, 1994 y 1998, alcanzando los octavos de final en esta última. Es reconocida por su fortaleza física y organización táctica. En la actualidad cuenta con una generación talentosa encabezada por figuras como Erling Haaland y Martin Ødegaard, que compiten en las principales ligas europeas.',
+                'descripcion' => 'La selección nacional de fútbol de Noruega ha tenido participaciones destacadas en la escena internacional, clasificando a las Copas del Mundo de 1938, 1994 y 1998, alcanzando los octavos de final en dos ocasiones (1938 y 1998). Es reconocida por su fortaleza física y organización táctica. En la actualidad cuenta con una generación talentosa encabezada por figuras como Erling Haaland y Martin Ødegaard, que compiten en las principales ligas europeas.',
                 'grupo' => 9,
                 'created_at' => (Carbon::now())->toDateTimeString()
             ],
@@ -384,7 +384,7 @@ class EquipoSeeder extends Seeder
                 'nombre' => 'Portugal',
                 'codigo_iso' => 'PT',
                 'imagen' => '/images/selecciones/pt.jpg',
-                'descripcion' => 'La selección nacional de fútbol de Portugal es una de las potencias europeas contemporáneas. Su mayor logro fue la conquista de la Eurocopa en 2016 y la Liga de Naciones de la UEFA en 2019. En la Copa Mundial de la FIFA alcanzó el tercer lugar en 1966 y el cuarto puesto en 2006. Es reconocida por su talento ofensivo y por haber contado con figuras históricas como Eusébio y Cristiano Ronaldo, uno de los máximos goleadores internacionales de la historia.',
+                'descripcion' => 'La selección nacional de fútbol de Portugal es una de las potencias europeas contemporáneas. Su mayor logro fue la conquista de la Eurocopa en 2016 y la Liga de Naciones de la UEFA en 2019 y 2025. En la Copa Mundial de la FIFA alcanzó el tercer lugar en 1966 y el cuarto puesto en 2006. Es reconocida por su talento ofensivo y por haber contado con figuras históricas como Eusébio y Cristiano Ronaldo, uno de los máximos goleadores internacionales de la historia.',
                 'grupo' => 11,
                 'created_at' => (Carbon::now())->toDateTimeString()
             ],
