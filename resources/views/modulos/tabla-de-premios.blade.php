@@ -34,11 +34,6 @@
                                 <h2 class="text-5xl sm:text-7xl lg:text-8xl font-brandan uppercase leading-tight">
                                     {{ $premio->nombre }}
                                 </h2>
-                                @if($premio->descripcion)
-                                    <p class="text-lg lg:text-xl text-complementary-dark mt-2">
-                                        {{ $premio->descripcion }}
-                                    </p>
-                                @endif
                             </div>
 
                             {{-- Imagen --}}
@@ -56,7 +51,4 @@
             </div>
         </div>
     </div>
-
-    {{-- Modal / Drawer Premio --}}
-    <x-prize-modal />
 </x-app-layout>

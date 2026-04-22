@@ -15,7 +15,6 @@ class Premio extends Model
         'posicion',
         'titulo_posicion',
         'nombre',
-        'descripcion',
         'imagen',
         'pais_id',
     ];

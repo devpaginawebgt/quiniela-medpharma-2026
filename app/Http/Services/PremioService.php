@@ -9,7 +9,9 @@ class PremioService {
 
     public function getPremios($id_pais)
     {
-        return Premio::where('pais_id', $id_pais)->get();
+        return Premio::where('pais_id', $id_pais)
+            ->orderBy('posicion')
+            ->get();
     }
 
 }

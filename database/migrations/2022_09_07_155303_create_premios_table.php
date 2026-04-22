@@ -19,7 +19,6 @@ class CreatePremiosTable extends Migration
             $table->string('titulo_posicion');
             $table->string('nombre');
             $table->string('imagen');
-            $table->string('descripcion')->nullable();
             $table->integer('pais_id');
             $table->timestamps();
         });

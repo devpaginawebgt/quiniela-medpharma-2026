@@ -41,7 +41,6 @@ class PremioResource extends JsonResource
             'tituloPosicion' => $this->titulo_posicion,
             'color' => $color,
             'nombre' => $this->nombre,
-            'descripcion' => $this->descripcion,
             'imagen' => HelperService::ImagePath($this->imagen),
         ];
     }
