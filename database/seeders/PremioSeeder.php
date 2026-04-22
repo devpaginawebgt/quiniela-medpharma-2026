@@ -39,7 +39,7 @@ class PremioSeeder extends Seeder
             [
                 'posicion' => 1,
                 'titulo_posicion' => 'Primer y segundo lugar',
-                'nombre' => 'Televisor 55"',
+                'nombre' => "Televisor 55''",
                 'imagen' => '/images/premios/es/Premio TV quiniela 2026.png',
                 'pais_id' => 2,
             ],
@@ -83,7 +83,7 @@ class PremioSeeder extends Seeder
             [
                 'posicion' => 1,
                 'titulo_posicion' => 'Primeros tres lugares',
-                'nombre' => 'Televisor 43"',
+                'nombre' => "Televisor 43''",
                 'imagen' => '/images/premios/hn/Premio TV quiniela 2026.png',
                 'pais_id' => 3,
             ],
@@ -106,7 +106,7 @@ class PremioSeeder extends Seeder
             [
                 'posicion' => 1,
                 'titulo_posicion' => 'Primer lugar',
-                'nombre' => 'TV 43"',
+                'nombre' => "TV 43''",
                 'imagen' => '/images/premios/ni/Premio TV quiniela 2026.png',
                 'pais_id' => 4,
             ],
@@ -120,7 +120,7 @@ class PremioSeeder extends Seeder
             [
                 'posicion' => 3,
                 'titulo_posicion' => 'Cuarto y quinto lugar',
-                'nombre' => 'TV 32"',
+                'nombre' => "TV 32''",
                 'imagen' => '/images/premios/ni/Premio TV pequeña quiniela 2026.png',
                 'pais_id' => 4,
             ],
@@ -148,7 +148,7 @@ class PremioSeeder extends Seeder
             [
                 'posicion' => 7,
                 'titulo_posicion' => 'Undécimo y duodécimo lugar',
-                'nombre' => 'Ventilador 16" 2 en 1',
+                'nombre' => "Ventilador 16'' 2 en 1",
                 'imagen' => '/images/premios/ni/Premio ventilador quiniela 2026.png',
                 'pais_id' => 4,
             ],
@@ -206,14 +206,14 @@ class PremioSeeder extends Seeder
             [
                 'posicion' => 1,
                 'titulo_posicion' => 'Primeros dos lugares',
-                'nombre' => 'Televisor 50"',
+                'nombre' => "Televisor 50''",
                 'imagen' => '/images/premios/cr/Premio TV quiniela 2026.png',
                 'pais_id' => 5,
             ],
             [
                 'posicion' => 2,
                 'titulo_posicion' => 'Siguientes tres lugares',
-                'nombre' => 'Televisor 32"',
+                'nombre' => "Televisor 32''",
                 'imagen' => '/images/premios/cr/Premio TV pequeña quiniela 2026.png',
                 'pais_id' => 5,
             ],
@@ -243,14 +243,14 @@ class PremioSeeder extends Seeder
             [
                 'posicion' => 1,
                 'titulo_posicion' => 'Primer lugar',
-                'nombre' => 'Televisor 50"',
+                'nombre' => "Televisor 50''",
                 'imagen' => '/images/premios/pa/Premio TV quiniela 2026.png',
                 'pais_id' => 6,
             ],
             [
                 'posicion' => 2,
                 'titulo_posicion' => 'Siguientes dos lugares',
-                'nombre' => 'Televisor 32"',
+                'nombre' => "Televisor 32''",
                 'imagen' => '/images/premios/pa/Premio TV pequeña quiniela 2026.png',
                 'pais_id' => 6,
             ],
