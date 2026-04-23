@@ -15,13 +15,14 @@ class CodigoSeeder extends Seeder
      */
     public function run()
     {
-        Codigo::factory(7)->state([
+        Codigo::factory(1)->state([
             'estado' => 1,
             'country_id' => 1,
         ])->create();
 
         // Códigos para usuarios Medpharma por país (ver UserSeeder)
         $medpharmaCodigos = [
+            ['codigo' => 'MEDPHAGT', 'country_id' => 1],
             ['codigo' => 'MEDPHASV', 'country_id' => 2],
             ['codigo' => 'MEDPHAHN', 'country_id' => 3],
             ['codigo' => 'MEDPHANI', 'country_id' => 4],

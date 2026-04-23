@@ -49,7 +49,7 @@ class UserSeeder extends Seeder
             ],
 
             [
-                'codigo_id'        =>  8,
+                'codigo_id'        =>  3,
                 'nombres'          =>  'Medpharma',
                 'apellidos'        =>  'SV',
                 'numero_documento' =>  '1234567891113',
@@ -64,7 +64,7 @@ class UserSeeder extends Seeder
             ],
 
             [
-                'codigo_id'        =>  9,
+                'codigo_id'        =>  4,
                 'nombres'          =>  'Medpharma',
                 'apellidos'        =>  'HN',
                 'numero_documento' =>  '1234567891114',
@@ -79,7 +79,7 @@ class UserSeeder extends Seeder
             ],
 
             [
-                'codigo_id'        =>  10,
+                'codigo_id'        =>  5,
                 'nombres'          =>  'Medpharma',
                 'apellidos'        =>  'NI',
                 'numero_documento' =>  '1234567891115',
@@ -94,7 +94,7 @@ class UserSeeder extends Seeder
             ],
 
             [
-                'codigo_id'        =>  11,
+                'codigo_id'        =>  6,
                 'nombres'          =>  'Medpharma',
                 'apellidos'        =>  'CR',
                 'numero_documento' =>  '1234567891116',
@@ -109,7 +109,7 @@ class UserSeeder extends Seeder
             ],
 
             [
-                'codigo_id'        =>  12,
+                'codigo_id'        =>  7,
                 'nombres'          =>  'Medpharma',
                 'apellidos'        =>  'PA',
                 'numero_documento' =>  '1234567891117',
