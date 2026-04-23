@@ -55,6 +55,7 @@ class PrediccionService {
                     $query->where('user_id', $user->id)
                         ->select('id','partido_id','goles_equipo_1','goles_equipo_2');
                 },
+                'partido.puntos:id,partido_id,acerto_marcadores,acerto_ganador_un_marcador,acerto_ganador,acerto_empate,acerto_un_marcador,default'
             ])
             ->get();
 
@@ -80,7 +81,7 @@ class PrediccionService {
 
             }
 
-            $puntos = $this->getResultadoPrediccion($registro->prediccion, $registro->resultado);
+            $puntos = $this->getResultadoPrediccion($registro->prediccion, $registro->resultado, $registro->partido->puntos);
 
             $registro->puntos = $puntos;
 
@@ -239,8 +240,23 @@ class PrediccionService {
 
     }
 
-    public function getResultadoPrediccion($prediccion, $resultado)
+    public function getResultadoPrediccion($prediccion, $resultado, $puntos)
     {
+        $puntos_acerto_marcadores          = 5;
+        $puntos_acerto_ganador_un_marcador = 4;
+        $puntos_acerto_ganador             = 2;
+        $puntos_acerto_empate              = 2;
+        $puntos_acerto_marcador            = 1;
+        $puntos_default                    = 0;
+
+        if (isset($puntos) && !empty($puntos)) {
+            $puntos_acerto_marcadores          = $puntos->acerto_marcadores;
+            $puntos_acerto_ganador_un_marcador = $puntos->acerto_ganador_un_marcador;
+            $puntos_acerto_ganador             = $puntos->acerto_ganador;
+            $puntos_acerto_empate              = $puntos->acerto_empate;
+            $puntos_acerto_marcador            = $puntos->acerto_marcador;
+            $puntos_default                    = $puntos->default;
+        }
 
         $pred_e_uno = $prediccion?->goles_equipo_1;
         $pred_e_dos = $prediccion?->goles_equipo_2;
@@ -276,15 +292,17 @@ class PrediccionService {
 
         // Validaciones de predicción
 
-        if ($acerto_marcadores) return 5;
+        if ($acerto_marcadores) return $puntos_acerto_marcadores;
 
-        if ($acerto_equipo_ganador && $acerto_un_marcador) return 4; 
+        if ($acerto_equipo_ganador && $acerto_un_marcador) return $puntos_acerto_ganador_un_marcador;
 
-        if ($acerto_equipo_ganador || $predijo_empate) return 2;
+        if ($acerto_equipo_ganador) return $puntos_acerto_ganador;
 
-        if ($acerto_un_marcador) return 1;
+        if ($predijo_empate) return $puntos_acerto_empate;
 
-        return 0;
+        if ($acerto_un_marcador) return $puntos_acerto_marcador;
+
+        return $puntos_default;
     
     }
 
@@ -293,7 +311,7 @@ class PrediccionService {
         $predicciones = Preccion::where('user_id', $user_id)
             ->where('status', 0)
             ->whereHas('resultado')
-            ->with('resultado', 'user')
+            ->with('resultado', 'user', 'partido.puntos')
             ->get();
 
         if ($predicciones->isEmpty()) {
@@ -303,7 +321,7 @@ class PrediccionService {
         $usuario = $predicciones->first()->user;
 
         foreach ($predicciones as $prediccion) {
-            $puntos = $this->getResultadoPrediccion($prediccion, $prediccion->resultado);
+            $puntos = $this->getResultadoPrediccion($prediccion, $prediccion->resultado, $prediccion->partido->puntos);
 
             $usuario->puntos += $puntos;
 
@@ -314,37 +332,11 @@ class PrediccionService {
         $usuario->save();
     }
 
-    public function actualizarPuntosGlobal()
-    {
-        $predicciones = Preccion::where('status', 0)
-            ->whereHas('resultado')
-            ->with('resultado', 'user')
-            ->get()
-            ->groupBy('user_id');
-
-        foreach ($predicciones as $userId => $prediccionesUsuario) {
-            $usuario = $prediccionesUsuario->first()->user;
-
-            foreach ($prediccionesUsuario as $prediccion) {
-                $puntos = $this->getResultadoPrediccion($prediccion, $prediccion->resultado);
-                $usuario->puntos += $puntos;
-                $prediccion->status = 1;
-                $prediccion->save();
-            }
-
-            $usuario->save();
-        }
-    }
-
-    /**
-     * Versión optimizada de actualizarPuntosGlobal usando chunks.
-     * Diseñada para el comando artisan con grandes volúmenes de datos.
-     */
     public function actualizarPuntosGlobalChunked()
     {
         Preccion::where('status', 0)
             ->whereHas('resultado')
-            ->with('resultado', 'user')
+            ->with('resultado', 'user', 'partido.puntos')
             ->chunkById(500, function ($predicciones) {
                 $porUsuario = $predicciones->groupBy('user_id');
                 $prediccionIds = [];
@@ -354,7 +346,7 @@ class PrediccionService {
                     $puntosTotal = 0;
 
                     foreach ($prediccionesUsuario as $prediccion) {
-                        $puntosTotal += $this->getResultadoPrediccion($prediccion, $prediccion->resultado);
+                        $puntosTotal += $this->getResultadoPrediccion($prediccion, $prediccion->resultado, $prediccion->partido->puntos);
                         $prediccionIds[] = $prediccion->id;
                     }
 

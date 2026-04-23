@@ -4,6 +4,9 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasOne;
+use Illuminate\Database\Eloquent\Relations\HasOneThrough;
 
 class Preccion extends Model
 {
@@ -24,12 +27,12 @@ class Preccion extends Model
         return $this->belongsTo(User::class);
     }
 
-    public function partido()
+    public function partido(): BelongsTo
     {
         return $this->belongsTo(Partido::class);
     }
 
-    public function resultado()
+    public function resultado(): HasOne
     {
         return $this->hasOne(ResultadoPartido::class, 'partido_id', 'partido_id');
     }
