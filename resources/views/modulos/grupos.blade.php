@@ -68,7 +68,7 @@
                                     <img
                                         src="{{ $equipo->imagen }}"
                                         alt="{{ $equipo->nombre }}"
-                                        class="w-12 sm:w-18 lg:w-20 aspect-8/5 object-cover rounded-tr-xl rounded-bl-xl sm:rounded-tr-2xl sm:rounded-bl-2xl shrink-0"
+                                        class="w-12 sm:w-18 lg:w-20 aspect-8/5 object-cover rounded-tr-xl rounded-bl-xl sm:rounded-tr-2xl sm:rounded-bl-2xl shrink-0 @if($equipo->has_white_flag === true) border border-zinc-300 @endif"
                                     >
                                     <span class="uppercase whitespace-nowrap">{{ $equipo->nombre }}</span>
                                 </td>

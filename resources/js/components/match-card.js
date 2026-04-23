@@ -14,6 +14,8 @@ const formatHora = (fechaStr) => {
 
 export const renderMatchCard = (partido) => {
     const equipos = `${partido.equipoUno.nombre} ${partido.equipoDos.nombre}`.toLowerCase();
+    const borderTeamOne = partido.equipoUno.hasWhiteFlag ? 'border border-zinc-300' : '';
+    const borderTeamTwo = partido.equipoDos.hasWhiteFlag ? 'border border-zinc-300' : '';
 
     return `<div
         class="match-card flex flex-col sm:flex-row items-center justify-between gap-8 sm:gap-12 py-12 sm:py-6 px-2 sm:px-4 font-optimprov"
@@ -23,7 +25,7 @@ export const renderMatchCard = (partido) => {
             <img
                 src="${partido.equipoUno.imagen}"
                 alt="${partido.equipoUno.nombre}"
-                class="w-18 sm:w-12 md:w-20 aspect-8/5 object-cover rounded-tr-lg rounded-bl-lg sm:rounded-tr-xl sm:rounded-bl-xl shrink-0"
+                class="w-18 sm:w-12 md:w-20 aspect-8/5 object-cover rounded-tr-lg rounded-bl-lg sm:rounded-tr-xl sm:rounded-bl-xl shrink-0 ${borderTeamOne}"
             >
             <span class="text-base sm:text-sm md:text-base lg:text-lg uppercase">${partido.equipoUno.nombre}</span>
         </div>
@@ -38,7 +40,7 @@ export const renderMatchCard = (partido) => {
             <img
                 src="${partido.equipoDos.imagen}"
                 alt="${partido.equipoDos.nombre}"
-                class="w-18 sm:w-12 md:w-18 lg:w-20 aspect-8/5 object-cover rounded-tr-lg rounded-bl-lg sm:rounded-tr-xl sm:rounded-bl-xl shrink-0"
+                class="w-18 sm:w-12 md:w-18 lg:w-20 aspect-8/5 object-cover rounded-tr-lg rounded-bl-lg sm:rounded-tr-xl sm:rounded-bl-xl shrink-0 ${borderTeamTwo}"
             >
         </div>
     </div>`;

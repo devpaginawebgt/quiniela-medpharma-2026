@@ -124,13 +124,16 @@ document.addEventListener('DOMContentLoaded', () => {
         const pred1 = prediccion.prediccionEquipoUno ?? '-';
         const pred2 = prediccion.prediccionEquipoDos ?? '-';
 
+        const borderTeamOne = prediccion.equipoUno.hasWhiteFlag ? 'border border-zinc-300' : '';
+        const borderTeamTwo = prediccion.equipoDos.hasWhiteFlag ? 'border border-zinc-300' : '';
+
         return `
             <div class="border-b border-zinc-200 py-5 px-2 sm:px-4 ">
                 <div class="flex flex-col md:flex-row items-center md:justify-between w-full gap-3 md:gap-4 lg:gap-8 font-optimprov">
                     <!-- Equipo 1 + marcador -->
                     <div class="flex items-center justify-between w-full md:w-auto md:flex-1 md:min-w-0 gap-3">
                         <div class="flex items-center gap-3">
-                            <img src="${prediccion.equipoUno.imagen}" alt="${prediccion.equipoUno.nombre}" class="w-12 md:w-14 lg:w-20 aspect-8/5 object-cover rounded-tr-lg rounded-bl-lg shrink-0">
+                            <img src="${prediccion.equipoUno.imagen}" alt="${prediccion.equipoUno.nombre}" class="w-12 md:w-14 lg:w-20 aspect-8/5 object-cover rounded-tr-lg rounded-bl-lg md:rounded-tr-xl md:rounded-bl-xl shrink-0 ${borderTeamOne}">
                             <span class="text-sm lg:text-lg uppercase">${prediccion.equipoUno.nombre}</span>
                         </div>
                         <span class="text-xl lg:text-3xl font-bold shrink-0">${pred1}</span>
@@ -144,7 +147,7 @@ document.addEventListener('DOMContentLoaded', () => {
                         <span class="text-xl lg:text-3xl font-bold shrink-0">${pred2}</span>
                         <div class="flex items-center flex-row-reverse md:flex-row gap-3">
                             <span class="text-sm lg:text-lg uppercase text-start md:text-end">${prediccion.equipoDos.nombre}</span>
-                            <img src="${prediccion.equipoDos.imagen}" alt="${prediccion.equipoDos.nombre}" class="w-12 md:w-14 lg:w-20 aspect-8/5 object-cover rounded-tr-lg rounded-bl-lg shrink-0">
+                            <img src="${prediccion.equipoDos.imagen}" alt="${prediccion.equipoDos.nombre}" class="w-12 md:w-14 lg:w-20 aspect-8/5 object-cover rounded-tr-lg rounded-bl-lg md:rounded-tr-xl md:rounded-bl-xl shrink-0 ${borderTeamTwo}">
                         </div>
                     </div>
                 </div>

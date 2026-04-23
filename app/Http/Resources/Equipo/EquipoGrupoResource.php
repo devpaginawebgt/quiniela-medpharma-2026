@@ -27,6 +27,7 @@ class EquipoGrupoResource extends JsonResource
             'gc' => $this->goles_contra,
             'dg' => $this->goles_favor - $this->goles_contra,
             'pts' => $this->puntos,
+            'hasWhiteFlag' => $this->has_white_flag,
         ];
     }
 }

@@ -43,8 +43,8 @@ class PartidoService {
                 })
                 ->with([
                     'partido:id,fase,jornada_id,fecha_partido,jugado,estado',
-                    'equipoUno:id,nombre,imagen,grupo',
-                    'equipoDos:id,nombre,imagen,grupo'
+                    'equipoUno:id,nombre,imagen,grupo,has_white_flag',
+                    'equipoDos:id,nombre,imagen,grupo,has_white_flag'
                 ])
                 ->get()
                 ->sortBy(fn($equipoPartido) => $equipoPartido->partido->fecha_partido->timestamp)

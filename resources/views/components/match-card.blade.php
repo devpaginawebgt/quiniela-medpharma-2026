@@ -20,7 +20,7 @@
         <img
             src="{{ asset($equipoUno['imagen']) }}"
             alt="{{ $equipoUno['nombre'] }}"
-            class="w-18 sm:w-12 md:w-20 aspect-8/5 object-cover rounded-tr-lg rounded-bl-lg sm:rounded-tr-xl sm:rounded-bl-xl shrink-0"
+            class="w-18 sm:w-12 md:w-20 aspect-8/5 object-cover rounded-tr-lg rounded-bl-lg sm:rounded-tr-xl sm:rounded-bl-xl shrink-0 @if($equipoUno['has_white_flag'] === true) border border-zinc-300 @endif"
         >
         <span class="text-base sm:text-sm md:text-base lg:text-lg uppercase">{{ $equipoUno['nombre'] }}</span>
     </div>
@@ -37,7 +37,7 @@
         <img
             src="{{ asset($equipoDos['imagen']) }}"
             alt="{{ $equipoDos['nombre'] }}"
-            class="w-18 sm:w-12 md:w-18 lg:w-20 aspect-8/5 object-cover rounded-tr-lg rounded-bl-lg sm:rounded-tr-xl sm:rounded-bl-xl shrink-0"
+            class="w-18 sm:w-12 md:w-18 lg:w-20 aspect-8/5 object-cover rounded-tr-lg rounded-bl-lg sm:rounded-tr-xl sm:rounded-bl-xl shrink-0 @if($equipoDos['has_white_flag'] === true) border border-zinc-300 @endif"
         >
     </div>
 </div>

@@ -19,6 +19,7 @@ class EquipoPartidoResource extends JsonResource
             'id' => $this->id,
             'nombre' => $this->nombre,
             'imagen' => HelperService::ImagePath($this->imagen),
+            'hasWhiteFlag' => $this->has_white_flag,
         ];
     }
 }

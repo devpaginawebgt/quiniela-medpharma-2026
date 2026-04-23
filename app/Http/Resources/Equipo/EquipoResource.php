@@ -20,6 +20,7 @@ class EquipoResource extends JsonResource
             'nombre' => $this->nombre,
             'imagen' => HelperService::ImagePath($this->imagen),
             'descripcion' => $this->descripcion,
+            'hasWhiteFlag' => $this->has_white_flag,
         ];
     }
 }

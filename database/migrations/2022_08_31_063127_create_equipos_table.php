@@ -27,6 +27,7 @@ class CreateEquiposTable extends Migration
             $table->integer('partidos_perdidos')->default(0);
             $table->integer('partidos_empatados')->default(0);
             $table->integer('puntos')->default(0);
+            $table->boolean('has_white_flag')->default(true);
             $table->timestamps();
 
             $table->foreign('grupo')

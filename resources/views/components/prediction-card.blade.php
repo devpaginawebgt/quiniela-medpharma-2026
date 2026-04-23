@@ -39,7 +39,7 @@
                 <img
                     src="{{ asset($equipoUno->imagen) }}"
                     alt="{{ $equipoUno->nombre }}"
-                    class="w-12 md:w-14 lg:w-20 aspect-8/5 object-cover rounded-tr-lg rounded-bl-lg md:rounded-tr-xl md:rounded-bl-xl shrink-0"
+                    class="w-12 md:w-14 lg:w-20 aspect-8/5 object-cover rounded-tr-lg rounded-bl-lg md:rounded-tr-xl md:rounded-bl-xl shrink-0 @if($equipoUno->has_white_flag === true) border border-zinc-300 @endif"
                 >
                 <span class="text-sm lg:text-lg uppercase">{{ $equipoUno->nombre }}</span>
             </div>
@@ -83,7 +83,7 @@
                 <img
                     src="{{ asset($equipoDos->imagen) }}"
                     alt="{{ $equipoDos->nombre }}"
-                    class="w-12 md:w-14 lg:w-20 aspect-8/5 object-cover rounded-tr-lg rounded-bl-lg md:rounded-tr-xl md:rounded-bl-xl shrink-0"
+                    class="w-12 md:w-14 lg:w-20 aspect-8/5 object-cover rounded-tr-lg rounded-bl-lg md:rounded-tr-xl md:rounded-bl-xl shrink-0 @if($equipoDos->has_white_flag === true) border border-zinc-300 @endif"
                 >
             </div>
         </div>

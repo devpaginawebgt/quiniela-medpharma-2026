@@ -22,8 +22,8 @@ class PrediccionService {
             })
             ->with([
                 'partido:id,fase,jornada_id,fecha_partido,jugado,estado',
-                'equipoUno:id,nombre,imagen,grupo',
-                'equipoDos:id,nombre,imagen,grupo',
+                'equipoUno:id,nombre,imagen,grupo,has_white_flag',
+                'equipoDos:id,nombre,imagen,grupo,has_white_flag',
                 'prediccion' => function ($query) use ($user_id) {
                     $query->where('user_id', $user_id)
                         ->select('id','partido_id','goles_equipo_1','goles_equipo_2');
@@ -48,8 +48,8 @@ class PrediccionService {
             })
             ->with([
                 'partido:id,fase,jornada_id,fecha_partido,jugado,estado',
-                'equipoUno:id,nombre,imagen,grupo',
-                'equipoDos:id,nombre,imagen,grupo',
+                'equipoUno:id,nombre,imagen,grupo,has_white_flag',
+                'equipoDos:id,nombre,imagen,grupo,has_white_flag',
                 'resultado:id,partido_id,goles_equipo_1,goles_equipo_2',
                 'prediccion' => function ($query) use ($user) {
                     $query->where('user_id', $user->id)

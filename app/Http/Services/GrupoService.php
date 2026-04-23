@@ -31,6 +31,7 @@ class GrupoService {
             'partidos_ganados', 
             'partidos_perdidos', 
             'partidos_empatados', 
+            'has_white_flag',
             'puntos'
         ])
             ->where('grupo', $grupo)
