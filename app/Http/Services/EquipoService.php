@@ -9,7 +9,7 @@ class EquipoService {
 
     public function getEquipos()
     {
-        return Equipo::select('id', 'nombre', 'imagen', 'descripcion')
+        return Equipo::select('id', 'nombre', 'imagen', 'descripcion', 'has_white_flag')
             ->orderBy('nombre', 'asc')
             ->get();
     }

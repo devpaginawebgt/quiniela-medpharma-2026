@@ -31,12 +31,21 @@ export const initTeamModal = () => {
         }, { once: true });
     };
 
+    const whiteFlagClasses = ['border-2', 'border-zinc-300'];
+
     document.querySelectorAll('.team-card').forEach(card => {
         card.addEventListener('click', () => {
             modalNombre.textContent = card.dataset.nombre;
             modalImg.src            = card.dataset.imagen;
             modalImg.alt            = card.dataset.nombre;
             modalDesc.textContent   = card.querySelector('.team-card-descripcion').textContent.trim();
+
+            if (card.dataset.hasWhiteFlag === 'true') {
+                modalImg.classList.add(...whiteFlagClasses);
+            } else {
+                modalImg.classList.remove(...whiteFlagClasses);
+            }
+
             openModal();
         });
     });

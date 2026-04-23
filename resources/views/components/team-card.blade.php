@@ -6,6 +6,7 @@
         hover:-translate-y-1 transition-translate duration-200"
     data-nombre="{{ $equipo->nombre }}"
     data-imagen="{{ asset($equipo->imagen) }}"
+    data-has-white-flag="{{ $equipo->has_white_flag ? 'true' : 'false' }}"
     data-popover-target="popover-{{ $equipo->id }}"
     data-popover-trigger="hover"
     data-popover-placement="top"
