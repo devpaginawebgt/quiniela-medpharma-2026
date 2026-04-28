@@ -7,9 +7,9 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\Auth\RegisterRequest;
 use App\Http\Services\CodigoService;
 use App\Http\Services\CountryService;
+use App\Http\Services\UserService;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
-use Illuminate\Support\Facades\Http;
 use Illuminate\Auth\Events\Registered;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Http\Request;
@@ -18,30 +18,14 @@ use Illuminate\Validation\ValidationException;
 class RegisteredUserController extends Controller
 {
     public function __construct(
-        private readonly CountryService $countryService,
+        private readonly UserService $userService,
         private readonly CodigoService $codigoService,
+        private readonly CountryService $countryService,
     ) {}
 
     public function create(Request $request)
     {
-        $ip = $request->ip();
-
-        $country_code = 'GT';
-
-        try {
-            $response = Http::timeout(3)->get("http://api.ipinfo.io/lite/{$ip}", [
-                'token' => config('services.geolocation.key'),
-            ]);
-
-            if ($response->ok() && !empty($response->json('country_code'))) {
-                $country_code = $response->json('country_code');
-            }
-        } catch (\Exception $e) {
-            // fallback silencioso
-        }
-
-        $country = $this->countryService->getCountryByCode($country_code)
-            ?? $this->countryService->getCountryByCode('GT');
+        $country = $this->userService->getGuestCountry();
 
         return view('modulos.register', compact('country'));
     }
