@@ -15,9 +15,9 @@
         {{-- Full screen background --}}
         <div class="relative min-h-screen w-full">
             {{-- Background: main-bg hasta lg, bg-main-web desde lg --}}
-            <div class="absolute inset-0 bg-cover bg-center lg:hidden"
+            <div class="absolute inset-0 bg-cover bg-top-center lg:hidden"
                  style="background-image: url({{ asset('images/portadas/banner-auth-sm.jpg') }});"></div>
-            <div class="absolute inset-0 bg-cover bg-right hidden lg:block"
+            <div class="absolute inset-0 bg-cover bg-top-right hidden lg:block"
                  style="background-image: url({{ asset('images/portadas/banner-auth.jpg') }});"></div>
             {{-- Overlay oscuro --}}
             <div class="absolute inset-0 bg-black/0"></div>
@@ -55,6 +55,8 @@
 
                     {{-- Toast Errors --}}
                     <x-toast-errors :errors="$errors" />
+
+                    <h1 class="text-3xl lg:hidden text-dark text-center mb-6 font-brandan uppercase">Inicia sesión</h1>
 
                     {{-- Login Form --}}
                     <form

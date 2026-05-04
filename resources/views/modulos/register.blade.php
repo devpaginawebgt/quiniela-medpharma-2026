@@ -15,9 +15,9 @@
         {{-- Full screen background --}}
         <div class="relative min-h-screen w-full">
             {{-- Background --}}
-            <div class="absolute inset-0 bg-cover bg-center lg:hidden"
+            <div class="absolute inset-0 bg-cover bg-top-center lg:hidden"
                  style="background-image: url({{ asset('images/portadas/banner-auth-sm.jpg') }});"></div>
-            <div class="absolute inset-0 bg-cover bg-right hidden lg:block"
+            <div class="absolute inset-0 bg-cover bg-top-right hidden lg:block"
                  style="background-image: url({{ asset('images/portadas/banner-auth.jpg') }});"></div>
             {{-- Overlay --}}
             <div class="absolute inset-0 bg-black/0"></div>
@@ -41,16 +41,16 @@
                         {{-- Logo --}}
                         <div class="mb-4">
                             <img
-                                src="/images/logos/medpharma-logo.jpg"
-                                class="w-full max-w-82 mx-auto"
+                                src="/images/logos/logo-quiniela.png"
+                                class="w-full max-w-92 mx-auto"
                                 alt="{{ config('app.name', 'Quiniela') }}"
                             >
                         </div>
 
-                        <div class="hidden lg:flex flex-col items-center justify-center text-dark font-brandan uppercase -mt-2 mb-12">
-                        <span class="text-8xl text-[#9cc600]">Quiniela</span>
-                        <span class="text-6xl text-[#004c3f]">mundialista</span>
-                    </div>
+                        {{-- <div class="hidden lg:flex flex-col items-center justify-center text-dark font-brandan uppercase -mt-2 mb-12">
+                            <span class="text-8xl text-[#9cc600]">Quiniela</span>
+                            <span class="text-6xl text-[#004c3f]">mundialista</span>
+                        </div> --}}
     
                         {{-- Title --}}
                         <h1 class="text-2xl text-center font-bold text-complementary-dark mb-4">Crear cuenta</h1>
