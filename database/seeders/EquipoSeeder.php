@@ -90,7 +90,7 @@ class EquipoSeeder extends Seeder
             [
                 'nombre' => 'Suiza',
                 'codigo_iso' => 'CH',
-                'imagen' => '/images/selecciones/ch.jpg',
+                'imagen' => '/images/selecciones/ch.png',
                 'descripcion' => 'La selección nacional de fútbol de Suiza es una de las más constantes de Europa en torneos internacionales. Ha participado en múltiples Copas del Mundo, alcanzando los cuartos de final en 1934, 1938 y 1954. En la Eurocopa ha logrado destacadas actuaciones recientes, incluyendo los cuartos de final en 2020. Es reconocida por su organización táctica, solidez defensiva y equilibrio colectivo. A lo largo de su historia ha contado con jugadores destacados como Xherdan Shaqiri, Granit Xhaka y Stéphane Chapuisat.',
                 'grupo' => 2,
                 'created_at' => (Carbon::now())->toDateTimeString(),
