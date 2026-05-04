@@ -9,6 +9,7 @@ use App\Http\Controllers\ResultadoPartidoController;
 use App\Http\Controllers\EquipoController;
 use App\Http\Controllers\GrupoController;
 use App\Http\Controllers\JornadaController;
+use App\Http\Controllers\ReportsController;
 use App\Http\Controllers\UserController;
 
 /*
@@ -59,7 +60,26 @@ Route::middleware(['auth'])->as('web.')->group(function() {
 
     Route::controller(PremioController::class)->group(function() {
         Route::get('/tabla-de-premios', 'recompensas')->name('tabla-de-premios');
-    });    
+    });
+
+        // Rutas solo para admins
+    Route::middleware('role:admin')->prefix('admin')->as('admin.')->group(function () {
+
+        Route::controller(ReportsController::class)->as('reports.')->group(function () {
+            Route::controller(ReportsController::class)->prefix('users')->as('users.')->group(function () {
+                Route::get('/', 'report')->name('index');
+                Route::get('/data', 'data')->name('data');
+                Route::get('/export', 'export')->name('export');
+            });
+
+            Route::controller(ReportsController::class)->prefix('predictions')->as('predictions.')->group(function () {
+                Route::get('/', 'predictionsReport')->name('index');
+                Route::get('/data', 'predictionsData')->name('data');
+                Route::get('/export', 'predictionsExport')->name('export');
+            });
+        });
+
+    });
 
     Route::get('/', function () {
         return redirect()->route('web.inicio');
@@ -89,7 +109,5 @@ Route::middleware(['auth'])->as('web.')->group(function() {
 // Embed (público, sin auth — para Flutter WebView)
 
 Route::post('/codigo', [CodigoController::class, 'isValid'])->name('web.code');
-
-Route::get('/embed/bracket', fn() => view('embed.bracket'))->name('embed.bracket');
 
 require __DIR__.'/auth.php';

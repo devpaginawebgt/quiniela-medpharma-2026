@@ -126,5 +126,8 @@ class UserSeeder extends Seeder
         
         DB::table('users')->insert($users);
         // User::factory()->count(600)->create();
+
+        User::whereIn('id', [1, 2])->each(fn (User $user) => $user->assignRole('admin'));
+        User::whereIn('id', [3, 4, 5, 6, 7])->each(fn (User $user) => $user->assignRole('participant'));
     }
 }

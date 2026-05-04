@@ -3,6 +3,7 @@ import './views/equipos.js';
 import './views/grupos.js';
 import './views/proximos-partidos.js';
 import './views/mis-predicciones.js';
+import './views/admin-report.js';
 
 // // Helpers
 

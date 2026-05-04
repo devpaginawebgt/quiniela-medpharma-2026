@@ -33,6 +33,16 @@ class Partido extends Model
         return $this->hasOne(PartidoPuntos::class, 'partido_id');
     }
 
+    public function jornada(): BelongsTo
+    {
+        return $this->belongsTo(Jornada::class, 'jornada_id');
+    }
+
+    public function equipos(): HasOne
+    {
+        return $this->hasOne(EquipoPartido::class, 'partido_id');
+    }
+
     // public function brand(): BelongsTo
     // {
     //     return $this->belongsTo(Brand::class, 'brand_id');

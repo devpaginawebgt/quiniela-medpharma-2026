@@ -66,6 +66,7 @@
                         </p>
                     @else
                         @php
+                            $user = auth()->user();
                             $timezone = auth()->user()->country->timezone ?? 'America/Guatemala';
                             $grupos_por_fecha = $records
                                 ->sortBy(fn($registro) => $registro->partido->fecha_partido->timestamp)
@@ -89,16 +90,18 @@
                         @endforeach
                     @endif
 
-                    {{-- Botón sticky inferior derecha --}}
-                    <div class="sticky bottom-4 z-50 flex justify-center pointer-events-none">
-                        <button
-                            type="submit"
-                            class="pointer-events-auto cursor-pointer focus:outline-none hover:brightness-[1.2] focus:ring-4 focus:ring-primary rounded-full shadow-lg shadow-dark bg-green-700 text-light text-md lg:text-xl py-3 px-6 font-semibold gap-2 flex justify-center items-center mr-4"
-                        >
-                            <span class="icon-[fluent--edit-16-filled] w-6 h-6"></span>
-                            Pronosticar
-                        </button>
-                    </div>
+                    @if (!$user->hasRole('admin'))
+                        {{-- Botón sticky inferior derecha --}}
+                        <div class="sticky bottom-4 z-50 flex justify-center pointer-events-none">
+                            <button
+                                type="submit"
+                                class="pointer-events-auto cursor-pointer focus:outline-none hover:brightness-[1.2] focus:ring-4 focus:ring-primary rounded-full shadow-lg shadow-dark bg-green-700 text-light text-md lg:text-xl py-3 px-6 font-semibold gap-2 flex justify-center items-center mr-4"
+                            >
+                                <span class="icon-[fluent--edit-16-filled] w-6 h-6"></span>
+                                Pronosticar
+                            </button>
+                        </div>
+                    @endif
                 </form>
             </div>
         </div>

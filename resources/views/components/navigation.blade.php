@@ -82,6 +82,14 @@
             </button>
             <div id="user-dropdown" class="z-50 hidden bg-white rounded-lg shadow-lg border border-gray-200 w-44 transition-opacity! duration-150!">
                 <ul class="py-1">
+                    @if ($user->hasRole('admin'))
+                        <li>
+                            <a href="{{ route('web.admin.reports.users.index') }}" class="w-full flex items-center gap-2 px-4 py-2 text-sm text-dark hover:bg-gray-100">
+                                <span class="icon-[fluent--person-shield-16-filled] w-5 h-5"></span>
+                                Admin
+                            </a>
+                        </li>
+                    @endif
                     <li>
                         <form method="POST" action="{{ route('web.logout') }}">
                             @csrf
@@ -118,6 +126,12 @@
                 {{ $link['label'] }}
             </a>
         @endforeach
+            @if ($user->hasRole('admin'))
+                <a href="{{ route('web.admin.reports.users.index') }}" class="w-full flex items-center gap-2 px-4 py-2 text-sm text-dark hover:bg-gray-100">
+                    <span class="icon-[fluent--person-shield-16-filled] w-5 h-5"></span>
+                    Admin
+                </a>
+            @endif
             <form method="POST" action="{{ route('web.logout') }}" class="w-full">
                 @csrf
                 <button type="submit" class="w-full flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium transition-colors duration-150 hover:bg-gray-100">
