@@ -87,12 +87,6 @@ Route::middleware(['auth'])->as('web.')->group(function() {
 
 });
 
-// Route::controller(JornadaController::class)->group(function() {
-    //     Route::get('calendario', 'calendarioWeb')->name('calendario');
-    //     Route::post('/partidos-grupo', 'partidosGrupo');
-    //     Route::get('/partidos-jornada/{jornada}', 'partidosJornada');
-    // });
-
 // Route::middleware(['guest'])->group(function() {
 
 //     // Participantes inscritos
@@ -103,11 +97,8 @@ Route::middleware(['auth'])->as('web.')->group(function() {
 
 // });
 
-// Los metodos post se cambiaron a put porque el servidor donde se alojara la aplicacion no permite post
-
-
-// Embed (público, sin auth — para Flutter WebView)
-
-Route::post('/codigo', [CodigoController::class, 'isValid'])->name('web.code');
+Route::middleware('guest')->group(function () {
+    Route::post('/codigo', [CodigoController::class, 'isValid'])->name('web.code');
+});
 
 require __DIR__.'/auth.php';
