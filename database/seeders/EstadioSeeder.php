@@ -17,13 +17,13 @@ class EstadioSeeder extends Seeder
     {
         $estadios = [
             [
-                'nombre' => 'Toronto – BMO Field',
+                'nombre' => 'BMO Field - Toronto',
                 'descripcion' => 'Es el primer estadio construido específicamente para fútbol en Canadá, ubicado en el histórico Exhibition Place de Toronto. Hogar del Toronto FC, cuenta con una capacidad regular de 30,000 espectadores, pero será ampliado temporalmente a más de 45,000 asientos para albergar múltiples encuentros de la Copa Mundial de la FIFA 2026. Reconocido por su ambiente vibrante a orillas del lago Ontario, este recinto combina una profunda pasión futbolera con instalaciones modernas y de primer nivel.',
                 'imagen' => '/images/estadios/bmo_field.jpg',
                 'created_at' => (Carbon::now())->toDateTimeString()
             ],
             [
-                'nombre' => 'Vancouver – Estadio BC Place',
+                'nombre' => 'Estadio BC Place - Vancouver',
                 'descripcion' => 'Estadio icónico ubicado en el corazón de Vancouver, famoso por su espectacular techo retráctil sostenido por cables, considerado uno de los más grandes del mundo. Con una capacidad para más de 54,000 espectadores, es un recinto multipropósito de primer nivel. Histórico por albergar los Juegos Olímpicos de 2010 y la final del Mundial Femenino de 2015, el BC Place será uno de los escenarios más imponentes de Canadá para el Mundial 2026, destacando por su tecnología de vanguardia y su pantalla central suspendida.',
                 'imagen' => '/images/estadios/bc_place.jpg',
                 'created_at' => (Carbon::now())->toDateTimeString()
