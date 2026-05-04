@@ -5,7 +5,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="csrf-token" content="{{ csrf_token() }}">
 
-        <title>{{ config('app.name', 'Quiniela') }} - Iniciar Sesión</title>
+        <title>{{ config('app.name', 'Quiniela') }} - Recuperar contraseña</title>
 
         <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&display=swap">
 
@@ -50,19 +50,25 @@
                         <span class="text-6xl text-[#004c3f]">mundialista</span>
                     </div>
 
-                    {{-- Session Status --}}
-                    <x-auth-session-status class="mb-4" :status="session('status')" />
-
                     {{-- Toast Errors --}}
                     <x-toast-errors :errors="$errors" />
 
-                    <h1 class="text-3xl lg:hidden text-dark text-center mb-6 font-brandan uppercase">Inicia sesión</h1>
+                    <h1 class="text-3xl text-dark text-center mb-4 font-brandan uppercase">
+                        Recuperar Contraseña
+                    </h1>
 
-                    {{-- Login Form --}}
+                    {{-- Session Status --}}
+                    <x-auth-session-status class="mb-4" :status="session('status')" />
+
+                    <p class="text-complementary-dark text-center mb-6 max-w-108 mx-auto">
+                        Ingresa tu correo electrónico y te enviaremos un enlace para restablecer tu contraseña.
+                    </p>
+
+                    {{-- Forgot Form --}}
                     <form
                         method="POST"
-                        action="{{ route('login') }}"
-                        class="formulario-auth w-full max-w-108 lg:max-w-108 mx-auto"
+                        action="{{ route('password.email') }}"
+                        class="formulario-auth w-full max-w-108 mx-auto"
                     >
                         @csrf
 
@@ -77,43 +83,24 @@
                             />
                         </div>
 
-                        <div class="mb-2">
-                            <x-auth-password-input
-                                id="login-password"
-                                name="password"
-                                icon="icon-[fluent--password-32-filled]"
-                                placeholder="Contraseña"
-                                minlength="4"
-                                maxlength="50"
-                                required
-                            />
-                        </div>
-
                         <button
                             type="submit"
                             class="w-full bg-comp bg-secondary text-light font-bold rounded-lg px-6 py-3 hover:brightness-110 focus:ring-4 focus:ring-secondary/50 flex items-center justify-center gap-2"
                         >
-                            <span class="icon-[fluent--arrow-enter-16-filled] w-5 h-5"></span>
-                            Ingresar
+                            Enviar enlace
+                            <span class="icon-[fluent--arrow-right-16-filled] w-5 h-5"></span>    
                         </button>
                     </form>
 
-                    <div class="flex justify-center mt-6 mb-4">
-                        <a href="{{ route('password.request') }}" class="text-sm text-secondary font-bold hover:text-dark">
-                            ¿Olvidaste tu contraseña?
-                        </a>
-                    </div>
-
-                    {{-- Register link --}}
-                    <p class="text-center text-sm">
-                        <span class="text-complementary-dark mb-2">¿No tienes cuenta?</span>
-                        <a href="{{ route('register') }}" class="text-secondary font-bold hover:text-dark">
-                            Regístrate
+                    {{-- Back to login --}}
+                    <p class="text-center mt-8 text-sm">
+                        <a href="{{ route('ingresa') }}" class="text-secondary font-bold hover:text-dark inline-flex items-center gap-1">
+                            <span class="icon-[fluent--arrow-left-24-filled] w-4 h-4"></span>
+                            Volver al inicio de sesión
                         </a>
                     </p>
                 </div>
             </div>
-        </div>
         </div>
     </body>
 </html>
