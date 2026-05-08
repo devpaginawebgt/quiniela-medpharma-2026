@@ -15,6 +15,7 @@ class Equipo extends Model
         'codigo_iso',
         'descripcion',
         'grupo',
+        'api_team_id',
         'goles_favor',
         'goles_contra',
         'partidos_jugados',
@@ -32,5 +33,15 @@ class Equipo extends Model
     public function partidos($jornada)
     {
         return $this->belongsToMany(Partido::class,'equipo_partidos');
+    }
+
+    public function apiTeam()
+    {
+        return $this->belongsTo(ApiTeam::class, 'api_team_id', 'api_team_id');
+    }
+
+    public function players()
+    {
+        return $this->hasMany(ApiPlayer::class, 'api_team_id', 'api_team_id');
     }
 }

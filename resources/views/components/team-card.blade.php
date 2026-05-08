@@ -4,6 +4,7 @@
     class="team-card bg-light border-4 lg:border-6 border-light cursor-pointer
         rounded-tr-xl rounded-bl-xl lg:rounded-tr-3xl lg:rounded-bl-3xl
         hover:-translate-y-1 transition-translate duration-200"
+    data-equipo-id="{{ $equipo->id }}"
     data-nombre="{{ $equipo->nombre }}"
     data-imagen="{{ asset($equipo->imagen) }}"
     data-has-white-flag="{{ $equipo->has_white_flag ? 'true' : 'false' }}"

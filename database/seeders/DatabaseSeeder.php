@@ -19,6 +19,9 @@ class DatabaseSeeder extends Seeder
             RolePermissionSeeder::class,
             UserSeeder::class,
             BannerSeeder::class,
+
+            ApiTeamSeeder::class,
+
             GrupoSeeder::class,
             EquipoSeeder::class,
             EstadioSeeder::class,

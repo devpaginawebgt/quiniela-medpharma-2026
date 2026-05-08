@@ -34,6 +34,24 @@
             <div class="p-6 flex flex-col gap-3">
                 <h3 id="modal-equipo-nombre" class="font-optimprov text-xl uppercase text-center"></h3>
                 <p id="modal-equipo-descripcion" class="text-complementary-dark text-sm lg:text-base leading-relaxed text-justify"></p>
+
+                {{-- Plantilla / Jugadores --}}
+                <div class="mt-2">
+                    <h4 class="font-optimprov text-base uppercase text-dark mb-3">Plantilla</h4>
+
+                    {{-- Loading --}}
+                    <div id="modal-equipo-players-loading" class="hidden items-center justify-center py-4">
+                        <span class="icon-[fluent--spinner-ios-20-filled] w-6 h-6 animate-spin text-primary"></span>
+                    </div>
+
+                    {{-- Empty state --}}
+                    <p id="modal-equipo-players-empty" class="hidden text-sm text-complementary-dark text-center py-4">
+                        No hay jugadores registrados.
+                    </p>
+
+                    {{-- Accordion --}}
+                    <div id="modal-equipo-players-accordion" data-accordion="collapse" class="hidden"></div>
+                </div>
             </div>
         </div>
 

@@ -7,6 +7,7 @@ use App\Http\Services\EquipoService;
 use App\Http\Services\ModuleService;
 use App\Http\Services\PartidoService;
 use App\Http\Services\UserService;
+use App\Models\Equipo;
 use Illuminate\Support\Facades\Auth;
 use App\Traits\ApiResponse;
 use Illuminate\Http\Request;
@@ -46,6 +47,14 @@ class EquipoController extends Controller
             'equipos' => $equipos
         ]);
 
+    }
+
+    public function players(Equipo $equipo)
+    {
+        return response()->json([
+            'equipo'  => ['id' => $equipo->id, 'nombre' => $equipo->nombre],
+            'grupos'  => $this->equipoService->getPlayersByPosition($equipo),
+        ]);
     }
 
     // Respuestas de API

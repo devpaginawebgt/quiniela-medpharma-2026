@@ -34,6 +34,7 @@ Route::middleware(['auth'])->as('web.')->group(function() {
 
     Route::controller(EquipoController::class)->group(function() {
         Route::get('selecciones', 'equiposWeb')->name('selecciones');
+        Route::get('selecciones/{equipo}/players', 'players')->name('selecciones.players');
     });
 
     Route::controller(GrupoController::class)->prefix('grupos')->group(function() {            

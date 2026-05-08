@@ -20,6 +20,7 @@ class CreateEquiposTable extends Migration
             $table->string('imagen');
             $table->text('descripcion')->nullable();
             $table->unsignedBigInteger('grupo');
+            $table->unsignedBigInteger('api_team_id')->nullable();
             $table->integer('goles_favor')->default(0);
             $table->integer('goles_contra')->default(0);
             $table->integer('partidos_jugados')->default(0);
@@ -35,6 +36,12 @@ class CreateEquiposTable extends Migration
                 ->on('grupos')
                 ->onUpdate('cascade')
                 ->onDelete('restrict');
+
+            $table->foreign('api_team_id')
+                ->references('api_team_id')
+                ->on('api_teams')
+                ->onUpdate('cascade')
+                ->onDelete('set null');
         });
     }
 
