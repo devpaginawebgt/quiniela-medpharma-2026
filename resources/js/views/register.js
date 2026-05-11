@@ -64,4 +64,15 @@ document.addEventListener('DOMContentLoaded', () => {
     if (codeInput && countryInput) {
         codeInput.addEventListener('focusout', validateCode)
     }
+
+    const form = document.getElementById('register-form');
+    const submitButton = document.getElementById('register-submit');
+
+    if (form && submitButton) {
+        form.addEventListener('submit', () => {
+            submitButton.disabled = true;
+            submitButton.querySelector('[data-submit-icon]').className = 'icon-[fluent--spinner-ios-16-filled] w-5 h-5 animate-spin';
+            submitButton.querySelector('[data-submit-label]').textContent = 'Registrando...';
+        });
+    }
 });

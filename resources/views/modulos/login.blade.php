@@ -60,6 +60,7 @@
 
                     {{-- Login Form --}}
                     <form
+                        id="login-form"
                         method="POST"
                         action="{{ route('login') }}"
                         class="formulario-auth w-full max-w-108 lg:max-w-108 mx-auto"
@@ -90,13 +91,27 @@
                         </div>
 
                         <button
+                            id="login-submit"
                             type="submit"
-                            class="w-full bg-comp bg-secondary text-light font-bold rounded-lg px-6 py-3 hover:brightness-110 focus:ring-4 focus:ring-secondary/50 flex items-center justify-center gap-2"
+                            class="w-full bg-comp bg-secondary text-light font-bold rounded-lg px-6 py-3 hover:brightness-110 focus:ring-4 focus:ring-secondary/50 flex items-center justify-center gap-2 disabled:opacity-60 disabled:cursor-not-allowed disabled:hover:brightness-100"
                         >
-                            <span class="icon-[fluent--arrow-enter-16-filled] w-5 h-5"></span>
-                            Ingresar
+                            <span data-submit-icon class="icon-[fluent--arrow-enter-16-filled] w-5 h-5"></span>
+                            <span data-submit-label>Ingresar</span>
                         </button>
                     </form>
+
+                    <script>
+                        (() => {
+                            const form = document.getElementById('login-form');
+                            const button = document.getElementById('login-submit');
+
+                            form.addEventListener('submit', () => {
+                                button.disabled = true;
+                                button.querySelector('[data-submit-icon]').className = 'icon-[fluent--spinner-ios-16-filled] w-5 h-5 animate-spin';
+                                button.querySelector('[data-submit-label]').textContent = 'Ingresando...';
+                            });
+                        })();
+                    </script>
 
                     <div class="flex justify-center mt-6 mb-4">
                         <a href="{{ route('password.request') }}" class="text-sm text-secondary font-bold hover:text-dark">

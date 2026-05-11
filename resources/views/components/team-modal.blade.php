@@ -41,7 +41,7 @@
 
                     {{-- Loading --}}
                     <div id="modal-equipo-players-loading" class="hidden items-center justify-center py-4">
-                        <span class="icon-[fluent--spinner-ios-20-filled] w-6 h-6 animate-spin text-primary"></span>
+                        <span class="icon-[fluent--spinner-ios-20-filled] w-6 h-6 custom-animate-spin text-primary"></span>
                     </div>
 
                     {{-- Empty state --}}

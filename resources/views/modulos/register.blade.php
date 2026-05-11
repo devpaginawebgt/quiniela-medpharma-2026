@@ -60,6 +60,7 @@
     
                         {{-- Register Form --}}
                         <form
+                            id="register-form"
                             method="POST"
                             action="{{ route('register') }}"
                             class="w-full max-w-108 mx-auto space-y-3"
@@ -188,11 +189,12 @@
                             {{-- Actions --}}
                             <div class="w-full flex items-center justify-between gap-4 pt-2">
                                 <button
+                                    id="register-submit"
                                     type="submit"
-                                    class="bg-secondary text-light font-bold rounded-lg px-6 py-3 hover:brightness-110 focus:ring-4 focus:ring-secondary/50 flex items-center justify-center gap-2 w-full"
+                                    class="bg-secondary text-light font-bold rounded-lg px-6 py-3 hover:brightness-110 focus:ring-4 focus:ring-secondary/50 flex items-center justify-center gap-2 w-full disabled:opacity-60 disabled:cursor-not-allowed disabled:hover:brightness-100"
                                 >
-                                    <span class="icon-[fluent--person-16-filled] w-5 h-5"></span>
-                                    Registrarme
+                                    <span data-submit-icon class="icon-[fluent--person-16-filled] w-5 h-5"></span>
+                                    <span data-submit-label>Registrarme</span>
                                 </button>
                             </div>
     
