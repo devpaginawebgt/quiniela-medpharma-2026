@@ -103,3 +103,7 @@ Route::middleware('guest')->group(function () {
 });
 
 require __DIR__.'/auth.php';
+
+Route::fallback(function () {
+    return response()->view('errors.404', [], 404);
+});
