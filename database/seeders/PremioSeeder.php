@@ -29,7 +29,7 @@ class PremioSeeder extends Seeder
             ],
             [
                 'posicion' => 3,
-                'titulo_posicion' => 'Decimoprimero al decimoquinto lugar',
+                'titulo_posicion' => 'Decimoprimero al vigésimo lugar',
                 'nombre' => 'Giftcard de Q500.00',
                 'imagen' => '/images/premios/gt/Premio giftcard quiniela 2026.png',
                 'pais_id' => 1,
