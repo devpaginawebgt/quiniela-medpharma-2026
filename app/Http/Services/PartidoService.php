@@ -77,12 +77,7 @@ class PartidoService {
     public function actualizarPuntosEquipos()
     {
         $partidosJugados = EquipoPartido::select('id', 'equipo_1', 'equipo_2', 'partido_id')
-            ->with([
-                'partido:id,estado',
-                'equipoUno:id,nombre,goles_favor,goles_contra,partidos_jugados,partidos_ganados,partidos_perdidos,partidos_empatados,puntos',
-                'equipoDos:id,nombre,goles_favor,goles_contra,partidos_jugados,partidos_ganados,partidos_perdidos,partidos_empatados,puntos',
-                'resultado:id,partido_id,goles_equipo_1,goles_equipo_2',
-            ])
+            ->with(['partido', 'equipoUno', 'equipoDos', 'resultado'])
             ->has('resultado')
             ->whereHas('partido', function(Builder $query) {
                 $query->whereNot('estado', 1);
@@ -91,41 +86,43 @@ class PartidoService {
 
         foreach ($partidosJugados as $partido) {
 
-            $equipo1 = $partido->equipoUno;
-            $equipo2 = $partido->equipoDos;
+            if (in_array((int)$partido->partido->jornada_id, [1, 2, 3])) {
+                $equipo1 = $partido->equipoUno;
+                $equipo2 = $partido->equipoDos;
 
-            $goles_e1 = $partido->resultado->goles_equipo_1;
-            $goles_e2 = $partido->resultado->goles_equipo_2;
+                $goles_e1 = $partido->resultado->goles_equipo_1;
+                $goles_e2 = $partido->resultado->goles_equipo_2;
 
-            // Goles a favor y en contra
+                // Goles a favor y en contra
 
-            $equipo1->increment('goles_favor', $goles_e1);
-            $equipo1->increment('goles_contra', $goles_e2);
-            $equipo1->increment('partidos_jugados');
+                $equipo1->increment('goles_favor', $goles_e1);
+                $equipo1->increment('goles_contra', $goles_e2);
+                $equipo1->increment('partidos_jugados');
 
-            $equipo2->increment('goles_favor', $goles_e2);
-            $equipo2->increment('goles_contra', $goles_e1);
-            $equipo2->increment('partidos_jugados');
+                $equipo2->increment('goles_favor', $goles_e2);
+                $equipo2->increment('goles_contra', $goles_e1);
+                $equipo2->increment('partidos_jugados');
 
-            // Determinar resultado
+                // Determinar resultado
 
-            $gano_equipo_1 = $goles_e1 > $goles_e2;
-            $gano_equipo_2 = $goles_e2 > $goles_e1;
-            $empate = $goles_e1 === $goles_e2;
+                $gano_equipo_1 = $goles_e1 > $goles_e2;
+                $gano_equipo_2 = $goles_e2 > $goles_e1;
+                $empate = $goles_e1 === $goles_e2;
 
-            if ($gano_equipo_1) {
-                $equipo1->increment('partidos_ganados');
-                $equipo1->increment('puntos', 3);
-                $equipo2->increment('partidos_perdidos');
-            } elseif ($gano_equipo_2) {
-                $equipo2->increment('partidos_ganados');
-                $equipo2->increment('puntos', 3);
-                $equipo1->increment('partidos_perdidos');
-            } elseif ($empate) {
-                $equipo1->increment('partidos_empatados');
-                $equipo1->increment('puntos');
-                $equipo2->increment('partidos_empatados');
-                $equipo2->increment('puntos');
+                if ($gano_equipo_1) {
+                    $equipo1->increment('partidos_ganados');
+                    $equipo1->increment('puntos', 3);
+                    $equipo2->increment('partidos_perdidos');
+                } elseif ($gano_equipo_2) {
+                    $equipo2->increment('partidos_ganados');
+                    $equipo2->increment('puntos', 3);
+                    $equipo1->increment('partidos_perdidos');
+                } elseif ($empate) {
+                    $equipo1->increment('partidos_empatados');
+                    $equipo1->increment('puntos');
+                    $equipo2->increment('partidos_empatados');
+                    $equipo2->increment('puntos');
+                }
             }
 
             // Marcar partido como procesado
