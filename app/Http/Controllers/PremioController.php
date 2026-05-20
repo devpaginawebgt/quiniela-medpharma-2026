@@ -30,8 +30,11 @@ class PremioController extends Controller
 
         $premios = $this->premioService->getPremios($id_pais);
 
+        $pais = $user->country?->name;
+
         return view('modulos.tabla-de-premios', [
             'premios' => $premios,
+            'pais' => $pais,
         ]);
     }
 

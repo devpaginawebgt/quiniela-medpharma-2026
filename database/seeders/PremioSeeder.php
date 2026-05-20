@@ -15,21 +15,21 @@ class PremioSeeder extends Seeder
         $premios = [
             [
                 'posicion' => 1,
-                'titulo_posicion' => 'Primero al quinto lugar',
+                'titulo_posicion' => '1er. al 5to. lugar',
                 'nombre' => "Televisor 55''",
                 'imagen' => '/images/premios/gt/Premio TV quiniela 2026.png',
                 'pais_id' => 1,
             ],
             [
                 'posicion' => 2,
-                'titulo_posicion' => 'Sexto al décimo lugar',
-                'nombre' => 'Bocina Bluetooth',
-                'imagen' => '/images/premios/gt/Premio parlante quiniela 2026.png',
+                'titulo_posicion' => '6to. al 10mo. lugar',
+                'nombre' => 'Minibar',
+                'imagen' => '/images/premios/gt/Premio bar quiniela 2026.png',
                 'pais_id' => 1,
             ],
             [
                 'posicion' => 3,
-                'titulo_posicion' => 'Decimoprimero al vigésimo lugar',
+                'titulo_posicion' => '11vo. al 25to. lugar',
                 'nombre' => 'Giftcard de Q500.00',
                 'imagen' => '/images/premios/gt/Premio giftcard quiniela 2026.png',
                 'pais_id' => 1,

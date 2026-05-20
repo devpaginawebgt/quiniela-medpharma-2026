@@ -12,26 +12,45 @@
             {{-- White overlay --}}
             <div class="absolute inset-0 bg-white mx-4 lg:mx-8 mb-4 lg:mb-8"></div>
 
-            <div class="relative px-6 md:px-8 lg:px-12 pb-16 pt-8 mx-auto" style="max-width: min(84rem, calc(100vw - 2rem));">
+            <div class="relative px-6 md:px-8 lg:px-16 pb-16 lg:pb-24 pt-8 mx-auto" style="max-width: min(84rem, calc(100vw - 2rem));">
 
-                <h1 class="text-center md:text-start text-5xl sm:text-7xl lg:text-8xl uppercase font-brandan max-w-[12ch]">
-                    Premios Ganadores
-                </h1>
+                {{-- Encabezado --}}
+                <div class="flex flex-col items-center text-center">
+                    <img
+                        src="{{ asset('images/logos/medpharma-logo.jpg') }}"
+                        alt="Medpharma"
+                        class="w-44 md:w-60 lg:w-56 h-auto object-contain"
+                    >
+
+                    <h1 class="mt-3 lg:mt-6 text-6xl md:text-9xl font-brandan uppercase text-dark">
+                        Premios
+                    </h1>
+
+                    <p class="mt-4 sm:mt-3 text-4xl md:text-5xl font-brandan font-black uppercase text-green-600">
+                        Quiniela Mundialista
+                    </p>
+
+                    @if(!empty($pais))
+                        <p class="mt-4 sm:mt-6 text-3xl md:text-5xl lg:text-5xl font-brandan font-bold uppercase tracking-[0.6rem] lg:tracking-[1rem] text-zinc-400">
+                            {{ $pais }}
+                        </p>
+                    @endif
+                </div>
 
                 {{-- Lista de premios alternados --}}
                 <div class="flex flex-col gap-12 lg:gap-16 mt-10 lg:mt-16">
                     @foreach($premios as $index => $premio)
                         @php
-                            $isEven = $index % 2 === 0;
+                            $isEven = $index % 2 === 1;
                         @endphp
 
-                        <div class="flex flex-col {{ $isEven ? 'md:flex-row' : 'md:flex-row-reverse' }} items-start gap-6 lg:gap-12">
+                        <div class="flex flex-col {{ $isEven ? 'md:flex-row' : 'md:flex-row-reverse' }} items-center gap-6 lg:gap-12">
                             {{-- Texto --}}
-                            <div class="flex-1 {{ $isEven ? 'md:text-left' : 'md:text-right' }} text-center mt-16">
-                                <p class="text-3xl sm:text-4xl lg:text-5xl font-brandan uppercase text-[#95c908]">
+                            <div class="flex-1 text-center md:text-left mt-8 lg:mt-16">
+                                <p class="text-5xl sm:text-6xl lg:text-7xl font-brandan text-[#95c908] mb-4">
                                     {{ $premio->titulo_posicion }}
                                 </p>
-                                <h2 class="text-5xl sm:text-7xl lg:text-8xl font-brandan uppercase leading-tight">
+                                <h2 class="text-5xl sm:text-6xl lg:text-7xl text-zinc-500 font-brandan leading-tight">
                                     {{ $premio->nombre }}
                                 </h2>
                             </div>
