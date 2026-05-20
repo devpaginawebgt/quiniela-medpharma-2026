@@ -38,7 +38,7 @@
                 </div>
 
                 {{-- Lista de premios alternados --}}
-                <div class="flex flex-col gap-12 lg:gap-16 mt-10 lg:mt-16">
+                <div class="flex flex-col gap-2 mt-10 lg:mt-16">
                     @foreach($premios as $index => $premio)
                         @php
                             $isEven = $index % 2 === 1;
