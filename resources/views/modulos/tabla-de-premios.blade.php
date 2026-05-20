@@ -19,10 +19,10 @@
                     <img
                         src="{{ asset('images/logos/medpharma-logo.jpg') }}"
                         alt="Medpharma"
-                        class="w-44 md:w-60 lg:w-56 h-auto object-contain"
+                        class="w-44 md:w-60 lg:w-60 h-auto object-contain"
                     >
 
-                    <h1 class="mt-3 lg:mt-6 text-6xl md:text-9xl font-brandan uppercase text-dark">
+                    <h1 class="text-6xl md:text-9xl font-brandan uppercase text-dark">
                         Premios
                     </h1>
 
