@@ -6,7 +6,7 @@
             <div class="flex flex-col gap-4 mb-4 lg:flex-row lg:items-center lg:justify-between">
 
                 <div class="flex items-center gap-3">
-                    <span class="icon-[material-symbols--supervised-user-circle] w-6 h-6 lg:w-12 lg:h-12 text-dark"></span>
+                    <span class="icon-[fluent--people-16-filled] w-6 h-6 lg:w-12 lg:h-12 text-dark"></span>
                     <h2 class="font-semibold text-gray-900 text-lg lg:text-4xl">
                         Reporte de Usuarios Registrados
                     </h2>
