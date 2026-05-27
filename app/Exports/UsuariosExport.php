@@ -17,6 +17,7 @@ class UsuariosExport implements FromQuery, WithHeadings, WithMapping, WithChunkR
     public function query()
     {
         return User::with(['country'])
+            ->withExists('predictions')
             ->when($this->search, function ($query) {
                 $query->where(function ($q) {
                     $q->where('nombres', 'like', "%{$this->search}%")
@@ -48,6 +49,7 @@ class UsuariosExport implements FromQuery, WithHeadings, WithMapping, WithChunkR
             'País',
             'Puntos Total',
             'Fecha Registro',
+            'Ingresó pronósticos',
             'Estado',
         ];
     }
@@ -64,6 +66,7 @@ class UsuariosExport implements FromQuery, WithHeadings, WithMapping, WithChunkR
             $user->country?->name ?? 'N/A',
             $user->puntos,
             $user->created_at->timezone('America/Guatemala')->format('d/m/Y H:i'),
+            $user->predictions_exists ? 'Sí' : 'No',
             $user->status_user ? 'Activo' : 'Inactivo',
         ];
     }

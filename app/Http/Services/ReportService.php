@@ -11,6 +11,7 @@ class ReportService
     {
         return User::with(['country'])
             ->select('users.*')
+            ->withExists('predictions')
             ->orderBy('puntos', 'desc');
     }
 

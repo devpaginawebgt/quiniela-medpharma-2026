@@ -60,7 +60,24 @@ class ReportsController extends Controller
             ->filterColumn('pais', function ($query, $keyword) {
                 $query->whereHas('country', fn($q) => $q->where('name', 'like', "%{$keyword}%"));
             })
-            ->rawColumns(['estado_badge'])
+            ->addColumn('pronosticos', function ($u) {
+                if ($u->predictions_exists) {
+                    return '
+                        <span class="inline-flex items-center gap-1 px-2.5 py-0.5 text-xs font-medium rounded-full border bg-green-100 text-green-700 border-green-200">
+                            <span class="w-1.5 h-1.5 rounded-full bg-green-600"></span>
+                            Sí
+                        </span>
+                    ';
+                }
+
+                return '
+                    <span class="inline-flex items-center gap-1 px-2.5 py-0.5 text-xs font-medium rounded-full border bg-red-100 text-red-700 border-red-200">
+                        <span class="w-1.5 h-1.5 rounded-full bg-red-600"></span>
+                        No
+                    </span>
+                ';
+            })
+            ->rawColumns(['estado_badge', 'pronosticos'])
             ->make(true);
     }
 

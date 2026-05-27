@@ -106,6 +106,7 @@ $(function () {
             { data: "pais", title: "País" },            
             { data: "puntos", title: "Puntos Total" },
             { data: "fecha_registro", title: "Fecha Registro" },
+            { data: "pronosticos", title: "Ingresó Pronósticos" },
             {
                 data: "estado_badge",
                 title: "Estado",
