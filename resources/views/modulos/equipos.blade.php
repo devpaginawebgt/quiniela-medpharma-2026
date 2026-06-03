@@ -11,6 +11,11 @@
 
             <h1 class="uppercase z-10 text-center mt-10 font-brandan text-4xl sm:text-7xl px-4 lg:hidden">Selecciones Clasificadas</h1>
 
+            <p class="lg:absolute z-20 text-sm md:text-lg font-optimprov text-center text-dark
+                px-4 lg:pl-16
+                mt-4 lg:mt-[21%]
+                2xl:ps-20 2xl:mt-92">Haz click en las banderas para más información</p>
+
             {{-- Contenido --}}
             <div
                 class="z-20 flex flex-wrap items-start justify-center lg:justify-start
