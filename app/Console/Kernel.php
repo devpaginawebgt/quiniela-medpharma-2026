@@ -18,6 +18,17 @@ class Kernel extends ConsoleKernel
         $schedule->command('queue:work --stop-when-empty --timeout=30 --max-time=55')
              ->everyMinute()
              ->withoutOverlapping();
+
+        $schedule->command('app:obtener-resultados-pendientes')
+            ->everyFiveMinutes()
+            ->withoutOverlapping()
+            ->runInBackground();
+
+        $schedule->command('app:sincronizar-rondas')
+            ->dailyAt('06:30')
+            ->timezone('America/Mexico_City')
+            ->withoutOverlapping()
+            ->runInBackground();
     }
 
     /**

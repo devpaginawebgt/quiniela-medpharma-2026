@@ -2,6 +2,7 @@
 
 namespace App\Http\Services;
 
+use App\Events\JourneyCompleted;
 use App\Models\EquipoPartido;
 use App\Models\Jornada;
 use App\Models\Partido;
@@ -149,5 +150,47 @@ class PartidoService {
     //     return $partidos;
 
     // }
+
+    /**
+     * Revisa si la jornada `is_current` ya tiene todos sus partidos en estado=1
+     * y, si la siguiente jornada ya tiene partidos cargados, dispara
+     * `JourneyCompleted`. Idempotente y safe-to-call-anytime.
+     */
+    public function verifyJourneyStatus()
+    {
+        $journey = Jornada::where('is_current', true)->first();
+
+        if (empty($journey)) return;
+
+        $next_journey = Jornada::find((int)$journey->id + 1);
+
+        if (empty($next_journey)) return;
+
+        $pending = Partido::where('jornada_id', $journey->id)
+            ->where('estado', '!=', 1)
+            ->exists();
+
+        $completed = ! $pending;
+
+        $next_matches = Partido::where('jornada_id', $next_journey->id)->exists();
+
+        if ($completed === true && $next_matches === true) {
+            JourneyCompleted::dispatch($journey);
+        }
+    }
+
+    /**
+     * Cierra la jornada actual (is_current=false) y abre la siguiente.
+     */
+    public function updateCurrentJourney(Jornada $journey)
+    {
+        $journey->update(['is_current' => false]);
+
+        $next_journey = Jornada::find((int)$journey->id + 1);
+
+        if ($next_journey) {
+            $next_journey->update(['is_current' => true]);
+        }
+    }
 
 }

@@ -13,6 +13,7 @@ class Equipo extends Model
         'nombre',
         'imagen',
         'codigo_iso',
+        'code',
         'descripcion',
         'grupo',
         'api_team_id',
