@@ -5,6 +5,17 @@ html {
     color-scheme: light only;
 }
 
+/* Deshabilita forzado de modo oscuro en Chromium/Samsung */
+:root {
+  -webkit-forced-color-adjust: none;
+  forced-color-adjust: none;
+}
+
+* {
+  -webkit-forced-color-adjust: none;
+  forced-color-adjust: none;
+}
+
 
 * {
 

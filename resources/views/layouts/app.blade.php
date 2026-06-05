@@ -11,6 +11,7 @@
         <meta http-equiv="Pragma" content="no-cache">
         <meta name="color-scheme" content="light only">
         <meta name="theme-color" content="#ffffff">
+        <meta name="darkreader-lock">
 
         <title>{{ config('app.name', 'Quiniela') }}</title>
 
