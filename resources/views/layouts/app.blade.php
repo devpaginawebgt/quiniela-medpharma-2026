@@ -9,6 +9,8 @@
         <meta http-equiv="Last-Modified" content="0">
         <meta http-equiv="Cache-Control" content="no-cache, mustrevalidate">
         <meta http-equiv="Pragma" content="no-cache">
+        <meta name="color-scheme" content="light only">
+        <meta name="theme-color" content="#ffffff">
 
         <title>{{ config('app.name', 'Quiniela') }}</title>
 
