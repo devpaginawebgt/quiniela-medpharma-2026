@@ -43,7 +43,7 @@
 <input type="hidden" id="user_id" value="{{ $user->id }}">
 
 {{-- Top Navigation Bar --}}
-<nav class="fixed top-0 left-0 right-0 z-50 bg-white shadow-sm">
+<nav class="fixed top-0 left-0 right-0 z-50 bg-white! shadow-sm">
     <div class="max-w-screen-2xl mx-auto px-4 lg:px-8 flex items-center justify-between h-16">
 
         <div class="flex gap-4 justify-start items-center">
@@ -80,7 +80,7 @@
                 <span class="truncate">{{ $username }}</span>
                 <span class="icon-[fluent--chevron-down-20-filled] w-4 h-4 shrink-0"></span>
             </button>
-            <div id="user-dropdown" class="z-50 hidden bg-white rounded-lg shadow-lg border border-gray-200 w-44 transition-opacity! duration-150!">
+            <div id="user-dropdown" class="z-50 hidden bg-white! rounded-lg shadow-lg border border-gray-200 w-44 transition-opacity! duration-150!">
                 <ul class="py-1">
                     @if ($user->hasRole('admin'))
                         <li>
@@ -111,7 +111,7 @@
 </nav>
 
 {{-- Drawer de navegación móvil (Flowbite) --}}
-<div id="mobile-nav-drawer" class="lg:hidden fixed top-16 left-0 right-0 z-40 bg-white shadow-xl transition-transform -translate-y-full pt-6 p-4" tabindex="-1">
+<div id="mobile-nav-drawer" class="lg:hidden fixed top-16 left-0 right-0 z-40 bg-white! shadow-xl transition-transform -translate-y-full pt-6 p-4" tabindex="-1">
     <p class="flex items-start gap-3 text-sm text-dark mb-4">
         <span class="icon-[fluent--person-12-filled] w-10 h-10"></span>
         <span class="uppercase text-2xl font-brandan">{{ $username }}</span>
