@@ -1,8 +1,10 @@
 
 
 html {
-    color: var(--light-color);
+    color: #FFFFFF;
+    color-scheme: light only;
 }
+
 
 * {
 
