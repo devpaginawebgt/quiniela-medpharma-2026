@@ -45,7 +45,7 @@
                         <th class="px-4 py-3 border border-gray-200">Pts. Total</th>
                         <th class="px-4 py-3 border border-gray-200">Registro</th>
                         <th class="px-4 py-3 border border-gray-200">Ingresó Pronósticos</th>
-                        <th class="px-4 py-3 border border-gray-200">Estado</th                        
+                        <th class="px-4 py-3 border border-gray-200">Estado</th>
                     </tr>
                 </thead>
 
