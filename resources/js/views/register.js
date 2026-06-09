@@ -51,7 +51,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 code,
                 country_id: countryId
             });
-            
+
             const message = codeResponse.data.data?.message ?? 'Código de invitación validado';
             addCodeSuccess(message)
 
@@ -63,6 +63,18 @@ document.addEventListener('DOMContentLoaded', () => {
 
     if (codeInput && countryInput) {
         codeInput.addEventListener('focusout', validateCode)
+    }
+
+    const documentInput = document.querySelector('input[name="numero_documento"]');
+    if (documentInput) {
+        const invisibleCharsRegex = /[\s ​-‍⁠﻿]/g;
+        const stripInvisibleChars = (value) => value.replace(invisibleCharsRegex, '');
+        documentInput.addEventListener('input', (e) => {
+            e.target.value = stripInvisibleChars(e.target.value);
+        });
+        documentInput.addEventListener('blur', (e) => {
+            e.target.value = stripInvisibleChars(e.target.value);
+        });
     }
 
     const form = document.getElementById('register-form');

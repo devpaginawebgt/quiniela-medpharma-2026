@@ -95,7 +95,7 @@
     
                             {{-- Numero de Documento de Identidad --}}
                             @php
-                                $regex    = $country->document_regex;
+                                $regex    = trim($country->document_regex, '^$');
                                 $message  = $country->document_regex_message;
                                 $document = $country->document_name;
                             @endphp
