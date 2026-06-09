@@ -31,7 +31,7 @@ class GrupoController extends Controller
 
     public function gruposWeb()
     {
-        $this->partidoService->actualizarPuntosEquipos();
+        // $this->partidoService->actualizarPuntosEquipos();
 
         // Banners
 
