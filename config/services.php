@@ -32,6 +32,13 @@ return [
 
     'geolocation' => [
         'key' => env('GEOLOCATION_API_KEY'),
-    ]
+    ],
+
+    'brevo' => [
+        'key' => env('BREVO_API_KEY'),
+        'endpoint' => env('BREVO_ENDPOINT', 'https://api.brevo.com/v3'),
+        'from_email' => env('BREVO_FROM_EMAIL'),
+        'from_name' => env('BREVO_FROM_NAME', 'Quiniela Medpharma'),
+    ],
 
 ];
