@@ -165,7 +165,7 @@ class PrediccionService {
 
             if ($fecha_actual->greaterThan($fecha_limite)) {
 
-                $prediccion_usuario->message = 'No se puede guardar la predicción, el partido está por comenzar (menos de 10 minutos).';
+                $prediccion_usuario->message = 'No se puede guardar la predicción, el partido está por comenzar (menos de 1 hora).';
 
                 $predicciones_rechazadas->push($prediccion_usuario);
 
