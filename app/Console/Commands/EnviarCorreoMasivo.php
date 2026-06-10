@@ -38,14 +38,40 @@ class EnviarCorreoMasivo extends Command
             return Command::FAILURE;
         }
 
+        $rawTotal = $users->count();
+
+        // Filtra emails con formato inválido y duplicados (case-insensitive).
+        $seen = [];
+        $invalid = [];
+        $users = $users->filter(function ($u) use (&$seen, &$invalid) {
+            $email = strtolower(trim((string) $u->email));
+            if (! filter_var($email, FILTER_VALIDATE_EMAIL)) {
+                $invalid[] = $u->email;
+                return false;
+            }
+            if (isset($seen[$email])) {
+                return false;
+            }
+            $seen[$email] = true;
+            return true;
+        })->values();
+
         $total = $users->count();
+        $skipped = $rawTotal - $total;
 
         if ($total === 0) {
-            $this->warn('No hay usuarios que coincidan con los filtros.');
+            $this->warn('No hay usuarios con email válido que coincidan con los filtros.');
             return Command::SUCCESS;
         }
 
         $this->info("Destinatarios encontrados: {$total}");
+        if ($skipped > 0) {
+            $this->warn("Omitidos por email inválido o duplicado: {$skipped}");
+            if (! empty($invalid)) {
+                $muestra = array_slice($invalid, 0, 5);
+                $this->line('  Ejemplos inválidos: '.implode(', ', $muestra).(count($invalid) > 5 ? ' …' : ''));
+            }
+        }
 
         if (! $this->confirm("¿Enviar correo a {$total} usuarios vía Brevo?", true)) {
             $this->info('Cancelado.');
