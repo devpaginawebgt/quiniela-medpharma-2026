@@ -26,8 +26,9 @@ class RegisteredUserController extends Controller
     public function create(Request $request)
     {
         $country = $this->userService->getGuestCountry();
+        $countries = $this->countryService->getCountries();
 
-        return view('modulos.register', compact('country'));
+        return view('modulos.register', compact('country', 'countries'));
     }
 
     public function store(RegisterRequest $request)
