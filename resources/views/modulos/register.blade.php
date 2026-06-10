@@ -95,9 +95,10 @@
     
                             {{-- Numero de Documento de Identidad --}}
                             @php
-                                $regex    = trim($country->document_regex, '^$');
-                                $message  = $country->document_regex_message;
-                                $document = $country->document_name;
+                                $selectedCountry = $countries->firstWhere('id', (int) old('pais_id', $country->id)) ?? $country;
+                                $regex    = trim($selectedCountry->document_regex, '^$');
+                                $message  = $selectedCountry->document_regex_message;
+                                $document = $selectedCountry->document_name;
                             @endphp
 
                             <x-auth-input
@@ -129,6 +130,26 @@
                                 maxlength="255"
                                 required
                             />
+
+                            {{-- Pais --}}
+                            <x-auth-select
+                                id="paisId"
+                                name="pais_id"
+                                icon="icon-[fluent--earth-24-filled]"
+                                required
+                            >
+                                @foreach($countries as $countryOption)
+                                    <option
+                                        value="{{ $countryOption->id }}"
+                                        data-document-name="{{ $countryOption->document_name }}"
+                                        data-document-regex="{{ trim($countryOption->document_regex, '^$') }}"
+                                        data-document-message="{{ $countryOption->document_regex_message }}"
+                                        @selected((int) $selectedCountry->id === (int) $countryOption->id)
+                                    >
+                                        {{ $countryOption->name }}
+                                    </option>
+                                @endforeach
+                            </x-auth-select>
     
                             {{-- Codigo de registro --}}
                             <div class="flex flex-col gap-1">
@@ -145,21 +166,6 @@
                                 <span id="codigoHelper" class="text-sm">
 
                                 </span>
-                            </div>
-    
-                            {{-- Pais (detectado por IP) --}}
-
-                            <input
-                                id="paisId"
-                                type="hidden"
-                                name="pais_id"
-                                value="{{ $country->id }}"
-
-                            >
-
-                            <div class="flex items-center gap-3 py-3 px-4 bg-transparent border-2 rounded-lg border-secondary text-dark text-base cursor-default">
-                                <img src="{{ asset($country->image) }}" alt="{{ $country->name }}" class="w-6 aspect-6/4 rounded-sm object-cover shadow-sm">
-                                <span>{{ $country->name }}</span>
                             </div>
     
                             <div class="flex flex-col gap-2">

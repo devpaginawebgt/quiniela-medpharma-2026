@@ -6,6 +6,8 @@ document.addEventListener('DOMContentLoaded', () => {
     const codeInput = document.getElementById('codigo');
     const countryInput = document.getElementById('paisId');
     const codeHelper = document.getElementById('codigoHelper');
+    
+    const documentInputEl = document.querySelector('input[name="numero_documento"]');
 
     function resetCodeError() {
         codeInput.classList.remove('border-green-600', 'border-red-600');
@@ -63,6 +65,39 @@ document.addEventListener('DOMContentLoaded', () => {
 
     if (codeInput && countryInput) {
         codeInput.addEventListener('focusout', validateCode)
+    }
+
+    if (countryInput && countryInput.tagName === 'SELECT') {
+        const syncDocumentFromCountry = () => {
+            const selectedOption = countryInput.options[countryInput.selectedIndex];
+            if (!selectedOption || !documentInputEl) return;
+
+            const documentName = selectedOption.dataset.documentName ?? '';
+            const documentRegex = selectedOption.dataset.documentRegex ?? '';
+            const documentMessage = selectedOption.dataset.documentMessage ?? '';
+
+            documentInputEl.placeholder = documentName ? `Numero de ${documentName}` : 'Numero de documento';
+
+            if (documentRegex) {
+                documentInputEl.setAttribute('pattern', documentRegex);
+            } else {
+                documentInputEl.removeAttribute('pattern');
+            }
+
+            if (documentMessage) {
+                documentInputEl.setAttribute('title', documentMessage);
+            } else {
+                documentInputEl.removeAttribute('title');
+            }
+        };
+
+        countryInput.addEventListener('change', () => {
+            syncDocumentFromCountry();
+
+            if (codeInput && codeInput.value.trim().length > 0) {
+                validateCode();
+            }
+        });
     }
 
     const documentInput = document.querySelector('input[name="numero_documento"]');
