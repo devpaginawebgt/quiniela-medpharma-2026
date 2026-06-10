@@ -21,7 +21,7 @@ class MassNotification extends Mailable
         $e2 = $this->partido->equipos->equipoDos->nombre ?? 'Equipo 2';
 
         return new Envelope(
-            subject: "¡{$e1} vs {$e2} comienza pronto!",
+            subject: "La Quiniela Mundialista está por comenzar",
         );
     }
 
