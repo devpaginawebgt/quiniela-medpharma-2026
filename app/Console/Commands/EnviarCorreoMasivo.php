@@ -23,7 +23,7 @@ class EnviarCorreoMasivo extends Command
         $users = User::where('status_user', 1)
             ->whereNotNull('email')
             ->where('email', '!=', '')
-            // ->whereIn('email', ['dev@paginawebguatemala.com', 'soporte@paginawebguatemala.com'])
+            ->whereIn('email', ['dev@paginawebguatemala.com', 'soporte@paginawebguatemala.com'])
             ->get();
 
         $partido = Partido::with([
