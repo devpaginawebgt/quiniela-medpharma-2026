@@ -32,7 +32,7 @@ class ReportsController extends Controller
             ->addColumn('email', fn($u) => $u->email ?? 'N/A')
             ->addColumn('pais', fn($u) => $u->country?->name ?? 'N/A')
             ->addColumn('puntos', fn($u) => $u->puntos ?? '0')
-            ->addColumn('fecha_registro', fn($u) => $u->created_at->timezone('America/Guatemala')->format('d/m/Y h:i A'))
+            ->addColumn('fecha_registro', fn($u) => $u->created_at->timezone('America/Guatemala')->format('d/m/Y h:i:s A'))
             ->addColumn('estado_badge', function ($u) {
                 if ($u->status_user) {
                     return '

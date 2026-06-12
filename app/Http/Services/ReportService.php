@@ -13,6 +13,7 @@ class ReportService
             ->select('users.*')
             ->withExists('predictions')
             ->orderBy('puntos', 'desc')
+            ->orderBy('created_at', 'asc')
             ->orderBy('id');
     }
 
