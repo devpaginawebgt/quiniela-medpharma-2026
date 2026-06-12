@@ -112,8 +112,6 @@ class UserService {
             ->where('status_user', 1)
             ->where('pais_id', $id_pais)
             ->where('puntos', '>', 0)
-            ->orderByDesc('puntos')
-            ->orderBy('nombres')
             ->limit(10)
             ->get();
     }
