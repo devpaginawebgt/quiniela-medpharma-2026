@@ -74,7 +74,7 @@ class UserService {
     public function getRanking($id_pais)
     {
         $participantes = User::select('id', 'nombres', 'apellidos', 'pais_id', 'numero_documento', 'email', 'telefono', 'puntos', 'created_at')
-            ->selectRaw('RANK() OVER (ORDER BY puntos DESC, created_at DESC, nombres ASC) as posicion')
+            ->selectRaw('RANK() OVER (ORDER BY puntos DESC, created_at ASC, nombres ASC) as posicion')
             ->has('predictions')
             ->where('status_user', 1)
             ->where('pais_id', $id_pais)
@@ -96,7 +96,7 @@ class UserService {
     public function getRankingWeb($id_pais, $perPage = 100)
     {
         return User::select('id', 'nombres', 'apellidos', 'puntos', 'pais_id', 'numero_documento', 'email', 'telefono', 'created_at')
-            ->selectRaw('RANK() OVER (ORDER BY puntos DESC, created_at DESC, nombres ASC) as posicion')
+            ->selectRaw('RANK() OVER (ORDER BY puntos DESC, created_at ASC, nombres ASC) as posicion')
             ->has('predictions')
             ->where('status_user', 1)
             ->where('pais_id', $id_pais)
@@ -107,7 +107,7 @@ class UserService {
     public function getTop10(int $id_pais)
     {
         return User::select('id', 'nombres', 'apellidos', 'puntos')
-            ->selectRaw('RANK() OVER (ORDER BY puntos DESC, created_at DESC, nombres ASC) as posicion')
+            ->selectRaw('RANK() OVER (ORDER BY puntos DESC, created_at ASC, nombres ASC) as posicion')
             ->has('predictions')
             ->where('status_user', 1)
             ->where('pais_id', $id_pais)
@@ -119,7 +119,7 @@ class UserService {
     public function getUserRank($user)
     {
         $rankingQuery = User::select('id', 'nombres', 'apellidos', 'pais_id', 'puntos', 'created_at')
-            ->selectRaw('RANK() OVER (ORDER BY puntos DESC, created_at DESC, nombres ASC) as posicion')
+            ->selectRaw('RANK() OVER (ORDER BY puntos DESC, created_at ASC, nombres ASC) as posicion')
             ->has('predictions')
             ->where('status_user', 1)
             ->where('pais_id', $user->pais_id)
