@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Exports\PronosticosExport;
 use App\Exports\UsuariosExport;
+use App\Http\Services\PartidoService;
 use App\Http\Services\PrediccionService;
 use App\Http\Services\ReportService;
 use Illuminate\Http\Request;
@@ -14,6 +15,7 @@ class ReportsController extends Controller
 {
     public function __construct(
         protected readonly ReportService $reportService,
+        protected readonly PartidoService $partidoService,
         protected readonly PrediccionService $prediccionService,
     ) {}
 
@@ -90,14 +92,22 @@ class ReportsController extends Controller
         return Excel::download(new UsuariosExport($search), $fileName);
     }
 
-    public function predictionsReport()
+    public function predictionsReport(Request $request)
     {
-        return view('modulos.admin.predictions');
+        $jornadas = $this->partidoService->getJornadas();
+
+        return view('modulos.admin.predictions', compact('jornadas'));
     }
 
-    public function predictionsData()
+    public function predictionsData(Request $request)
     {
-        $query = $this->reportService->getPronosticos();
+        $jornada_id = (int)$request->input('jornada');
+
+        if (!empty($id_jornada)) {
+            $jornada_id = $this->partidoService->getJornadaSeleccionada($jornada_id);
+        }
+
+        $query = $this->reportService->getPronosticos($jornada_id);
 
         return DataTables::eloquent($query)
             ->addColumn('usuario', fn($p) => $p->user->nombres . ' ' . $p->user->apellidos)
@@ -178,8 +188,14 @@ class ReportsController extends Controller
     {
         $search = (string) ($request->get('search') ?? '');
 
+        $jornada_id = (int)$request->input('jornada');
+
+        if (!empty($id_jornada)) {
+            $jornada_id = $this->partidoService->getJornadaSeleccionada($jornada_id);
+        }
+
         $fileName = 'pronosticos_' . now()->format('Ymd_His') . '.xlsx';
 
-        return Excel::download(new PronosticosExport($search), $fileName);
+        return Excel::download(new PronosticosExport($search, $jornada_id), $fileName);
     }
 }

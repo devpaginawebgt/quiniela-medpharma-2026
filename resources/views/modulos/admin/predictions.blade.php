@@ -13,14 +13,28 @@
                 </div>
 
                 <form id="form-export-predictions"
-                    class="flex justify-end lg:justify-normal"
+                    class="flex flex-col justify-center items-center md:flex-row md:justify-normal gap-4 flex-wrap md:flex-nowrap"
                     action="{{ route('web.admin.reports.predictions.export') }}"
                     method="GET">
+
+                    <x-form-select id="jornada-pronosticos" name="jornada" class="min-w-60 shrink-0">
+                        <option value="">
+                            Todas
+                        </option>
+                        @foreach($jornadas as $jornada)
+                            @php
+                                $journey_name = in_array($jornada->name, ['1', '2', '3']) ? "Jornada {$jornada->name}" : $jornada->name;
+                            @endphp
+                            <option value="{{ $jornada->id }}">
+                                {{ $journey_name }}
+                            </option>
+                        @endforeach
+                    </x-form-select>
 
                     <button
                         id="btn-export-predictions"
                         type="submit"
-                        class="flex items-center gap-2 bg-green-600 hover:bg-green-700 text-white text-sm font-medium px-4 py-2 rounded-lg transition">
+                        class="flex items-center gap-2 bg-green-600 hover:bg-green-700 text-white text-sm font-medium px-4 py-3 rounded-lg transition shrink-0">
                         <span id="btn-export-predictions-icon" class="icon-[fluent--arrow-download-16-filled] w-4 h-4"></span>
                         <span id="btn-export-predictions-text">Descargar Excel</span>
                     </button>

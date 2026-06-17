@@ -14,20 +14,29 @@ class PronosticosExport implements FromQuery, WithHeadings, WithMapping, WithChu
     protected PrediccionService $prediccionService;
 
     public function __construct(
-        protected string $search = ''
+        protected string $search = '',
+        protected string|int $jornada = 0
     ) {
         $this->prediccionService = app(PrediccionService::class);
     }
 
     public function query()
     {
+        $jornada_id = $this->jornada;
+
         return Preccion::with([
             'user.country',            
             'partido.jornada',
+            'partido.puntos',
             'partido.equipos.equipoUno',
             'partido.equipos.equipoDos',
             'resultado',
         ])
+            ->when(!empty($jornada_id), function($query) use($jornada_id) {
+                $query->whereHas('partido', function($query) use($jornada_id) {
+                    $query->where('jornada_id', $jornada_id);
+                });
+            })
             ->when($this->search, function ($query) {
                 $query->where(function ($q) {
                     $q->whereHas('user', function ($u) {

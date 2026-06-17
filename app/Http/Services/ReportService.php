@@ -17,15 +17,21 @@ class ReportService
             ->orderBy('id');
     }
 
-    public function getPronosticos()
+    public function getPronosticos(string|int $jornada_id)
     {
         return Preccion::with([
-            'user.country',
-            'partido.jornada',
-            'partido.equipos.equipoUno',
-            'partido.equipos.equipoDos',
-            'resultado',
-        ])
+                'user.country',
+                'partido.jornada',
+                'partido.puntos',
+                'partido.equipos.equipoUno',
+                'partido.equipos.equipoDos',
+                'resultado',
+            ])
+            ->when(!empty($jornada_id), function($query) use($jornada_id) {
+                $query->whereHas('partido', function($query) use($jornada_id) {
+                    $query->where('jornada_id', $jornada_id);
+                });
+            })
             ->select('preccions.*')
             ->orderBy('preccions.created_at', 'desc')
             ->orderBy('id');

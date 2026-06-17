@@ -23,6 +23,17 @@ class PartidoService {
         return Jornada::find($jornada);
     }
 
+    public function getJornadaSeleccionada(string|int $id_jornada)
+    {
+        $jornadas = $this->getJornadas();
+
+        $jornada_actual = $jornadas->firstWhere('is_current', true) ?? $jornadas->first();
+
+        $jornada_solicitada = (int)$id_jornada;
+
+        return $jornadas->firstWhere('id', $jornada_solicitada)->id ?? $jornada_actual->id;
+    }
+
     public function getJornadasGrupo(string $grupo)
     {
         $jornadas_obtener = collect([1, 2, 3]);

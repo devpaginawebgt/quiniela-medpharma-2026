@@ -1,11 +1,19 @@
 $(function () {
     // ========== PRONOSTICOS ==========
-    if ($("#tabla-pronosticos").length) {
+    if ($("#tabla-pronosticos").length && $('#jornada-pronosticos').length) {
         const tablaPronosticos = $("#tabla-pronosticos").DataTable({
             responsive: true,
             processing: true,
             serverSide: true,
-            ajax: $("#tabla-pronosticos").data("url"),
+            ajax: {
+                url: $("#tabla-pronosticos").data("url"),
+                data: function(d) {
+                    d.jornada = $('#jornada-pronosticos').val();
+                },
+                error: function(xhr, error, code) {
+                    console.error("Error loading data: ", code);
+                }
+            },
             lengthChange: false,
             ordering: false,
             search: { return: true },
@@ -46,6 +54,8 @@ $(function () {
             ],
         });
 
+        $('#jornada-pronosticos').on('change', () => { tablaPronosticos.ajax.reload() });
+
         $("#form-export-predictions").on("submit", function (e) {
             e.preventDefault();
 
@@ -55,11 +65,13 @@ $(function () {
             btn.prop("disabled", true).addClass("opacity-50 cursor-not-allowed");
             text.text("Generando Excel...");
 
+            const jornada = $('#jornada-pronosticos').val();
+
             $.ajax({
                 url: $(this).attr("action"),
                 method: "GET",
                 xhrFields: { responseType: "blob" },
-                data: { search: tablaPronosticos.search() },
+                data: {  search: tablaPronosticos.search(), jornada },
                 success: function (data, status, xhr) {
                     const url = window.URL.createObjectURL(new Blob([data]));
                     const disposition = xhr.getResponseHeader("content-disposition");
