@@ -18,6 +18,11 @@ class CorreccionPartido101 extends Command
 
     public function handle()
     {
+        // Comando deshabilitado: ya se ejecutó en producción el 2026-07-15.
+        // Volver a correrlo duplicaría los puntos de los usuarios afectados.
+        $this->error('Comando deshabilitado.');
+        return Command::FAILURE;
+
         $partido = Partido::with(['puntos'])->find(self::PARTIDO_ID);
 
         if (!$partido) {
