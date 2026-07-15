@@ -255,7 +255,7 @@ class PrediccionService {
             $puntos_acerto_ganador_un_marcador = $puntos->acerto_ganador_un_marcador;
             $puntos_acerto_ganador             = $puntos->acerto_ganador;
             $puntos_acerto_empate              = $puntos->acerto_empate;
-            $puntos_acerto_marcador            = $puntos->acerto_marcador;
+            $puntos_acerto_marcador            = $puntos->acerto_un_marcador;
             $puntos_default                    = $puntos->default;
         }
 
