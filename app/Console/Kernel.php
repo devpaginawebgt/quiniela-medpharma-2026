@@ -20,16 +20,16 @@ class Kernel extends ConsoleKernel
              ->withoutOverlapping()
              ->runInBackground();
 
-        $schedule->command('app:obtener-resultados-pendientes')
-            ->everyTwoMinutes()
-            ->withoutOverlapping()
-            ->runInBackground();
+        // $schedule->command('app:obtener-resultados-pendientes')
+        //     ->everyTwoMinutes()
+        //     ->withoutOverlapping()
+        //     ->runInBackground();
 
-        $schedule->command('app:sincronizar-rondas')
-            ->dailyAt('06:30')
-            ->timezone('America/Mexico_City')
-            ->withoutOverlapping()
-            ->runInBackground();
+        // $schedule->command('app:sincronizar-rondas')
+        //     ->dailyAt('06:30')
+        //     ->timezone('America/Mexico_City')
+        //     ->withoutOverlapping()
+        //     ->runInBackground();
     }
 
     /**
